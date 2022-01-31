@@ -4,19 +4,46 @@
   min-width: 170px;
   font-weight: 500;
   text-align: center;
-  font-size: $base-font-size;
+  text-decoration: none;
+  transition: $base-animation;
+  will-change: color, backgroun-color, box-shadow;
+
+  font-size: $button-m-font-size;
   line-height: $button-m-line-height;
-  color: $color-theme;
   border: $button-m-border-width solid currentColor;
-  background: transparent;
   padding: $button-m-padding;
   height: $button-m-height;
-  border-radius: $button-m-height / 2;
-  text-decoration: none;
-  transition: background $base-animation;
+  border-radius: $button-m-border-radius;
+  color: $button-m-color;
+  background: $button-m-background;
 
   &:hover {
-    background: rgba($color-theme, 0.1);
+    background: rgba($button-m-color, 0.1);
+  }
+
+  &--size-big {
+    font-size: $button-xl-font-size;
+    line-height: $button-xl-line-height;
+    border-width: $button-xl-border-width;
+    padding: $button-xl-padding;
+    height: $button-xl-height;
+    border-radius: $button-xl-border-radius;
+    color: $button-xl-color;
+    background: $button-xl-background;
+
+    box-shadow: 0 12px 32px rgba($color-theme, 0.28);
+
+    &:hover {
+      background: rgba($button-xl-background, 0.9);
+      box-shadow: none;
+    }
+  }
+
+  &:disabled {
+    cursor: not-allowed;
+    background: $c-gray-2;
+    color: $color-text;
+    box-shadow: none;
   }
 }
 
@@ -27,5 +54,13 @@
 
   &:hover {
     color: $color-theme;
+  }
+
+  &--inverted {
+    color: $color-theme;
+
+    &:hover {
+      color: inherit;
+    }
   }
 }

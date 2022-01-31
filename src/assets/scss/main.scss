@@ -1,13 +1,15 @@
 @import "vendors";
 @import "variables";
-@import "blocks/auth-form";
+@import "typography";
 @import "blocks/container";
 @import "elements/button";
+@import "elements/input";
 
 body {
   font-family: "Ubuntu", sans-serif;
   background: $color-background;
   font-size: $base-font-size;
+  line-height: $base-line-height;
   padding-top: $header-height;
   position: relative;
 }

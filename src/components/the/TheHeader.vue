@@ -68,7 +68,7 @@ export default {
   &__inner {
     display: flex;
     align-items: center;
-    padding: $site-padding / 2 0;
+    padding: $base-gap / 2 0;
     height: 100%;
   }
 

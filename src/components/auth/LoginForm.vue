@@ -1,31 +1,51 @@
 <template>
   <form
-    class="auth-form"
+    class="login-form"
     @submit.prevent="onFormSubmit"
   >
-    <h1>Вход по логину</h1>
+    <h1 class="login-form__title title">
+      Войти
+    </h1>
 
     <input
       v-model.trim="$v.login.$model"
+      class="login-form__element input"
       type="text"
-      placeholder="login"
+      placeholder="Логин"
     >
 
     <input
       v-model.trim="$v.password.$model"
+      class="login-form__element input"
       type="password"
-      placeholder="password"
+      placeholder="Пароль"
     >
 
     <input
+      class="login-form__element button button--size-big button--type-filled"
       type="submit"
       value="Вход"
       :disabled="$v.$anyError"
     >
 
-    <router-link to="/register">
-      Нет профиля? Зарегистрироваться
+    <router-link
+      class="login-form__element text-button text-button--inverted"
+      to="/password-recovery"
+    >
+      Забыли пароль?
     </router-link>
+
+    <div class="login-form__divider login-form__element" />
+
+    <span>
+      Нет подписки?
+      <router-link
+        class="login-form__element text-button text-button--inverted"
+        to="/subscription"
+      >
+        Получить подписку
+      </router-link>
+    </span>
   </form>
 </template>
 
@@ -34,7 +54,7 @@ import { mapActions } from 'vuex';
 import { required, minLength } from 'vuelidate/lib/validators';
 
 export default {
-  name: 'LoginByLogin',
+  name: 'LoginForm',
 
   data() {
     return {
@@ -75,3 +95,23 @@ export default {
   },
 };
 </script>
+
+<style lang="scss">
+.login-form {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+
+  &__title {
+    margin-bottom: 50px;
+  }
+
+  &__element {
+    margin-bottom: $base-gap;
+  }
+
+  &__divider {
+    border-bottom: 1px solid $color-border;
+  }
+}
+</style>

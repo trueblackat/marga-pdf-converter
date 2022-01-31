@@ -1,0 +1,20 @@
+.input {
+  background: $input-background-color;
+  border: 1px solid $input-border-color;
+  border-radius: 12px;
+  font-size: $base-font-size;
+  line-height: $base-line-height;
+  //font-weight: 500;
+  padding: 17px 25px;
+  color: $color-text;
+  outline: none;
+  transition: border-color $base-animation;
+
+  &::placeholder {
+    color: $input-placeholder-color;
+  }
+
+  &:focus {
+    border-color: $color-theme;
+  }
+}

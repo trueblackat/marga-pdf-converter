@@ -1,5 +1,9 @@
 {
-  "name": "pdf-converter",
+  "name": "pdfeditor",
+  "author": {
+    "email": "gafurovamir@gmail.com",
+    "name": "Amir Gafurov"
+  },
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -32,7 +36,7 @@
     "eslint-plugin-import": "^2.20.2",
     "eslint-plugin-vue": "^6.2.2",
     "lint-staged": "^9.5.0",
-    "sass": "^1.26.5",
+    "sass": "1.32.13",
     "sass-loader": "^8.0.2",
     "vue-template-compiler": "^2.6.11"
   },
