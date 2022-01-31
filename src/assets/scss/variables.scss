@@ -1,0 +1,24 @@
+$c-white: #fff;
+$c-orange: #ef5933;
+$c-black: #2c2827;
+$c-gray: #e5e5e5;
+$c-gray-2: #ebebeb;
+$color-theme: $c-orange;
+$color-text: $c-black;
+$color-background: $c-gray;
+$color-border: $c-gray-2;
+
+$header-height: 80px;
+$site-width: 1170px;
+$site-padding: 20px;
+$base-font-size: 15px;
+$base-line-height: 17px;
+
+$base-animation-time: 0.2s;
+$base-animation-function: ease;
+$base-animation: $base-animation-time $base-animation-function;
+
+$button-m-line-height: $base-line-height;
+$button-m-border-width: 2px;
+$button-m-padding: 10px;
+$button-m-height: $button-m-padding * 2 + $button-m-border-width * 2 + $button-m-line-height;

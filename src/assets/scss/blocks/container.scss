@@ -1,0 +1,6 @@
+.container {
+  max-width: calc(#{$site-width} + #{$site-padding});
+  padding: 0 $site-padding;
+  width: 100%;
+  margin: 0 auto;
+}
