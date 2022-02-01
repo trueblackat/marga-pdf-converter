@@ -10,6 +10,23 @@ body {
   background: $color-background;
   font-size: $base-font-size;
   line-height: $base-line-height;
-  padding-top: $header-height;
   position: relative;
+}
+
+.app-container {
+  display: flex;
+  flex-direction: column;
+  padding-top: $header-height;
+  min-height: 100vh;
+  height: 100%;
+
+  &__header,
+  &__content,
+  &__footer {
+    flex-shrink: 0;
+  }
+
+  &__content {
+    flex-grow: 1;
+  }
 }

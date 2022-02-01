@@ -1,6 +1,6 @@
 <template>
   <header class="header">
-    <div class="header__inner container">
+    <nav class="header__inner container">
       <router-link
         class="header__logo"
         to="/"
@@ -33,7 +33,7 @@
       >
         Подписка
       </router-link>
-    </div>
+    </nav>
   </header>
 </template>
 
@@ -63,7 +63,7 @@ export default {
   z-index: 10;
   height: $header-height;
   background: $c-white;
-  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.06);
+  box-shadow: $base-shadow;
 
   &__inner {
     display: flex;
