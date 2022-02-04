@@ -10,32 +10,42 @@
 
   font-size: $button-m-font-size;
   line-height: $button-m-line-height;
-  border: $button-m-border-width solid currentColor;
+  border: $button-default-border-width solid currentColor;
   padding: $button-m-padding;
   height: $button-m-height;
   border-radius: $button-m-border-radius;
-  color: $button-m-color;
-  background: $button-m-background;
+  color: $button-default-color;
+  background: $button-default-background;
 
   &:hover {
-    background: rgba($button-m-color, 0.1);
+    background: rgba($button-default-color, 0.1);
   }
 
-  &--size-big {
+  &--size-l {
+    font-size: $button-l-font-size;
+    line-height: $button-l-line-height;
+    padding: $button-l-padding;
+    height: $button-l-height;
+    border-radius: $button-l-border-radius;
+  }
+
+  &--size-xl {
     font-size: $button-xl-font-size;
     line-height: $button-xl-line-height;
-    border-width: $button-xl-border-width;
     padding: $button-xl-padding;
     height: $button-xl-height;
     border-radius: $button-xl-border-radius;
-    color: $button-xl-color;
-    background: $button-xl-background;
+  }
+
+  &--type-filled {
+    color: $button-type-filled-color;
+    background: $button-type-filled-background;
+    border-width: $button-type-filled-border-width;
 
     box-shadow: 0 12px 32px rgba($color-theme, 0.28);
 
     &:hover {
-      background: rgba($button-xl-background, 0.9);
-      box-shadow: none;
+      background: $button-type-filled-background-hover;
     }
   }
 

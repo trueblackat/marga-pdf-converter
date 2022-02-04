@@ -27,6 +27,7 @@ body {
   }
 
   &__content {
+    padding: $base-gap * 2 0;
     flex-grow: 1;
   }
 }

@@ -1,9 +1,11 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
 import store from '@/store';
+
 import Home from '@/views/Home.vue';
 import Login from '@/views/Login.vue';
 import Register from '@/views/Register.vue';
+import Subscriptions from '@/views/Subscriptions.vue';
 
 const ifNotAuthenticated = (to, from, next) => {
   if (!store.getters['auth/isAuthenticated']) {
@@ -41,6 +43,11 @@ const routes = [
     name: 'Register',
     component: Register,
     beforeEnter: ifNotAuthenticated,
+  },
+  {
+    path: '/subscriptions',
+    name: 'Subscriptions',
+    component: Subscriptions,
   },
 ];
 

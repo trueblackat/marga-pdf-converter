@@ -10,7 +10,7 @@
         </div>
 
         <p class="footer__rights">
-          pdf editor 2022  ©  all right received
+          pdf editor {{ currentYear }}  ©  all right received
         </p>
       </div>
 
@@ -90,6 +90,14 @@
 <script>
 export default {
   name: 'TheFooter',
+
+  computed: {
+    currentYear() {
+      const now = new Date();
+
+      return now.getFullYear();
+    },
+  },
 };
 </script>
 

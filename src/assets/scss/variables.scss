@@ -1,5 +1,6 @@
 $c-white: #fff;
 $c-orange: #ef5933;
+$c-orange-light: #f27859;
 $c-black: #2c2827;
 $c-gray-1: #f4f4f4;
 $c-gray-2: #e5e5e5;
@@ -7,6 +8,7 @@ $c-gray-3: #ebebeb;
 $c-gray-4: #efefef;
 $c-gray-5: #9a9a9a;
 $color-theme: $c-orange;
+$color-theme-hover: $c-orange-light;
 $color-text: $c-black;
 $color-background: $c-gray-1;
 $color-border: $c-gray-2;
@@ -16,6 +18,7 @@ $site-width: 1150px;
 $base-gap: 20px;
 $base-font-size: 15px;
 $base-line-height: 17px;
+$base-border-radius: 16px;
 
 $base-shadow: 0 6px 24px rgba(0, 0, 0, 0.06);
 
@@ -23,23 +26,32 @@ $base-animation-time: 0.2s;
 $base-animation-function: ease;
 $base-animation: $base-animation-time $base-animation-function;
 
+$button-type-filled-border-width: 0;
+$button-type-filled-color: $c-white;
+$button-type-filled-background: $color-theme;
+$button-type-filled-background-hover: $color-theme-hover;
+
+$button-default-border-width: 2px;
+$button-default-color: $color-theme;
+$button-default-background: transparent;
+
 $button-m-font-size: $base-font-size;
 $button-m-line-height: $base-line-height;
-$button-m-border-width: 2px;
 $button-m-padding: 10px;
-$button-m-height: $button-m-padding * 2 + $button-m-border-width * 2 + $button-m-line-height;
+$button-m-height: $button-m-padding * 2 + $button-default-border-width * 2 + $button-m-line-height;
 $button-m-border-radius: $button-m-height / 2;
-$button-m-color: $color-theme;
-$button-m-background: transparent;
+
+$button-l-font-size: 17px;
+$button-l-line-height: 20px;
+$button-l-padding: 19px;
+$button-l-height: $button-l-padding * 2 + $button-type-filled-border-width * 2 + $button-l-line-height;
+$button-l-border-radius: $button-l-height / 2;
 
 $button-xl-font-size: 17px;
 $button-xl-line-height: 22px;
-$button-xl-border-width: 0;
 $button-xl-padding: 23px;
-$button-xl-height: $button-xl-padding * 2 + $button-xl-border-width * 2 + $button-xl-line-height;
+$button-xl-height: $button-xl-padding * 2 + $button-type-filled-border-width * 2 + $button-xl-line-height;
 $button-xl-border-radius: $button-xl-height / 2;
-$button-xl-color: $c-white;
-$button-xl-background: $color-theme;
 
 $input-border-color: $c-gray-3;
 $input-background-color: $c-gray-4;

@@ -22,7 +22,7 @@
     >
 
     <input
-      class="login-form__element button button--size-big button--type-filled"
+      class="login-form__element button button--size-xl button--type-filled"
       type="submit"
       value="Вход"
       :disabled="$v.$anyError"
@@ -41,7 +41,7 @@
       Нет подписки?
       <router-link
         class="login-form__element text-button text-button--inverted"
-        to="/subscription"
+        to="/subscriptions"
       >
         Получить подписку
       </router-link>

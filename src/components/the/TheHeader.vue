@@ -29,7 +29,7 @@
 
       <router-link
         class="button"
-        to="/subscription"
+        to="/subscriptions"
       >
         Подписка
       </router-link>
