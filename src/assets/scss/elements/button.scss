@@ -7,6 +7,7 @@
   text-decoration: none;
   transition: $base-animation;
   will-change: color, backgroun-color, box-shadow;
+  outline: none;
 
   font-size: $button-m-font-size;
   line-height: $button-m-line-height;

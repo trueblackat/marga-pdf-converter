@@ -1,41 +1,28 @@
 <template>
   <div
     :class="[
-      'subscribe-item',
-      { 'subscribe-item--is-hot': isHot }
+      'subscription-item',
+      { 'subscription-item--is-hot': isHot }
     ]"
   >
-    <div class="subscribe-item__hot-badge">
+    <div class="subscription-item__hot-badge">
       <img
         src="@/assets/images/fire.svg"
         alt="hot"
       >
     </div>
 
-    <h2 class="subscribe-item__title">
+    <h2 class="subscription-item__title">
       {{ title }}
     </h2>
 
-    <div class="subscribe-item__features">
-      <div
-        v-for="feature in features"
-        :key="`feature-${feature}`"
-        class="subscribe-item__feature"
-      >
-        <img
-          src="@/assets/images/check.svg"
-          alt="check"
-        >
+    <subscription-features :features="features" />
 
-        <span>{{ feature }}</span>
-      </div>
-    </div>
-
-    <div class="subscribe-item__price">
+    <div class="subscription-item__price">
       {{ price }}
     </div>
 
-    <div class="subscribe-item__price-captions">
+    <div class="subscription-item__price-captions">
       <span v-if="priceCaption">
         {{ priceCaption }}
       </span>
@@ -55,9 +42,11 @@
 </template>
 
 <script>
+import SubscriptionFeatures from '@/components/Subscriptions/SubscriptionFeatures.vue';
+
 export default {
   name: 'SubscribeItem',
-
+  components: { SubscriptionFeatures },
   props: {
     title: {
       type: String,
@@ -93,7 +82,7 @@ export default {
 </script>
 
 <style lang="scss">
-.subscribe-item {
+.subscription-item {
   $parent: &;
 
   background: $c-gray-4;
@@ -141,26 +130,6 @@ export default {
     grid-area: title;
   }
 
-  &__features {
-    grid-area: features;
-  }
-
-  &__feature {
-    font-size: $base-font-size;
-    line-height: 22px;
-    display: flex;
-    align-items: flex-start;
-
-    &:not(:last-child) {
-      margin-bottom: 12px;
-    }
-
-    img {
-      opacity: 0.42;
-      margin-right: 8px;
-    }
-  }
-
   &__price {
     font-size: 28px;
     line-height: 32px;
@@ -197,6 +166,10 @@ export default {
         opacity: 1;
       }
     }
+  }
+
+  .features {
+    grid-area: features;
   }
 
   .button {

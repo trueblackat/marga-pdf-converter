@@ -7,6 +7,8 @@ import './assets/scss/main.scss';
 
 Vue.config.productionTip = false;
 
+Vue.prototype.$eventBus = new Vue();
+
 Vue.use(Vuelidate);
 
 window.vm = new Vue({
