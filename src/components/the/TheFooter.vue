@@ -3,10 +3,7 @@
     <div class="footer__inner container">
       <div class="footer__block">
         <div class="footer__logo">
-          <img
-            src="@/assets/images/logo.svg"
-            alt="pdfeditor"
-          >
+          <svg-icon name="logo" />
         </div>
 
         <p class="footer__rights">
@@ -120,6 +117,14 @@ export default {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+  }
+
+  &__logo {
+    .svg-icon {
+      width: 162px;
+      height: 24px;
+      color: $color-theme;
+    }
   }
 
   &__inlines {

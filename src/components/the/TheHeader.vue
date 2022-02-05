@@ -5,10 +5,7 @@
         class="header__logo"
         to="/"
       >
-        <img
-          src="@/assets/images/logo.svg"
-          alt="PDFeditor"
-        >
+        <svg-icon name="logo" />
       </router-link>
 
       <div class="header__gutter" />
@@ -78,6 +75,12 @@ export default {
 
   &__logo {
     flex-shrink: 0;
+
+    .svg-icon {
+      width: 162px;
+      height: 24px;
+      color: $color-theme;
+    }
   }
 
   &__link {

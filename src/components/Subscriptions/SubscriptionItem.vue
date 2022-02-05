@@ -6,10 +6,7 @@
     ]"
   >
     <div class="subscription-item__hot-badge">
-      <img
-        src="@/assets/images/fire.svg"
-        alt="hot"
-      >
+      <svg-icon name="fire" />
     </div>
 
     <h2 class="subscription-item__title">
@@ -123,6 +120,11 @@ export default {
     visibility: hidden;
     pointer-events: none;
     user-select: none;
+
+    .svg-icon {
+      width: 27px;
+      height: 31px;
+    }
   }
 
   &__title {
@@ -154,20 +156,6 @@ export default {
     }
   }
 
-  &--is-hot {
-    border-color: $color-theme;
-
-    #{$parent}__hot-badge {
-      visibility: visible;
-    }
-
-    #{$parent}__feature {
-      img {
-        opacity: 1;
-      }
-    }
-  }
-
   .features {
     grid-area: features;
   }
@@ -175,6 +163,22 @@ export default {
   .button {
     width: 100%;
     grid-area: button;
+  }
+
+  .features-item__icon {
+    opacity: 0.42;
+  }
+
+  &--is-hot {
+    border-color: $color-theme;
+
+    #{$parent}__hot-badge {
+      visibility: visible;
+    }
+
+    .features-item__icon {
+      opacity: 1;
+    }
   }
 }
 </style>

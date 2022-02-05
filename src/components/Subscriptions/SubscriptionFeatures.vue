@@ -3,14 +3,14 @@
     <div
       v-for="feature in features"
       :key="`feature-${feature}`"
-      class="features__item"
+      class="features-item"
     >
-      <img
-        src="@/assets/images/check.svg"
-        alt="check"
-      >
+      <svg-icon
+        class="features-item__icon"
+        name="check"
+      />
 
-      <span>{{ feature }}</span>
+      <span class="features-item__name">{{ feature }}</span>
     </div>
   </div>
 </template>
@@ -28,21 +28,20 @@ export default {
 </script>
 
 <style lang="scss">
-.features {
-  &__item {
-    font-size: $base-font-size;
-    line-height: 22px;
-    display: flex;
-    align-items: flex-start;
+.features-item {
+  font-size: $base-font-size;
+  line-height: 22px;
+  display: flex;
+  align-items: flex-start;
 
-    &:not(:last-child) {
-      margin-bottom: 12px;
-    }
+  &:not(:last-child) {
+    margin-bottom: 12px;
+  }
 
-    img {
-      opacity: 0.42;
-      margin-right: 8px;
-    }
+  &__icon {
+    margin-right: 8px;
+    flex-shrink: 0;
+    color: $color-theme;
   }
 }
 

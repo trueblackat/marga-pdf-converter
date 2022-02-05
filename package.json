@@ -1,11 +1,11 @@
 {
   "name": "pdfeditor",
+  "version": "0.1.0",
+  "private": true,
   "author": {
     "email": "gafurovamir@gmail.com",
     "name": "Amir Gafurov"
   },
-  "version": "0.1.0",
-  "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
@@ -38,6 +38,9 @@
     "lint-staged": "^9.5.0",
     "sass": "1.32.13",
     "sass-loader": "^8.0.2",
+    "svgo": "^1.1.0",
+    "svgo-loader": "^2.1.0",
+    "vue-cli-plugin-svg-sprite": "~1.1.0",
     "vue-template-compiler": "^2.6.11"
   },
   "gitHooks": {

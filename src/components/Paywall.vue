@@ -16,10 +16,7 @@
           title="Закрыть"
           @click="close"
         >
-          <img
-            src="@/assets/images/close.svg"
-            alt="close"
-          >
+          <svg-icon name="close" />
         </button>
 
         <h1 class="paywall__title">
@@ -155,6 +152,17 @@ export default {
     top: 25px;
     left: 25px;
     outline: none;
+
+    .svg-icon {
+      color: $color-border;
+      transition: color $base-animation;
+    }
+
+    &:hover {
+      .svg-icon {
+        color: $color-text;
+      }
+    }
   }
 
   &__title {
@@ -197,6 +205,7 @@ export default {
   user-select: none;
   cursor: pointer;
   transition: border-color $base-animation;
+  text-align: center;
 
   &__title {
     margin-bottom: 8px;
