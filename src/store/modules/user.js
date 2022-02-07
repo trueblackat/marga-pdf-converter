@@ -14,7 +14,7 @@ export default {
     },
 
     CLEAR_USER(state) {
-      state.user = null;
+      state.user = {};
     },
 
     SET_LOADING(state, data) {

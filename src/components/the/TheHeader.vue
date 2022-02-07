@@ -18,6 +18,7 @@
       </router-link>
 
       <router-link
+        v-if="!isAuthenticated"
         class="header__link text-button"
         to="/login"
       >
@@ -25,28 +26,32 @@
       </router-link>
 
       <router-link
+        v-if="!isAuthenticated"
         class="button"
         to="/subscriptions"
       >
         Подписка
       </router-link>
+
+      <user-nav
+        v-if="isAuthenticated && isUserInfoExited"
+        :username="user.login"
+      />
     </nav>
   </header>
 </template>
 
 <script>
-import { mapActions } from 'vuex';
+import UserNav from '@/components/UserNav.vue';
+import { mapGetters, mapState } from 'vuex';
 
 export default {
   name: 'TheHeader',
-
-  methods: {
-    ...mapActions('auth', ['logout']),
-
-    onLogout() {
-      console.log('onLogout');
-      // this.logout();
-    },
+  components: { UserNav },
+  computed: {
+    ...mapState('user', ['user']),
+    ...mapGetters('user', ['isUserInfoExited']),
+    ...mapGetters('auth', ['isAuthenticated']),
   },
 };
 </script>
