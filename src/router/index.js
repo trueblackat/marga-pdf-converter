@@ -6,6 +6,7 @@ import Home from '@/views/Home.vue';
 import Login from '@/views/Login.vue';
 import Register from '@/views/Register.vue';
 import Subscriptions from '@/views/Subscriptions.vue';
+import TermsAndConditions from '@/views/TermsAndConditions.vue';
 
 const ifNotAuthenticated = (to, from, next) => {
   if (!store.getters['auth/isAuthenticated']) {
@@ -48,6 +49,11 @@ const routes = [
     path: '/subscriptions',
     name: 'Subscriptions',
     component: Subscriptions,
+  },
+  {
+    path: '/terms-and-conditions',
+    name: 'TermsAndConditions',
+    component: TermsAndConditions,
   },
 ];
 

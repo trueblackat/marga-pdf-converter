@@ -12,7 +12,7 @@
 
       <router-link
         class="header__link text-button"
-        to="/info"
+        to="/terms-and-conditions"
       >
         Информация
       </router-link>

@@ -2,9 +2,12 @@
   <footer class="footer">
     <div class="footer__inner container">
       <div class="footer__block">
-        <div class="footer__logo">
+        <router-link
+          class="footer__logo"
+          to="/"
+        >
           <svg-icon name="logo" />
-        </div>
+        </router-link>
 
         <p class="footer__rights">
           pdf editor {{ currentYear }}  ©  all right received
