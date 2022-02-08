@@ -1,5 +1,9 @@
 <template>
-  <div class="subscription-features">
+  <transition-group
+    class="subscription-features"
+    name="list"
+    tag="div"
+  >
     <div
       v-for="feature in features"
       :key="`feature-${feature}`"
@@ -12,16 +16,17 @@
 
       <span class="subscription-features-item__name">{{ feature }}</span>
     </div>
-  </div>
+  </transition-group>
 </template>
+
 <script>
 export default {
   name: 'SubscriptionFeatures',
+
   props: {
     features: {
       type: Array,
       required: true,
-      validator: (value) => !!value.length,
     },
   },
 };
@@ -33,6 +38,7 @@ export default {
   line-height: 22px;
   display: flex;
   align-items: flex-start;
+  transition: $base-animation;
 
   &:not(:last-child) {
     margin-bottom: 12px;

@@ -7,3 +7,20 @@
 .fade-leave-to {
   opacity: 0;
 }
+
+.list-enter,
+.list-leave-to {
+  opacity: 0;
+}
+
+.list-enter {
+  transform: translateY(5px);
+}
+
+.list-leave-to {
+  transform: translateY(-5px);
+}
+
+.list-leave-active {
+  position: absolute;
+}
