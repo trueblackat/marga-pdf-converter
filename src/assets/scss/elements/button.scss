@@ -6,8 +6,11 @@
   text-align: center;
   text-decoration: none;
   transition: $base-animation;
-  will-change: color, backgroun-color, box-shadow;
+  will-change: color, background-color, box-shadow;
   outline: none;
+  position: relative;
+  overflow: hidden;
+  white-space: nowrap;
 
   font-size: $button-m-font-size;
   line-height: $button-m-line-height;
@@ -47,6 +50,18 @@
 
     &:hover {
       background: $button-type-filled-background-hover;
+    }
+  }
+
+  &--with-icon {
+    .svg-icon {
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: 64px;
+      padding: 22px;
+      border-right: 1px solid rgba(black, 0.05);
     }
   }
 

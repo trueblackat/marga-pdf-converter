@@ -1,6 +1,6 @@
 <template>
-  <div class="home-page">
-    <file-uploader />
+  <div class="home-page container">
+    <file-uploader class="home-page__uploader" />
   </div>
 </template>
 
@@ -13,3 +13,12 @@ export default {
   components: { FileUploader },
 };
 </script>
+
+<style lang="scss">
+.home-page {
+  &__uploader {
+    padding-top: $base-gap * 2;
+    margin-bottom: 170px;
+  }
+}
+</style>

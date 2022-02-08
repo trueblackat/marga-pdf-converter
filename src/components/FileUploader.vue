@@ -1,66 +1,58 @@
 <template>
-  <div
-    class="file-uploader"
-    @drop="onDrop"
-    @dragover.prevent
-  >
-    <div class="file-uploader__caption">
-      drop here
-    </div>
+  <section class="file-uploader">
+    <div class="file-uploader__inner">
+      <h1 class="file-uploader__title">
+        Выберите файл
+      </h1>
 
-    <input
-      type="file"
-      class="file-uploader__input-file"
-      multiple
-      @change="onInputChange"
-    >
-  </div>
+      <h2 class="file-uploader__subtitle">
+        для редактирования
+      </h2>
+
+      <button
+        class="button button--size-xl button--type-filled button--with-icon"
+        @click="openFileDialog"
+      >
+        <svg-icon name="plus" />
+        <span>Добавить файл</span>
+      </button>
+
+      <input
+        ref="input"
+        class="file-uploader__input"
+        type="file"
+        multiple
+        @change="onInputChange"
+      >
+    </div>
+  </section>
 </template>
 
 <script>
+import api from '@/api';
+import { getFileAsBase64 } from '@/utils/files.utils';
+
 export default {
   name: 'FileUploader',
 
-  data() {
-    return {
-      files: [],
-    };
-  },
-
   methods: {
-    onDrop(ev) {
-      ev.preventDefault();
+    openFileDialog() {
+      this.$refs.input.click();
+    },
 
-      const files = [];
+    async onInputChange(event) {
+      const { files } = event.target;
+      const fileEncodingPromises = Array.from(files).map((file) => getFileAsBase64(file));
+      const encodedFiles = await Promise.all(fileEncodingPromises);
+      const uploadPromises = encodedFiles.map((item) => api.documents.upload(item.name, item.body));
 
-      if (ev.dataTransfer.items) {
-        // Use DataTransferItemList interface to access the file(s)
-        for (let i = 0; i < ev.dataTransfer.items.length; i += 1) {
-          // If dropped items aren't files, reject them
-          if (ev.dataTransfer.items[i].kind === 'file') {
-            const file = ev.dataTransfer.items[i].getAsFile();
+      try {
+        const result = await Promise.all(uploadPromises);
 
-            files.push(file);
-          }
-        }
-      } else {
-        // Use DataTransfer interface to access the file(s)
-        for (let i = 0; i < ev.dataTransfer.files.length; i += 1) {
-          files.push(ev.dataTransfer.files[i]);
-        }
+        console.log(result);
+      } catch (e) {
+        console.log(e);
       }
-
-      this.checkFiles(files);
-    },
-
-    onInputChange(ev) {
-      const { files } = ev.target;
-
-      this.checkFiles(Array.from(files));
-    },
-
-    checkFiles(files) {
-      console.log(files);
     },
   },
 };
@@ -68,21 +60,37 @@ export default {
 
 <style lang="scss">
 .file-uploader {
-  height: 400px;
-  background: gray;
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  input {
-    position: absolute;
-    top: 0;
-    left: 0;
+  &__inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
     width: 100%;
-    height: 100%;
-    opacity: 0;
-    cursor: pointer;
+    max-width: 570px;
+    margin: 0 auto;
+  }
+
+  &__title {
+    font-weight: 500;
+    font-size: 48px;
+    line-height: 55px;
+    margin-bottom: 10px;
+  }
+
+  &__subtitle {
+    font-weight: 300;
+    font-size: 28px;
+    line-height: 32px;
+    color: $c-gray-5;
+    margin-bottom: 67px;
+  }
+
+  &__input {
+    display: none;
+  }
+
+  .button {
+    width: 100%;
   }
 }
 </style>

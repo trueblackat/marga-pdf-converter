@@ -1,6 +1,6 @@
-import axios from 'axios';
 import { API_URL, timeout } from '@/constants/api.constants';
 import localStorageDb from '@/utils/localStorageDB.utils';
+import axios from 'axios';
 
 const getAuthToken = () => localStorageDb.get('token');
 const httpClient = axios.create({
@@ -27,6 +27,7 @@ const authInterceptor = (config) => {
 const responseInterceptor = (response) => response.data;
 
 const errorInterceptor = async (error) => {
+  // TODO: проверить статус при ошибках
   switch (error.response.status) {
     case 400:
       console.error(error.response.status, error.message);

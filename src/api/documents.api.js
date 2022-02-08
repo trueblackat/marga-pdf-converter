@@ -1,10 +1,10 @@
 import httpClient from '@/api/httpClient';
+import { documentFormats, documentStatuses, documentTypes } from '@/constants/base.constants';
 import { booleanToNumber } from '@/utils/api.utils';
-import { documentStatuses, documentTypes, documentFormats } from '@/constants/base.constants';
 
 /*
   Список запросов
-  Swagger - http://18.191.201.80/api/swagger/
+  Swagger - https://pdf.marga.app/api/swagger/
 */
 
 /**
@@ -43,9 +43,15 @@ const getList = ({
   return httpClient.get('/documents', { params });
 };
 
-const create = () => httpClient.get('/documents');
+/**
+ * Загрузка документа
+ * @param name {string} - имя файла
+ * @param body {string} - тело файла в base64
+ * @return {Promise<object>} - созданный документ
+ */
+const upload = (name, body) => httpClient.post('/documents', { name, body });
 
 export default {
   getList,
-  create,
+  upload,
 };
