@@ -23,9 +23,9 @@
 </template>
 
 <script>
-import { mapActions, mapState } from 'vuex';
-import SubscriptionItem from '@/components/Subscriptions/SubscriptionItem.vue';
 import Paywall from '@/components/Paywall.vue';
+import SubscriptionItem from '@/components/subscriptions/SubscriptionItem.vue';
+import { mapActions, mapState } from 'vuex';
 
 export default {
   name: 'SubscriptionsPage',

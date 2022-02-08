@@ -1,16 +1,16 @@
 <template>
-  <div class="features">
+  <div class="subscription-features">
     <div
       v-for="feature in features"
       :key="`feature-${feature}`"
-      class="features-item"
+      class="subscription-features-item"
     >
       <svg-icon
-        class="features-item__icon"
+        class="subscription-features-item__icon"
         name="check"
       />
 
-      <span class="features-item__name">{{ feature }}</span>
+      <span class="subscription-features-item__name">{{ feature }}</span>
     </div>
   </div>
 </template>
@@ -28,7 +28,7 @@ export default {
 </script>
 
 <style lang="scss">
-.features-item {
+.subscription-features-item {
   font-size: $base-font-size;
   line-height: 22px;
   display: flex;

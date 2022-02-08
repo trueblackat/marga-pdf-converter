@@ -39,7 +39,7 @@
 </template>
 
 <script>
-import SubscriptionFeatures from '@/components/Subscriptions/SubscriptionFeatures.vue';
+import SubscriptionFeatures from '@/components/subscriptions/SubscriptionFeatures.vue';
 
 export default {
   name: 'SubscribeItem',
@@ -156,17 +156,17 @@ export default {
     }
   }
 
-  .features {
+  .subscription-features {
     grid-area: features;
+  }
+
+  .subscription-features-item__icon {
+    opacity: 0.42;
   }
 
   .button {
     width: 100%;
     grid-area: button;
-  }
-
-  .features-item__icon {
-    opacity: 0.42;
   }
 
   &--is-hot {
@@ -176,7 +176,7 @@ export default {
       visibility: visible;
     }
 
-    .features-item__icon {
+    .subscription-features-item__icon {
       opacity: 1;
     }
   }

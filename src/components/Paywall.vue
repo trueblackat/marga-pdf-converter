@@ -66,8 +66,8 @@
 </template>
 
 <script>
+import SubscriptionFeatures from '@/components/subscriptions/SubscriptionFeatures.vue';
 import { mapActions, mapGetters, mapState } from 'vuex';
-import SubscriptionFeatures from '@/components/Subscriptions/SubscriptionFeatures.vue';
 
 export default {
   name: 'Paywall',
@@ -179,7 +179,7 @@ export default {
     margin: 30px 0;
   }
 
-  .features {
+  .subscription-features {
     margin-bottom: 30px;
   }
 

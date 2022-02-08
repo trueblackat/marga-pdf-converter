@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import FileUploader from '@/components/FileUploader.vue';
+import FileUploader from '@/components/home/FileUploader.vue';
 
 export default {
   name: 'HomePage',
