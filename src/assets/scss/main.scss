@@ -28,7 +28,8 @@ body {
   }
 
   &__content {
-    padding: $base-gap * 2 0;
+    padding-top: $base-gap * 2;
+    padding-bottom: $base-gap * 2;
     flex-grow: 1;
   }
 }
