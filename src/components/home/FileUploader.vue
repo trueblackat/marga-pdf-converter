@@ -47,9 +47,9 @@ export default {
       const uploadPromises = encodedFiles.map((item) => api.documents.upload(item.name, item.body));
 
       try {
-        const result = await Promise.all(uploadPromises);
+        const uploadedFiles = await Promise.all(uploadPromises);
 
-        console.log(result);
+        console.info(`${uploadedFiles.length} файлов загружено!`);
       } catch (e) {
         console.log(e);
       }

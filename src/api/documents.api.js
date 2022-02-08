@@ -49,7 +49,7 @@ const getList = ({
  * @param body {string} - тело файла в base64
  * @return {Promise<object>} - созданный документ
  */
-const upload = (name, body) => httpClient.post('/documents', { name, body });
+const upload = (name, body) => httpClient.post('/documents/', { name, body });
 
 export default {
   getList,

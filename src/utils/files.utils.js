@@ -4,7 +4,7 @@ export const getFileAsBase64 = (file) => new Promise(((resolve, reject) => {
   reader.readAsDataURL(file);
 
   reader.onload = () => {
-    resolve({ name: file.name, body: reader.result });
+    resolve({ name: file.name, body: reader.result.split(',')[1] });
   };
 
   reader.onerror = (error) => {
