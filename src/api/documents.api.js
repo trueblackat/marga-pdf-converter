@@ -17,7 +17,7 @@ import { booleanToNumber } from '@/utils/api.utils';
  * @param status {string} - статус документа (processing, downloadable, archived)
  * @param name {string} - название файла
  * @param isBodyIncluded {boolean} - включить ли в выдачу тело документа?
- * @return {Promise} - массив документов
+ * @return {Promise<array>} - массив документов
  */
 const getList = ({
   ordering,
@@ -28,7 +28,7 @@ const getList = ({
   status,
   name,
   isBodyIncluded,
-}) => {
+} = {}) => {
   const params = {
     ordering, // TODO: узнать какие бывают сортировки
     id,

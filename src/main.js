@@ -1,5 +1,7 @@
 import SvgIcon from '@/components/SvgIcon.vue';
 import '@/plugins/svg-icons';
+import dayjs from 'dayjs';
+import 'dayjs/locale/ru';
 import Vue from 'vue';
 import ClickOutside from 'vue-click-outside';
 import Vuelidate from 'vuelidate';
@@ -7,6 +9,8 @@ import App from './App.vue';
 import './assets/scss/main.scss';
 import router from './router';
 import store from './store';
+
+dayjs.locale('ru');
 
 Vue.config.productionTip = false;
 

@@ -1,10 +1,10 @@
 <template>
-  <div class="subscriptions-page">
-    <h1 class="subscriptions-page__title title">
+  <div class="subscriptions-page container">
+    <h1 class="title page-title">
       Подписки
     </h1>
 
-    <div class="subscriptions-page__inner container">
+    <div class="subscriptions-page__inner">
       <subscription-item
         v-for="subscription in subscriptions"
         :key="`subscribe-${subscription.id}`"
@@ -52,11 +52,6 @@ export default {
 
 <style lang="scss">
 .subscriptions-page {
-  &__title {
-    text-align: center;
-    margin-bottom: $base-gap * 2;
-  }
-
   &__inner {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
