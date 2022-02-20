@@ -2,6 +2,7 @@ import store from '@/store';
 
 import Home from '@/views/Home.vue';
 import Login from '@/views/Login.vue';
+import MyFiles from '@/views/MyFiles.vue';
 import Profile from '@/views/Profile.vue';
 import Register from '@/views/Register.vue';
 import Subscriptions from '@/views/Subscriptions.vue';
@@ -50,6 +51,11 @@ const routes = [
     name: 'Profile',
     component: Profile,
     beforeEnter: ifAuthenticated,
+  },
+  {
+    path: '/my-files',
+    name: 'MyFiles',
+    component: MyFiles,
   },
   {
     path: '/subscriptions',

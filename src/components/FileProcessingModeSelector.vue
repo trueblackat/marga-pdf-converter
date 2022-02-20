@@ -1,5 +1,10 @@
 <template>
-  <section class="file-processing-mode-selector">
+  <section
+    :class="[
+      'file-processing-mode-selector',
+      { 'file-processing-mode-selector--is-small': isSmall},
+    ]"
+  >
     <div
       v-for="type in $options.FILE_PROCESSING_MODES"
       :key="`type-${type.code}`"
@@ -29,6 +34,13 @@ export default {
 
   FILE_PROCESSING_MODES,
 
+  props: {
+    isSmall: {
+      type: Boolean,
+      default: false,
+    },
+  },
+
   computed: {
     ...mapState('system', ['fileProcessingMode']),
   },
@@ -41,6 +53,8 @@ export default {
 
 <style lang="scss">
 .file-processing-mode-selector {
+  $parent: &;
+
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
   gap: 30px;
@@ -90,6 +104,21 @@ export default {
 
     &:hover {
       background-color: $color-theme-hover-light;
+    }
+  }
+
+  &--is-small {
+    #{$parent}__item {
+      .svg-icon {
+        width: 60px;
+        height: 60px;
+      }
+
+      .text {
+        span:first-child {
+          margin-bottom: 7px;
+        }
+      }
     }
   }
 }

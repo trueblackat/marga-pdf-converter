@@ -1,36 +1,45 @@
 <template>
   <section class="document-list">
-    <header class="document-list__heading">
-      123
-    </header>
+    <!--    <header class="document-list__heading">-->
+    <!--      123-->
+    <!--    </header>-->
 
-    <div class="document-list__inner">
+    <div
+      v-if="files.length"
+      class="document-list__inner"
+    >
       <document
-        v-for="document in documents"
-        :key="`document-${document.id}`"
-        :name="document.name"
-        :link="document.link"
-        :date="document.date"
-        :preview-link="document.previewLink"
-        :size="document.size"
-        :pages-count="document.pagesCount"
+        class="document-list__add-file"
+        size="Макс. 50 Mb"
+        name="Добавить файл"
+        date="Сегодня"
+      >
+        <file-uploader-block />
+      </document>
+
+      <document
+        v-for="file in files"
+        :key="`file-${file.id}`"
+        :name="file.name"
+        :link="file.link"
+        :date="file.date"
+        :preview-link="file.previewLink"
+        :size="file.size"
+        :pages-count="file.pagesCount"
       />
     </div>
   </section>
 </template>
 
 <script>
-import api from '@/api/';
 import Document from '@/components/profile/Document.vue';
-import humanFileSize from '@/utils/humanFileSize';
-import dayjs from 'dayjs';
-import capitalize from 'lodash/capitalize';
-import pick from 'lodash/pick';
+import FileUploaderBlock from '@/components/uploaders/FileUploaderBlock.vue';
+import { mapActions, mapState } from 'vuex';
 
 export default {
   name: 'DocumentList',
 
-  components: { Document },
+  components: { FileUploaderBlock, Document },
 
   data() {
     return {
@@ -38,23 +47,18 @@ export default {
     };
   },
 
+  computed: {
+    ...mapState('files', ['files']),
+  },
+
   created() {
-    this.getDocuments();
+    if (!this.files.length) {
+      this.getFiles();
+    }
   },
 
   methods: {
-    async getDocuments() {
-      const documents = await api.documents.getList();
-
-      this.documents = documents.map((item) => ({
-        ...pick(item, ['id', 'name']),
-        date: capitalize(dayjs(item.created).format('MMMM D, YYYY')),
-        link: `${process.env.VUE_APP_API_HOST}${item.link.substring(1)}`,
-        previewLink: `${process.env.VUE_APP_API_HOST}${item.preview_link.substring(1)}`,
-        size: humanFileSize(item.size),
-        pagesCount: item.num_pages,
-      }));
-    },
+    ...mapActions('files', ['getFiles']),
   },
 };
 </script>
@@ -72,6 +76,13 @@ export default {
     display: grid;
     grid-template-columns: repeat(auto-fill, 165px);
     gap: 30px;
+    align-items: start;
+  }
+
+  &__add-file {
+    .document__name {
+      color: $color-theme;
+    }
   }
 }
 </style>

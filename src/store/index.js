@@ -1,6 +1,7 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
 import auth from './modules/auth';
+import files from './modules/files';
 import subscriptions from './modules/subscriptions';
 import system from './modules/system';
 import user from './modules/user';
@@ -13,5 +14,6 @@ export default new Vuex.Store({
     user,
     subscriptions,
     system,
+    files,
   },
 });

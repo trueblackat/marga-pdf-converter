@@ -1,16 +1,20 @@
 <template>
   <div
     class="document"
-    @click="openFile"
+    @click="onDocumentClick"
   >
-    <picture class="document__preview">
-      <img
-        ref="image"
-        :src="previewLink"
-        :alt="name"
-        @error="onImageLoadError"
-      >
-    </picture>
+    <div class="document__preview">
+      <slot v-if="$slots.default" />
+
+      <picture v-else-if="previewLink">
+        <img
+          ref="image"
+          :src="previewLink"
+          :alt="name"
+          @error="onImageLoadError"
+        >
+      </picture>
+    </div>
 
     <div class="document__name">
       {{ name }}
@@ -43,7 +47,7 @@ export default {
 
     link: {
       type: String,
-      required: true,
+      default: '',
     },
 
     date: {
@@ -53,7 +57,7 @@ export default {
 
     previewLink: {
       type: String,
-      required: true,
+      default: '',
     },
 
     size: {
@@ -72,8 +76,15 @@ export default {
       this.$refs.image.style.display = 'none';
     },
 
+    onDocumentClick() {
+      this.$emit('document-click', this.name);
+      this.openFile();
+    },
+
     openFile() {
-      window.open(this.link, '_blank');
+      if (this.link) {
+        window.open(this.link, '_blank');
+      }
     },
   },
 };
@@ -81,21 +92,28 @@ export default {
 
 <style lang="scss">
 .document {
+  $parent: &;
+
   cursor: pointer;
 
   &__preview {
     height: 240px;
-    background: $c-white;
-    box-shadow: $base-shadow-small;
-    border-radius: $base-border-radius;
     margin-bottom: 15px;
-    overflow: hidden;
 
-    img {
-      width: 100%;
+    picture {
+      background: $c-white;
+      border-radius: $base-border-radius;
+      box-shadow: $base-shadow-small;
+      overflow: hidden;
       height: 100%;
-      object-fit: cover;
-      object-position: center;
+      transition: box-shadow $base-animation;
+
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center;
+      }
     }
   }
 
@@ -104,6 +122,7 @@ export default {
     font-size: 15px;
     line-height: 17px;
     margin-bottom: 8px;
+    transition: color $base-animation;
   }
 
   &__date,
@@ -125,6 +144,18 @@ export default {
 
       &:not(:last-child) {
         padding-right: 5px;
+      }
+    }
+  }
+
+  &:hover {
+    #{$parent}__name {
+      color: $color-theme;
+    }
+
+    #{$parent}__preview {
+      picture {
+        box-shadow: none;
       }
     }
   }

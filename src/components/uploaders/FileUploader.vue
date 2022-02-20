@@ -14,28 +14,22 @@
         @click="openFileDialog"
       >
         <svg-icon name="plus" />
+
         <span>Добавить файл</span>
       </button>
 
-      <input
-        ref="input"
-        class="file-uploader__input"
-        type="file"
-        multiple
-        @change="onInputChange"
-      >
+      <file-uploader-input-element ref="input" />
     </div>
   </section>
 </template>
 
 <script>
-import api from '@/api';
-import { getFileAsBase64 } from '@/utils/files.utils';
+import FileUploaderInputElement from '@/components/uploaders/FileUploaderInputElement.vue';
 import { mapGetters } from 'vuex';
 
 export default {
   name: 'FileUploader',
-
+  components: { FileUploaderInputElement },
   computed: {
     ...mapGetters('system', ['selectedFileProcessingModeData']),
   },
@@ -43,21 +37,6 @@ export default {
   methods: {
     openFileDialog() {
       this.$refs.input.click();
-    },
-
-    async onInputChange(event) {
-      const { files } = event.target;
-      const fileEncodingPromises = Array.from(files).map((file) => getFileAsBase64(file));
-      const encodedFiles = await Promise.all(fileEncodingPromises);
-      const uploadPromises = encodedFiles.map((item) => api.documents.upload(item.name, item.body));
-
-      try {
-        const uploadedFiles = await Promise.all(uploadPromises);
-
-        console.info(`${uploadedFiles.length} файлов загружено!`);
-      } catch (e) {
-        console.log(e);
-      }
     },
   },
 };
@@ -88,10 +67,6 @@ export default {
     line-height: 32px;
     color: $c-gray-5;
     margin-bottom: 67px;
-  }
-
-  &__input {
-    display: none;
   }
 
   .button {

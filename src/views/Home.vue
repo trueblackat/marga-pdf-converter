@@ -8,7 +8,7 @@
 
 <script>
 import FileProcessingModeSelector from '@/components/FileProcessingModeSelector.vue';
-import FileUploader from '@/components/home/FileUploader.vue';
+import FileUploader from '@/components/uploaders/FileUploader.vue';
 
 export default {
   name: 'HomePage',

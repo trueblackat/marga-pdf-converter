@@ -30,6 +30,13 @@
 
         <router-link
           class="text-button"
+          to="/my-files"
+        >
+          Мои файлы
+        </router-link>
+
+        <router-link
+          class="text-button"
           to="/profile"
         >
           Профиль
