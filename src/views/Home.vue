@@ -2,18 +2,18 @@
   <div class="home-page container">
     <file-uploader class="home-page__uploader" />
 
-    <uploader-features class="home-page__features" />
+    <file-processing-mode-selector class="home-page__features" />
   </div>
 </template>
 
 <script>
+import FileProcessingModeSelector from '@/components/FileProcessingModeSelector.vue';
 import FileUploader from '@/components/home/FileUploader.vue';
-import UploaderFeatures from '@/components/home/UploaderFeatures.vue';
 
 export default {
   name: 'HomePage',
 
-  components: { UploaderFeatures, FileUploader },
+  components: { FileProcessingModeSelector, FileUploader },
 };
 </script>
 

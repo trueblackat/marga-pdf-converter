@@ -2,11 +2,11 @@
   <section class="file-uploader">
     <div class="file-uploader__inner">
       <h1 class="file-uploader__title">
-        Выберите файл
+        {{ selectedFileProcessingModeData.title }}
       </h1>
 
       <h2 class="file-uploader__subtitle">
-        для редактирования
+        {{ selectedFileProcessingModeData.caption }}
       </h2>
 
       <button
@@ -31,9 +31,14 @@
 <script>
 import api from '@/api';
 import { getFileAsBase64 } from '@/utils/files.utils';
+import { mapGetters } from 'vuex';
 
 export default {
   name: 'FileUploader',
+
+  computed: {
+    ...mapGetters('system', ['selectedFileProcessingModeData']),
+  },
 
   methods: {
     openFileDialog() {

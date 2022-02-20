@@ -43,15 +43,15 @@
         class="login-form__element text-button text-button--inverted"
         to="/subscriptions"
       >
-        Получить подписку
+        Получите бесплатно
       </router-link>
     </span>
   </form>
 </template>
 
 <script>
+import { minLength, required } from 'vuelidate/lib/validators';
 import { mapActions } from 'vuex';
-import { required, minLength } from 'vuelidate/lib/validators';
 
 export default {
   name: 'LoginForm',
