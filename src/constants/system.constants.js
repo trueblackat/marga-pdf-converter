@@ -27,3 +27,5 @@ export const FILE_PROCESSING_MODES = {
     icon: 'divide-pdf',
   },
 };
+
+export const SERVER_GET_FILES_INTERVAL = 1000;

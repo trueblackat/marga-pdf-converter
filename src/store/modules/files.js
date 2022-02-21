@@ -1,5 +1,5 @@
 import api from '@/api';
-import { getEncodedFiles, getMappedFiles } from '@/utils/files.utils';
+import { getEncodedFiles, getMappedFiles, waitFileReady } from '@/utils/files.utils';
 
 export default {
   namespaced: true,
@@ -29,19 +29,22 @@ export default {
      */
     async uploadFiles({ commit, state }, files) {
       const encodedFiles = await getEncodedFiles(files);
-      const uploadPromises = encodedFiles.map((item) => api.documents.upload(item.name, item.body));
+      const uploadPromises = encodedFiles
+        .map((item) => api.documents.uploadItem(item.name, item.body));
 
       try {
         commit('SET_LOADING', true);
 
         const uploadedFiles = await Promise.all(uploadPromises);
-        const mappedFiles = getMappedFiles(uploadedFiles);
+        const uploadFilesIds = uploadedFiles.map((item) => item.id);
+
+        // Периодически спрашивать сервер "а не загрузились ли файлы?"
+        const readyToShowFiles = await waitFileReady(uploadFilesIds);
+        const mappedFiles = getMappedFiles(readyToShowFiles);
 
         commit('SET_FILES', [...state.files, ...mappedFiles]);
-
-        console.info(`${uploadedFiles.length} файлов загружено!`);
       } catch (e) {
-        console.log(e);
+        console.error(e);
       } finally {
         commit('SET_LOADING', false);
       }
@@ -56,9 +59,21 @@ export default {
 
         commit('SET_FILES', mappedFiles);
       } catch (e) {
-        console.log(e);
+        console.error(e);
       } finally {
         commit('SET_LOADING', false);
+      }
+    },
+
+    async deleteFile({ commit, state }, id) {
+      try {
+        await api.documents.deleteItem(id);
+
+        const filteredFiles = state.files.filter((item) => item.id !== id);
+
+        commit('SET_FILES', filteredFiles);
+      } catch (e) {
+        console.error(e);
       }
     },
   },

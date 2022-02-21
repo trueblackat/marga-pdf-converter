@@ -1,4 +1,5 @@
 import SvgIcon from '@/components/SvgIcon.vue';
+import loading from '@/directives/loading.directive';
 import '@/plugins/svg-icons';
 import dayjs from 'dayjs';
 import 'dayjs/locale/ru';
@@ -15,6 +16,8 @@ dayjs.locale('ru');
 Vue.config.productionTip = false;
 
 Vue.prototype.$eventBus = new Vue();
+
+Vue.directive('loading', loading);
 
 Vue.use(Vuelidate);
 Vue.component('SvgIcon', SvgIcon);

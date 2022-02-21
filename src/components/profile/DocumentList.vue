@@ -5,7 +5,7 @@
     <!--    </header>-->
 
     <div
-      v-if="files.length"
+      v-loading="loading"
       class="document-list__inner"
     >
       <document
@@ -18,7 +18,7 @@
       </document>
 
       <document
-        v-for="file in files"
+        v-for="file in sortedFiles"
         :key="`file-${file.id}`"
         :name="file.name"
         :link="file.link"
@@ -34,7 +34,7 @@
 <script>
 import Document from '@/components/profile/Document.vue';
 import FileUploaderBlock from '@/components/uploaders/FileUploaderBlock.vue';
-import { mapActions, mapState } from 'vuex';
+import { mapActions, mapGetters, mapState } from 'vuex';
 
 export default {
   name: 'DocumentList',
@@ -48,17 +48,24 @@ export default {
   },
 
   computed: {
-    ...mapState('files', ['files']),
+    ...mapGetters('files', ['sortedFiles']),
+    ...mapState('files', ['loading']),
   },
 
   created() {
-    if (!this.files.length) {
+    if (!this.sortedFiles.length) {
       this.getFiles();
     }
   },
 
   methods: {
-    ...mapActions('files', ['getFiles']),
+    ...mapActions('files', ['getFiles', 'deleteFile']),
+
+    deleteAll() {
+      this.sortedFiles.forEach((item) => {
+        this.deleteFile(item.id);
+      });
+    },
   },
 };
 </script>

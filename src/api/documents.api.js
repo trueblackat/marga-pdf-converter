@@ -44,14 +44,30 @@ const getList = ({
 };
 
 /**
+ * Получение информации о документе по id
+ * @param id {string} - id документа
+ * @return {Promise<object>}
+ */
+const getItem = (id) => httpClient.get(`/documents/${id}`);
+
+/**
  * Загрузка документа
  * @param name {string} - имя файла
  * @param body {string} - тело файла в base64
  * @return {Promise<object>} - созданный документ
  */
-const upload = (name, body) => httpClient.post('/documents/', { name, body });
+const uploadItem = (name, body) => httpClient.post('/documents/', { name, body });
+
+/**
+ * Удаление документа по id
+ * @param id {string} - id документа
+ * @return {Promise<any>}
+ */
+const deleteItem = (id) => httpClient.delete(`/documents/${id}`);
 
 export default {
   getList,
-  upload,
+  uploadItem,
+  getItem,
+  deleteItem,
 };
