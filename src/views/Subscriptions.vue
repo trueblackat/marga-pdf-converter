@@ -17,13 +17,10 @@
         @select="onSubscribeSelect(subscription.id)"
       />
     </div>
-
-    <paywall />
   </div>
 </template>
 
 <script>
-import Paywall from '@/components/Paywall.vue';
 import SubscriptionItem from '@/components/subscriptions/SubscriptionItem.vue';
 import { mapActions, mapState } from 'vuex';
 
@@ -31,7 +28,6 @@ export default {
   name: 'SubscriptionsPage',
 
   components: {
-    Paywall,
     SubscriptionItem,
   },
 
