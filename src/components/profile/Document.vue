@@ -123,6 +123,9 @@ export default {
     line-height: 17px;
     margin-bottom: 8px;
     transition: color $base-animation;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 
   &__date,
