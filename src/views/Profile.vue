@@ -53,8 +53,18 @@
 
             <span>{{ user.email }}</span>
 
-            <button class="text-button text-button--inverted">
+            <button
+              v-if="isEmailConfirmed"
+              class="text-button text-button--inverted"
+            >
               изменить
+            </button>
+
+            <button
+              v-if="!isEmailConfirmed"
+              class="text-button text-button--inverted"
+            >
+              подтвердить
             </button>
 
             <span>Пароль</span>
@@ -70,17 +80,28 @@
         </div>
       </div>
     </template>
+
+    <popup
+      title="Подтвердить почту"
+      caption="Введите код подтверждения, который пришел на новую почту"
+    >
+      <email-confirm-form />
+    </popup>
   </section>
 </template>
 
 <script>
+import EmailConfirmForm from '@/components/popup/forms/EmailConfirmForm.vue';
+import Popup from '@/components/popup/Popup.vue';
 import UserAvatar from '@/components/UserAvatar.vue';
 import dayjs from 'dayjs';
-import { mapActions, mapGetters, mapState } from 'vuex';
+import { mapGetters, mapState } from 'vuex';
 
 export default {
   name: 'Profile',
-  components: { UserAvatar },
+
+  components: { EmailConfirmForm, Popup, UserAvatar },
+
   computed: {
     ...mapState('user', ['user', 'loading']),
     ...mapGetters('user', ['isUserInfoExited']),
@@ -108,6 +129,10 @@ export default {
         : {};
     },
 
+    isEmailConfirmed() {
+      return this.user.email_confirmed ?? false;
+    },
+
     passwordUpdatedTime() {
       return this.isUserInfoExited
         ? dayjs().to(dayjs.utc(this.user.password_updated))
@@ -115,13 +140,7 @@ export default {
     },
   },
 
-  created() {
-    this.getCurrentUserInfo();
-  },
-
   methods: {
-    ...mapActions('user', ['getCurrentUserInfo']),
-
     onSubscriptionButtonClick() {
       this.$eventBus.$emit('show-paywall');
     },
@@ -248,6 +267,11 @@ export default {
     span {
       overflow: hidden;
       text-overflow: ellipsis;
+    }
+
+    .text-button {
+      text-align: left;
+      width: 100%;
     }
   }
 }

@@ -16,6 +16,7 @@
     background: rgba($c-white, 0.7);
     z-index: 100;
     box-shadow: 0 0 20px 7px rgba($c-white, 0.7);
+    border-radius: inherit;
   }
 
   &::after {

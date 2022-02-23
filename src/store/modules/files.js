@@ -42,6 +42,8 @@ export default {
         const readyToShowFiles = await waitFileReady(uploadFilesIds);
         const mappedFiles = getMappedFiles(readyToShowFiles);
 
+        // TODO: обновить статистику юзера
+
         commit('SET_FILES', [...state.files, ...mappedFiles]);
       } catch (e) {
         console.error(e);

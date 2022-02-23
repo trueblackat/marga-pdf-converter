@@ -71,7 +71,9 @@ import { mapActions, mapGetters, mapState } from 'vuex';
 
 export default {
   name: 'Paywall',
+
   components: { SubscriptionFeatures },
+
   data() {
     return {
       isShowed: false,
@@ -149,9 +151,9 @@ export default {
     background: none;
     cursor: pointer;
     position: absolute;
+    outline: none;
     top: 25px;
     left: 25px;
-    outline: none;
 
     .svg-icon {
       color: $color-border;
