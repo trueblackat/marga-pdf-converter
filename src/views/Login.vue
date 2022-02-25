@@ -22,7 +22,8 @@ export default {
 
 <style lang="scss">
 .login-page {
-  padding: 70px 0 100px;
+  padding-top: 70px;
+  padding-bottom: 100px;
   display: flex;
   align-items: center;
 
