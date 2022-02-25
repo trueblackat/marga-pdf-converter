@@ -1,4 +1,13 @@
 .popup-form {
+  &__caption {
+    text-align: center;
+    font-size: 15px;
+    line-height: 22px;
+    color: $c-gray-5;
+    margin-top: -10px;
+    margin-bottom: 20px;
+  }
+
   &__question {
     font-size: 13px;
     line-height: 19px;

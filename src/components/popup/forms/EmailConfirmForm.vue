@@ -1,5 +1,9 @@
 <template>
   <div class="popup-form">
+    <p class="popup-form__caption">
+      Введите код подтверждения, который пришел на новую почту
+    </p>
+
     <input
       type="text"
       class="input"

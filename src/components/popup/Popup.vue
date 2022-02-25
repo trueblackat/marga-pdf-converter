@@ -23,13 +23,6 @@
           {{ title }}
         </h1>
 
-        <p
-          v-if="caption"
-          class="popup__caption"
-        >
-          {{ caption }}
-        </p>
-
         <slot />
       </div>
     </section>
@@ -44,16 +37,6 @@ export default {
     title: {
       type: String,
       default: 'Попап',
-    },
-
-    caption: {
-      type: String,
-      default: '',
-    },
-
-    buttonLabel: {
-      type: String,
-      default: 'Подтвердить',
     },
   },
 
@@ -136,15 +119,6 @@ export default {
     font-size: 24px;
     line-height: 28px;
     margin-bottom: 30px;
-  }
-
-  &__caption {
-    text-align: center;
-    font-size: 15px;
-    line-height: 22px;
-    color: $c-gray-5;
-    margin-top: -10px;
-    margin-bottom: 20px;
   }
 }
 </style>

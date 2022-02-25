@@ -63,6 +63,7 @@
             <button
               v-if="!isEmailConfirmed"
               class="text-button text-button--inverted"
+              @click="showPopupConfirmEmail"
             >
               подтвердить
             </button>
@@ -73,7 +74,10 @@
               {{ passwordUpdatedTime }}
             </span>
 
-            <button class="text-button text-button--inverted">
+            <button
+              class="text-button text-button--inverted"
+              @click="showPopupChangePassword"
+            >
               изменить
             </button>
           </div>
@@ -82,16 +86,42 @@
     </template>
 
     <popup
+      ref="popupConfirmEmail"
       title="Подтвердить почту"
-      caption="Введите код подтверждения, который пришел на новую почту"
     >
       <email-confirm-form />
+    </popup>
+
+    <popup
+      ref="popupChangeEmail"
+      title="Изменить почту"
+    >
+      <email-change-form />
+    </popup>
+
+    <popup
+      ref="popupChangePassword"
+      title="Сменить пароль"
+    >
+      <password-change-form />
+    </popup>
+
+    <popup
+      ref="popupRemindPassword"
+      title="Забыли пароль"
+    >
+      <password-remind-form
+        caption="Введите Вашу почту чтобы, мы смогли вам отправить проверочный код"
+      />
     </popup>
   </section>
 </template>
 
 <script>
+import EmailChangeForm from '@/components/popup/forms/EmailChangeForm.vue';
 import EmailConfirmForm from '@/components/popup/forms/EmailConfirmForm.vue';
+import PasswordChangeForm from '@/components/popup/forms/PasswordChangeForm.vue';
+import PasswordRemindForm from '@/components/popup/forms/PasswordRemindForm.vue';
 import Popup from '@/components/popup/Popup.vue';
 import UserAvatar from '@/components/UserAvatar.vue';
 import dayjs from 'dayjs';
@@ -100,7 +130,14 @@ import { mapGetters, mapState } from 'vuex';
 export default {
   name: 'Profile',
 
-  components: { EmailConfirmForm, Popup, UserAvatar },
+  components: {
+    PasswordRemindForm,
+    PasswordChangeForm,
+    EmailChangeForm,
+    EmailConfirmForm,
+    Popup,
+    UserAvatar,
+  },
 
   computed: {
     ...mapState('user', ['user', 'loading']),
@@ -143,6 +180,14 @@ export default {
   methods: {
     onSubscriptionButtonClick() {
       this.$eventBus.$emit('show-paywall');
+    },
+
+    showPopupConfirmEmail() {
+      this.$refs.popupConfirmEmail.show();
+    },
+
+    showPopupChangePassword() {
+      this.$refs.popupChangePassword.show();
     },
   },
 };
