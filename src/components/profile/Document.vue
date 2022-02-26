@@ -1,7 +1,7 @@
 <template>
   <div
     class="document"
-    @click="onDocumentClick"
+    @click.stop.prevent="onDocumentClick"
   >
     <div class="document__preview">
       <slot v-if="$slots.default" />
@@ -14,6 +14,15 @@
           @error="onImageLoadError"
         >
       </picture>
+
+      <button
+        v-if="link"
+        class="document__download-button"
+        title="Скачать"
+        @click.stop.prevent="downloadFile"
+      >
+        <svg-icon name="download" />
+      </button>
     </div>
 
     <div class="document__name">
@@ -38,6 +47,8 @@
 </template>
 
 <script>
+import { saveAs } from 'file-saver';
+
 export default {
   name: 'Document',
 
@@ -86,13 +97,10 @@ export default {
 
     onDocumentClick() {
       this.$emit('document-click', this.name);
-      this.openFile();
     },
 
-    openFile() {
-      if (this.link) {
-        window.open(this.link, '_blank');
-      }
+    downloadFile() {
+      saveAs(this.link);
     },
   },
 };
@@ -107,6 +115,26 @@ export default {
   &__preview {
     height: 240px;
     margin-bottom: 15px;
+    position: relative;
+
+    #{$parent}__download-button {
+      position: absolute;
+      bottom: 10px;
+      right: 10px;
+      border-radius: 50%;
+      padding: 7px;
+      width: 30px;
+      height: 30px;
+      background: $color-theme;
+      color: $c-white;
+      border: none;
+      cursor: pointer;
+
+      svg {
+        width: 100%;
+        height: 100%;
+      }
+    }
 
     picture {
       background: $c-white;
