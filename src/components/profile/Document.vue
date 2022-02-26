@@ -30,6 +30,8 @@
     <div class="document__info">
       <span>{{ size }}</span>
 
+      <span v-if="fileExtension">{{ fileExtension }}</span>
+
       <span v-if="pagesCount">{{ pagesCount }}</span>
     </div>
   </div>
@@ -68,6 +70,12 @@ export default {
     pagesCount: {
       type: Number,
       default: 0,
+    },
+  },
+
+  computed: {
+    fileExtension() {
+      return this.link.split('.').pop();
     },
   },
 
@@ -140,13 +148,11 @@ export default {
   }
 
   &__info {
-    display: flex;
-
     span {
-      flex-grow: 1;
-
       &:not(:last-child) {
-        padding-right: 5px;
+        &:after {
+          content: " • ";
+        }
       }
     }
   }
