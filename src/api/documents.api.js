@@ -65,9 +65,26 @@ const uploadItem = (name, body) => httpClient.post('/documents/', { name, body }
  */
 const deleteItem = (id) => httpClient.delete(`/documents/${id}`);
 
+/**
+ * Получение превью всех страниц документа
+ * @param id
+ * @return {Promise<array>}
+ */
+const getItemPreviews = (id) => httpClient.get(`/documents/${id}/previews`);
+
+/**
+ * Сплит документа
+ * @param id {string} - id документа
+ * @param pages {string[]} - массив номеров страниц
+ * @return {Promise<object>} - новый документ
+ */
+const splitItem = (id, pages) => httpClient.post(`/documents/${id}/split`, { pages });
+
 export default {
   getList,
   uploadItem,
   getItem,
   deleteItem,
+  getItemPreviews,
+  splitItem,
 };

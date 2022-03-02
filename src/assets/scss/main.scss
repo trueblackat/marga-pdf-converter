@@ -9,6 +9,10 @@
 @import "elements/loading";
 @import "elements/popup-form";
 
+:root {
+  --document-page-width: 170px;
+}
+
 body {
   font-family: "Ubuntu", sans-serif;
   background: $color-background;

@@ -13,6 +13,7 @@
         size="Макс. 50 Mb"
         name="Добавить файл"
         date="Сегодня"
+        is-cliclable="false"
       >
         <file-uploader-block />
       </document>
@@ -26,13 +27,14 @@
         :preview-link="file.previewLink"
         :size="file.size"
         :pages-count="file.pagesCount"
+        @document-click="onDocumentClick(file.id, $event)"
       />
     </div>
   </section>
 </template>
 
 <script>
-import Document from '@/components/profile/Document.vue';
+import Document from '@/components/document-list/Document.vue';
 import FileUploaderBlock from '@/components/uploaders/FileUploaderBlock.vue';
 import { mapActions, mapGetters, mapState } from 'vuex';
 
@@ -60,6 +62,12 @@ export default {
 
   methods: {
     ...mapActions('files', ['getFiles', 'deleteFile']),
+
+    onDocumentClick(fileId, { canSplit }) {
+      if (canSplit) {
+        this.$router.push({ name: 'SplitDocument', params: { fileId } });
+      }
+    },
 
     deleteAll() {
       this.sortedFiles.forEach((item) => {

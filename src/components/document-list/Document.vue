@@ -1,7 +1,7 @@
 <template>
   <div
     class="document"
-    @click.stop.prevent="onDocumentClick"
+    @click="onDocumentClick"
   >
     <div class="document__preview">
       <slot v-if="$slots.default" />
@@ -25,7 +25,10 @@
       </button>
     </div>
 
-    <div class="document__name">
+    <div
+      class="document__name"
+      :title="name"
+    >
       {{ name }}
     </div>
 
@@ -41,12 +44,14 @@
 
       <span v-if="fileExtension">{{ fileExtension }}</span>
 
-      <span v-if="pagesCount">{{ pagesCount }}</span>
+      <span v-if="pagesCount">{{ pagesCount }} {{ pagesCountCaption }}</span>
     </div>
   </div>
 </template>
 
 <script>
+import { documentFormats } from '@/constants/base.constants';
+import declOfNum from '@/utils/declOfNum';
 import { saveAs } from 'file-saver';
 
 export default {
@@ -82,11 +87,24 @@ export default {
       type: Number,
       default: 0,
     },
+
+    isClickable: {
+      type: Boolean,
+      default: true,
+    },
   },
 
   computed: {
     fileExtension() {
       return this.link.split('.').pop();
+    },
+
+    pagesCountCaption() {
+      return declOfNum(this.pagesCount, ['страница', 'страницы', 'страниц']);
+    },
+
+    canSplit() {
+      return this.fileExtension === documentFormats.pdf.label;
     },
   },
 
@@ -96,7 +114,8 @@ export default {
     },
 
     onDocumentClick() {
-      this.$emit('document-click', this.name);
+      if (!this.isClickable) return;
+      this.$emit('document-click', { canSplit: this.canSplit });
     },
 
     downloadFile() {
@@ -113,7 +132,8 @@ export default {
   cursor: pointer;
 
   &__preview {
-    height: 240px;
+    width: 100%;
+    aspect-ratio: 170 / 240;
     margin-bottom: 15px;
     position: relative;
 

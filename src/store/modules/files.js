@@ -78,6 +78,30 @@ export default {
         console.error(e);
       }
     },
+
+    async splitDocument({ commit, state }, { fileId, pages }) {
+      try {
+        commit('SET_LOADING', true);
+
+        const newDocument = await api.documents.splitItem(fileId, pages);
+
+        // Периодически спрашивать сервер "а не загрузились ли файлы?"
+        const readyToShowFiles = await waitFileReady([newDocument.id]);
+        const mappedFiles = getMappedFiles(readyToShowFiles);
+
+        // TODO: обновить статистику юзера
+
+        commit('SET_FILES', [...state.files, ...mappedFiles]);
+
+        return Promise.resolve();
+      } catch (e) {
+        console.error(e);
+
+        return Promise.reject(e);
+      } finally {
+        commit('SET_LOADING', false);
+      }
+    },
   },
 
   getters: {

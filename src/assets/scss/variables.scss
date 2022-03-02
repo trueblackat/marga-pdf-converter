@@ -8,6 +8,8 @@ $c-gray-2: #e5e5e5;
 $c-gray-3: #ebebeb;
 $c-gray-4: #efefef;
 $c-gray-5: #9a9a9a;
+$c-gray-6: #c7c7c7;
+$c-gray-7: #dbdbdb;
 $color-theme: $c-orange;
 $color-theme-hover: $c-orange-light;
 $color-theme-hover-light: rgba($c-orange, 0.1);
@@ -26,7 +28,7 @@ $base-border-radius: 16px;
 $base-shadow: 0 6px 24px rgba(0, 0, 0, 0.06);
 $base-shadow-small: 0 2px 8px rgba(0, 0, 0, 0.04);
 
-$base-animation-time: 0.2s;
+$base-animation-time: 0.15s;
 $base-animation-function: ease;
 $base-animation: $base-animation-time $base-animation-function;
 

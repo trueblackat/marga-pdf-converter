@@ -26,8 +26,12 @@ export default {
       immediate: true,
 
       handler(isAuthenticated) {
-        if (isAuthenticated && !this.isUserInfoExited) {
-          this.getCurrentUserInfo();
+        this.getFiles();
+
+        if (isAuthenticated) {
+          if (!this.isUserInfoExited) {
+            this.getCurrentUserInfo();
+          }
         }
       },
     },
@@ -35,6 +39,7 @@ export default {
 
   methods: {
     ...mapActions('user', ['getCurrentUserInfo']),
+    ...mapActions('files', ['getFiles']),
   },
 };
 </script>

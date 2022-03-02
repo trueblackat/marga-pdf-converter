@@ -1,7 +1,7 @@
 import api from '@/api';
 import { SERVER_GET_FILES_INTERVAL } from '@/constants/system.constants';
 import humanFileSize from '@/utils/humanFileSize';
-import { sleep } from '@/utils/misc.utils';
+import { getAbsoluteFileApiLink, sleep } from '@/utils/misc.utils';
 import dayjs from 'dayjs';
 import capitalize from 'lodash/capitalize';
 import pick from 'lodash/pick';
@@ -34,7 +34,7 @@ export const getMappedFiles = (files) => files.map((item) => ({
   ...pick(item, ['id', 'name']),
   timestamp: dayjs(item.created).valueOf(),
   date: capitalize(dayjs(item.created).format('MMMM D, YYYY')),
-  link: `${process.env.VUE_APP_API_HOST}${item.link.substring(1)}`,
+  link: getAbsoluteFileApiLink(item.link.substring(1)),
   previewLink: `${process.env.VUE_APP_API_HOST}${item.preview_link.substring(1)}`,
   size: humanFileSize(item.size),
   pagesCount: item.num_pages,

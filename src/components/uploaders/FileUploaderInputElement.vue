@@ -2,7 +2,7 @@
   <input
     ref="element"
     type="file"
-    accept="image/*"
+    accept="image/*, application/pdf, application/docx"
     multiple
     style="display: none"
     @change="onInputChange"
@@ -10,6 +10,7 @@
 </template>
 
 <script>
+// TODO: описать accept возможные типы загрузки файлов
 import { mapActions } from 'vuex';
 
 export default {

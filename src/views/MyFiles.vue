@@ -14,8 +14,8 @@
 </template>
 
 <script>
+import DocumentList from '@/components/document-list/DocumentList.vue';
 import FileProcessingModeSelector from '@/components/FileProcessingModeSelector.vue';
-import DocumentList from '@/components/profile/DocumentList.vue';
 
 export default {
   name: 'Profile',
