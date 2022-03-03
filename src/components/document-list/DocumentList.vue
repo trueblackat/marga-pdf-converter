@@ -13,7 +13,7 @@
         size="Макс. 50 Mb"
         name="Добавить файл"
         date="Сегодня"
-        is-cliclable="false"
+        :is-clickable="false"
       >
         <file-uploader-block />
       </document>
@@ -36,6 +36,7 @@
 <script>
 import Document from '@/components/document-list/Document.vue';
 import FileUploaderBlock from '@/components/uploaders/FileUploaderBlock.vue';
+import { FILE_PROCESSING_MODES_TYPES } from '@/constants/system.constants';
 import { mapActions, mapGetters, mapState } from 'vuex';
 
 export default {
@@ -52,6 +53,7 @@ export default {
   computed: {
     ...mapGetters('files', ['sortedFiles']),
     ...mapState('files', ['loading']),
+    ...mapState('system', ['fileProcessingMode']),
   },
 
   created() {
@@ -64,7 +66,7 @@ export default {
     ...mapActions('files', ['getFiles', 'deleteFile']),
 
     onDocumentClick(fileId, { canSplit }) {
-      if (canSplit) {
+      if (canSplit && this.fileProcessingMode === FILE_PROCESSING_MODES_TYPES.split) {
         this.$router.push({ name: 'SplitDocument', params: { fileId } });
       }
     },

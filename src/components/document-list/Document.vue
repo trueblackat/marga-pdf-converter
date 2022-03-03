@@ -1,6 +1,9 @@
 <template>
   <div
-    class="document"
+    :class="[
+      'document',
+      { 'document--is-disabled' : isDisabled },
+    ]"
     @click="onDocumentClick"
   >
     <div class="document__preview">
@@ -51,8 +54,10 @@
 
 <script>
 import { documentFormats } from '@/constants/base.constants';
+import { FILE_PROCESSING_MODES_TYPES } from '@/constants/system.constants';
 import declOfNum from '@/utils/declOfNum';
 import { saveAs } from 'file-saver';
+import { mapState } from 'vuex';
 
 export default {
   name: 'Document',
@@ -95,6 +100,8 @@ export default {
   },
 
   computed: {
+    ...mapState('system', ['fileProcessingMode']),
+
     fileExtension() {
       return this.link.split('.').pop();
     },
@@ -103,8 +110,27 @@ export default {
       return declOfNum(this.pagesCount, ['страница', 'страницы', 'страниц']);
     },
 
-    canSplit() {
+    isPdf() {
       return this.fileExtension === documentFormats.pdf.label;
+    },
+
+    canConvert() {
+      return !this.isPdf;
+    },
+
+    canMerge() {
+      return this.isPdf;
+    },
+
+    canSplit() {
+      return this.isPdf;
+    },
+
+    isDisabled() {
+      return this.link
+        && ((this.fileProcessingMode === FILE_PROCESSING_MODES_TYPES.split && !this.canSplit)
+        || (this.fileProcessingMode === FILE_PROCESSING_MODES_TYPES.convert && !this.canConvert)
+        || (this.fileProcessingMode === FILE_PROCESSING_MODES_TYPES.merge && !this.canMerge));
     },
   },
 
@@ -130,6 +156,7 @@ export default {
   $parent: &;
 
   cursor: pointer;
+  transition: opacity $base-animation;
 
   &__preview {
     width: 100%;
@@ -215,6 +242,11 @@ export default {
         box-shadow: none;
       }
     }
+  }
+
+  &--is-disabled {
+    cursor: not-allowed;
+    opacity: 0.7;
   }
 }
 </style>

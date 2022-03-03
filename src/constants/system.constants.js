@@ -1,7 +1,7 @@
 export const FILE_PROCESSING_MODES_TYPES = {
   convert: 'convert',
   merge: 'merge',
-  divide: 'divide',
+  split: 'divide',
 };
 
 export const FILE_PROCESSING_MODES = {
@@ -19,12 +19,12 @@ export const FILE_PROCESSING_MODES = {
     caption: 'Выберите файл для объединения',
     icon: 'merge-pdf',
   },
-  [FILE_PROCESSING_MODES_TYPES.divide]: {
-    code: FILE_PROCESSING_MODES_TYPES.divide,
+  [FILE_PROCESSING_MODES_TYPES.split]: {
+    code: FILE_PROCESSING_MODES_TYPES.split,
     title: 'Разделить файл',
     subTitle: 'из одного .PDF в два или больше',
     caption: 'Выберите файл для разделения',
-    icon: 'divide-pdf',
+    icon: 'split-pdf',
   },
 };
 

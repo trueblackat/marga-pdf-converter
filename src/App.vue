@@ -1,8 +1,11 @@
 <template>
   <div class="app-container">
     <the-header class="app-container__header" />
+
     <router-view class="app-container__content" />
+
     <the-footer class="app-container__footer" />
+
     <paywall />
   </div>
 </template>
