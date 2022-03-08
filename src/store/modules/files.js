@@ -7,11 +7,15 @@ export default {
   state: () => ({
     files: [],
     loading: false,
+    convertQueue: [],
   }),
 
   mutations: {
     SET_FILES(state, files) {
       state.files = files;
+    },
+    SET_CONVERT_QUEUE(state, files) {
+      state.convertQueue = files;
     },
 
     SET_LOADING(state, data) {
@@ -25,7 +29,7 @@ export default {
      * @param commit
      * @param state
      * @param files {File[]} - массив файлов
-     * @return {Promise<void>}
+     * @return {Promise<array>} - массив загруженных файлов
      */
     async uploadFiles({ commit, state }, files) {
       const encodedFiles = await getEncodedFiles(files);
@@ -45,8 +49,12 @@ export default {
         // TODO: обновить статистику юзера
 
         commit('SET_FILES', [...state.files, ...mappedFiles]);
+
+        return Promise.resolve(mappedFiles);
       } catch (e) {
         console.error(e);
+
+        return Promise.reject(e);
       } finally {
         commit('SET_LOADING', false);
       }
@@ -94,6 +102,54 @@ export default {
         commit('SET_FILES', [...state.files, ...mappedFiles]);
 
         return Promise.resolve();
+      } catch (e) {
+        console.error(e);
+
+        return Promise.reject(e);
+      } finally {
+        commit('SET_LOADING', false);
+      }
+    },
+
+    addToConvertQueue({ commit, state }, fileId) {
+      const fileToAdd = state.files.find((item) => item.id === fileId);
+      const newQueue = [...state.convertQueue, fileToAdd];
+
+      commit('SET_CONVERT_QUEUE', newQueue);
+    },
+
+    removeFromConvertQueue({ commit, state }, fileId) {
+      const filteredQueue = state.convertQueue.filter((item) => item.id !== fileId);
+
+      commit('SET_CONVERT_QUEUE', filteredQueue);
+    },
+
+    clearConvertQueue({ commit }) {
+      commit('SET_CONVERT_QUEUE', []);
+    },
+
+    async convertAllInQueue({ state, commit }, isMergeMode = false) {
+      try {
+        commit('SET_LOADING', false);
+
+        const convertIds = state.convertQueue.map((item) => item.id);
+        let result = [];
+
+        if (isMergeMode) {
+          // TODO: ждать бекенд
+        } else {
+          const convertPromises = convertIds.map((id) => api.documents.convertItem(id));
+          const convertedFiles = await Promise.all(convertPromises);
+          const convertedIds = convertedFiles.map((item) => item.id);
+          const readyToShowFiles = await waitFileReady(convertedIds);
+          result = getMappedFiles(readyToShowFiles);
+        }
+
+        // TODO: обновить статистику юзера
+
+        commit('SET_FILES', [...state.files, ...result]);
+
+        return Promise.resolve(result);
       } catch (e) {
         console.error(e);
 

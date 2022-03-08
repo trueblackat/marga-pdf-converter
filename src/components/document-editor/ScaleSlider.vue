@@ -65,6 +65,7 @@ export default {
 
       handler(value) {
         document.documentElement.style.setProperty('--document-page-width', `${170 * value}px`);
+        document.documentElement.style.setProperty('--document-page-width-wide', `${270 * value}px`);
       },
     },
   },

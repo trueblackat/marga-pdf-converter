@@ -141,7 +141,11 @@ export default {
 
     onDocumentClick() {
       if (!this.isClickable) return;
-      this.$emit('document-click', { canSplit: this.canSplit });
+
+      this.$emit('document-click', {
+        canSplit: this.canSplit,
+        canConvert: this.canConvert,
+      });
     },
 
     downloadFile() {

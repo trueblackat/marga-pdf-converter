@@ -1,4 +1,5 @@
 import { ifAuthenticated, ifNotAuthenticated } from '@/router/interceptors';
+import ConvertDocuments from '@/views/ConvertDocuments.vue';
 import Home from '@/views/Home.vue';
 import Login from '@/views/Login.vue';
 import MyFiles from '@/views/MyFiles.vue';
@@ -52,5 +53,10 @@ export default [
     name: 'SplitDocument',
     component: SplitDocument,
     props: true,
+  },
+  {
+    path: '/convert-documents',
+    name: 'ConvertDocuments',
+    component: ConvertDocuments,
   },
 ];

@@ -1,35 +1,29 @@
 <template>
-  <section class="document-list">
-    <!--    <header class="document-list__heading">-->
-    <!--      123-->
-    <!--    </header>-->
-
-    <div
-      v-loading="loading"
-      class="document-list__inner"
+  <section
+    v-loading="loading"
+    class="document-list"
+  >
+    <document
+      class="document-list__add-file"
+      size="Макс. 50 Mb"
+      name="Добавить файл"
+      date="Сегодня"
+      :is-clickable="false"
     >
-      <document
-        class="document-list__add-file"
-        size="Макс. 50 Mb"
-        name="Добавить файл"
-        date="Сегодня"
-        :is-clickable="false"
-      >
-        <file-uploader-block />
-      </document>
+      <file-uploader-block />
+    </document>
 
-      <document
-        v-for="file in sortedFiles"
-        :key="`file-${file.id}`"
-        :name="file.name"
-        :link="file.link"
-        :date="file.date"
-        :preview-link="file.previewLink"
-        :size="file.size"
-        :pages-count="file.pagesCount"
-        @document-click="onDocumentClick(file.id, $event)"
-      />
-    </div>
+    <document
+      v-for="file in sortedFiles"
+      :key="`file-${file.id}`"
+      :name="file.name"
+      :link="file.link"
+      :date="file.date"
+      :preview-link="file.previewLink"
+      :size="file.size"
+      :pages-count="file.pagesCount"
+      @document-click="onDocumentClick(file.id, $event)"
+    />
   </section>
 </template>
 
@@ -44,12 +38,6 @@ export default {
 
   components: { FileUploaderBlock, Document },
 
-  data() {
-    return {
-      documents: [],
-    };
-  },
-
   computed: {
     ...mapGetters('files', ['sortedFiles']),
     ...mapState('files', ['loading']),
@@ -63,9 +51,14 @@ export default {
   },
 
   methods: {
-    ...mapActions('files', ['getFiles', 'deleteFile']),
+    ...mapActions('files', ['getFiles', 'deleteFile', 'addToConvertQueue']),
 
-    onDocumentClick(fileId, { canSplit }) {
+    onDocumentClick(fileId, { canSplit, canConvert }) {
+      if (canConvert && this.fileProcessingMode === FILE_PROCESSING_MODES_TYPES.convert) {
+        this.addToConvertQueue(fileId);
+        this.$router.push({ name: 'ConvertDocuments' });
+      }
+
       if (canSplit && this.fileProcessingMode === FILE_PROCESSING_MODES_TYPES.split) {
         this.$router.push({ name: 'SplitDocument', params: { fileId } });
       }
@@ -82,19 +75,10 @@ export default {
 
 <style lang="scss">
 .document-list {
-  &__heading {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-bottom: 20px;
-  }
-
-  &__inner {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, 165px);
-    gap: 30px;
-    align-items: start;
-  }
+  display: grid;
+  grid-template-columns: repeat(auto-fill, 165px);
+  gap: 30px;
+  align-items: start;
 
   &__add-file {
     .document__name {

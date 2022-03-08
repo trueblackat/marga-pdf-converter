@@ -29,9 +29,9 @@ export default {
       immediate: true,
 
       handler(isAuthenticated) {
-        this.getFiles();
-
         if (isAuthenticated) {
+          this.getFiles();
+
           if (!this.isUserInfoExited) {
             this.getCurrentUserInfo();
           }

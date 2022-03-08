@@ -80,6 +80,31 @@ const getItemPreviews = (id) => httpClient.get(`/documents/${id}/previews`);
  */
 const splitItem = (id, pages) => httpClient.post(`/documents/${id}/split`, { pages });
 
+/**
+ * Конвертация документа.
+ * Пока доступен один вариант - non-pdf -> pdf.
+ * @param id {string} - id документа
+ * @param format {string} - требуемый формат, пока разрешен только pdf
+ * @return {Promise<object>} - новый документ
+ */
+const convertItem = (id, format = 'pdf') => httpClient.post(
+  `/documents/${id}/convert`,
+  { document_format: format },
+);
+
+/**
+ * Объединение документов.
+ * @param ids {string[]} - массив id документов, которые нужно объединить
+ * @return {Promise<object>} - новый документ
+ */
+const mergeItems = (ids) => {
+  const props = {
+    sources: ids.map((id) => ({ id })),
+  };
+
+  return httpClient.post('/documents/merge', props);
+};
+
 export default {
   getList,
   uploadItem,
@@ -87,4 +112,6 @@ export default {
   deleteItem,
   getItemPreviews,
   splitItem,
+  convertItem,
+  mergeItems,
 };

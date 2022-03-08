@@ -23,10 +23,12 @@ export default {
       this.$refs.element.click();
     },
 
-    onInputChange(event) {
+    async onInputChange(event) {
       const { files } = event.target;
 
-      this.uploadFiles(files);
+      const uploadedFiles = await this.uploadFiles(files);
+
+      this.$emit('uploaded', uploadedFiles);
     },
   },
 };
