@@ -123,7 +123,7 @@ export default {
     },
 
     canSplit() {
-      return this.isPdf;
+      return this.isPdf && this.pagesCount > 1;
     },
 
     isDisabled() {
