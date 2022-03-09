@@ -89,7 +89,7 @@
       ref="popupConfirmEmail"
       title="Подтвердить почту"
     >
-      <email-confirm-form />
+      <email-confirm-form @success="$refs.popupConfirmEmail.close()" />
     </popup>
 
     <popup
@@ -103,7 +103,7 @@
       ref="popupChangePassword"
       title="Сменить пароль"
     >
-      <password-change-form />
+      <password-change-form @success="$refs.popupChangePassword.close()" />
     </popup>
 
     <popup

@@ -69,13 +69,13 @@ export default {
       try {
         this.loading = true;
 
-        const user = await api.profile.confirmEmail(
+        await api.profile.confirmEmail(
           this.code,
           this.user.email,
           this.user.id,
         );
 
-        this.setUser(user);
+        this.$emit('success');
       } catch (e) {
         this.isError = true;
         this.$refs.input.focus();

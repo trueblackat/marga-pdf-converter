@@ -8,7 +8,7 @@ import httpClient from '@/api/httpClient';
 /**
  * Обновление refresh-токена.
  * Требует request header Authorization.
- * @return {Promise<AxiosResponse<object>>} - данные о токене
+ * @return {Promise<object>} - обновленный объект токена пользователя
  */
 const refreshToken = () => httpClient.get('/users/refresh-token');
 
@@ -17,21 +17,21 @@ const refreshToken = () => httpClient.get('/users/refresh-token');
  * @param login {string} - логин
  * @param email {string} - email
  * @param password {string} - пароль
- * @return {Promise<AxiosResponse<object>>} - данные о токене
+ * @return {Promise<object>} - обновленный объект токена пользователя
  */
 const registerByLoginEmailPass = ({ login, email, password }) => httpClient
   .post('/users/register', { login, email, password });
 
 /**
  * Создание анонимного пользователя
- * @return {Promise<AxiosResponse<object>>} - данные о токене
+ * @return {Promise<object>} - обновленный объект токена пользователя
  */
 const registerAnonymous = () => httpClient.post('/users/unauthorized');
 
 /**
  * Получение информации о текущем пользователе.
  * Требует request header Authorization.
- * @return {Promise<AxiosResponse<object>>} - информация о пользователе
+ * @return {Promise<object>} - информация о пользователе
  */
 const getCurrentUserInfo = () => httpClient.get('/users/me');
 
@@ -39,13 +39,13 @@ const getCurrentUserInfo = () => httpClient.get('/users/me');
  * Авторизация по логину и паролю
  * @param login {string} - логин
  * @param password {string} - пароль
- * @return {Promise<AxiosResponse<object>>} - данные о токене
+ * @return {Promise<object>} - обновленный объект токена пользователя
  */
 const loginByLogin = ({ login, password }) => httpClient.post('/users/login_password', { login, password });
 
 /**
  * Очистка refreshtoken_cookie
- * @return {Promise<AxiosResponse<object>>}
+ * @return {Promise<object>} - обновленный объект токена пользователя
  */
 const revokeToken = () => httpClient.get('/users/revoke-token');
 

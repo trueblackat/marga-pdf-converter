@@ -1,5 +1,12 @@
 import httpClient from '@/api/httpClient';
 
+/**
+ * Подтверждение почты
+ * @param code {string} - код из письма
+ * @param email {string} - email пользователя
+ * @param userId {string} - id пользователя
+ * @return {Promise<object>} - обновленный объект токена пользователя
+ */
 const confirmEmail = (code, email, userId) => {
   const params = {
     code,
@@ -10,6 +17,18 @@ const confirmEmail = (code, email, userId) => {
   return httpClient.post('/users/confirm-email', params);
 };
 
+/**
+ * Изменение пароля
+ * @param oldPassword {string} - старый пароль пользователя
+ * @param newPassword {string} - новый пароль пользователя
+ * @return {Promise<object>} - обновленный объект токена пользователя
+ */
+const changePassword = (oldPassword, newPassword) => httpClient.post(
+  '/users/change-password',
+  { old_password: oldPassword, new_password: newPassword },
+);
+
 export default {
   confirmEmail,
+  changePassword,
 };
