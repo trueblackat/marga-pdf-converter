@@ -42,6 +42,10 @@ export default {
     clearUser({ commit }) {
       commit('CLEAR_USER');
     },
+
+    setUser({ commit }, userData) {
+      commit('SET_USER', userData);
+    },
   },
 
   getters: {

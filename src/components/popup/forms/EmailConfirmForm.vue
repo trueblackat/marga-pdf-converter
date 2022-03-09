@@ -1,31 +1,90 @@
 <template>
-  <div class="popup-form">
+  <div
+    v-loading="loading"
+    class="popup-form"
+  >
     <p class="popup-form__caption">
-      Введите код подтверждения, который пришел на новую почту
+      {{ formCaption }}
     </p>
 
     <input
+      ref="input"
+      v-model="code"
       type="text"
-      class="input"
+      :class="['input', {'input--is-error': isError}]"
       placeholder="Введите код"
     >
 
-    <p class="popup-form__question">
-      <span>Не пришел код?</span>
+    <!--    <p class="popup-form__question">-->
+    <!--      <span>Не пришел код?</span>-->
 
-      <button class="text-button text-button--inverted">
-        Отправить еще раз
-      </button>
-    </p>
+    <!--      <button class="text-button text-button&#45;&#45;inverted">-->
+    <!--        Отправить еще раз-->
+    <!--      </button>-->
+    <!--    </p>-->
 
-    <button class="button button--type-filled button--size-l">
+    <button
+      class="button button--type-filled button--size-l"
+      :disabled="code.length < 4"
+      @click="confirm"
+    >
       Подтвердить
     </button>
   </div>
 </template>
 
 <script>
+import api from '@/api';
+import { mapActions, mapState } from 'vuex';
+
 export default {
   name: 'EmailConfirmForm',
+
+  data() {
+    return {
+      loading: false,
+      isError: false,
+      code: this.$route.query.code || '',
+    };
+  },
+
+  computed: {
+    ...mapState('user', ['user']),
+
+    formCaption() {
+      return this.isError
+        ? 'Код не верен, проверьте правильность введенных данных'
+        : 'Введите код подтверждения, который пришел на новую почту';
+    },
+  },
+
+  mounted() {
+    this.$refs.input.focus();
+  },
+
+  methods: {
+    ...mapActions('user', ['setUser']),
+
+    async confirm() {
+      try {
+        this.loading = true;
+
+        const user = await api.profile.confirmEmail(
+          this.code,
+          this.user.email,
+          this.user.id,
+        );
+
+        this.setUser(user);
+      } catch (e) {
+        this.isError = true;
+        this.$refs.input.focus();
+
+        console.error(e);
+      } finally {
+        this.loading = false;
+      }
+    },
+  },
 };
 </script>

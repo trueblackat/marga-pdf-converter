@@ -177,6 +177,18 @@ export default {
     },
   },
 
+  watch: {
+    isUserInfoExited: {
+      immediate: true,
+
+      handler(value) {
+        if (value && this.$route.query.action === 'confirmEmail') {
+          this.$refs.popupConfirmEmail.show();
+        }
+      },
+    },
+  },
+
   methods: {
     onSubscriptionButtonClick() {
       this.$eventBus.$emit('show-paywall');
