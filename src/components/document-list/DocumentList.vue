@@ -44,14 +44,8 @@ export default {
     ...mapState('system', ['fileProcessingMode']),
   },
 
-  created() {
-    if (!this.sortedFiles.length) {
-      this.getFiles();
-    }
-  },
-
   methods: {
-    ...mapActions('files', ['getFiles', 'deleteFile', 'addToConvertQueue']),
+    ...mapActions('files', ['deleteFile', 'addToConvertQueue']),
 
     onDocumentClick(fileId, { canSplit, canConvert }) {
       if (canConvert && this.fileProcessingMode === FILE_PROCESSING_MODES_TYPES.convert) {

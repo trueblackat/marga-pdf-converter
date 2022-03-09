@@ -94,6 +94,7 @@ const convertItem = (id, format = 'pdf') => httpClient.post(
 
 /**
  * Объединение документов.
+ * Автоматически конвертирует файлы в pdf.
  * @param ids {string[]} - массив id документов, которые нужно объединить
  * @return {Promise<object>} - новый документ
  */

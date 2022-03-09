@@ -136,7 +136,9 @@ export default {
         let result = [];
 
         if (isMergeMode) {
-          // TODO: ждать бекенд
+          const mergedFile = await api.documents.mergeItems(convertIds);
+          const readyToShowFiles = await waitFileReady([mergedFile.id]);
+          result = getMappedFiles(readyToShowFiles);
         } else {
           const convertPromises = convertIds.map((id) => api.documents.convertItem(id));
           const convertedFiles = await Promise.all(convertPromises);
