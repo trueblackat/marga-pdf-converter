@@ -9,6 +9,7 @@
       </h1>
 
       <input
+        ref="loginInput"
         v-model.trim="$v.login.$model"
         class="login-form__element input"
         type="text"
@@ -56,11 +57,19 @@
     >
       <password-remind-form @success="$refs.popupRemindPassword.close()" />
     </popup>
+
+    <popup
+      ref="popupRestorePassword"
+      title="Задать новый пароль"
+    >
+      <password-restore-form @success="onRestorePasswordSuccess" />
+    </popup>
   </div>
 </template>
 
 <script>
 import PasswordRemindForm from '@/components/popup/forms/PasswordRemindForm.vue';
+import PasswordRestoreForm from '@/components/popup/forms/PasswordRestoreForm.vue';
 import Popup from '@/components/popup/Popup.vue';
 import { minLength, required } from 'vuelidate/lib/validators';
 import { mapActions } from 'vuex';
@@ -68,7 +77,7 @@ import { mapActions } from 'vuex';
 export default {
   name: 'LoginForm',
 
-  components: { Popup, PasswordRemindForm },
+  components: { Popup, PasswordRemindForm, PasswordRestoreForm },
 
   data() {
     return {
@@ -89,11 +98,25 @@ export default {
     },
   },
 
+  mounted() {
+    if (this.$route.query.action === 'restorePassword') {
+      this.$refs.popupRemindPassword.close();
+      this.$refs.popupRestorePassword.show();
+    } else {
+      this.$refs.loginInput.focus();
+    }
+  },
+
   methods: {
     ...mapActions('auth', ['loginByLogin']),
 
     showPopupRemindPassword() {
       this.$refs.popupRemindPassword.show();
+    },
+
+    onRestorePasswordSuccess() {
+      this.$refs.popupRestorePassword.close();
+      this.$router.push({ name: 'Login' });
     },
 
     async onFormSubmit() {

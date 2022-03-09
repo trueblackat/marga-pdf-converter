@@ -29,6 +29,18 @@ const changePassword = (oldPassword, newPassword) => httpClient.post(
 );
 
 /**
+ * Восстановление пароля (из ссылки на почту)
+ * @param userId {string} - id пользователя
+ * @param code {string} - код из письма
+ * @param newPassword {string} - новый пароль пользователя
+ * @return {Promise<object>} - обновленный объект токена пользователя
+ */
+const restorePassword = (userId, code, newPassword) => httpClient.post(
+  '/users/restore-password',
+  { user_id: userId, code, new_password: newPassword },
+);
+
+/**
  * Отправка ссылки на напоминание пароля
  * @param email {string} - почта, на которую отправить ссылку
  * @return {Promise<any>}
@@ -39,4 +51,5 @@ export default {
   confirmEmail,
   changePassword,
   remindPassword,
+  restorePassword,
 };
