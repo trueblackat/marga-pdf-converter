@@ -1,4 +1,5 @@
 import api from '@/api';
+import dayjs from 'dayjs';
 
 export default {
   namespaced: true,
@@ -50,5 +51,16 @@ export default {
 
   getters: {
     isUserInfoExited: (state) => !!Object.keys(state.user).length,
+
+    userCurrentSubscribe: (state) => {
+      if (!!state.user.tariff && dayjs(state.user.tariff_finished).isValid()) {
+        return {
+          dayUntil: dayjs(state.user.tariff_finished).format('D'),
+          monthUntil: dayjs(state.user.tariff_finished).format('MMMM'),
+        };
+      }
+
+      return false;
+    },
   },
 };

@@ -25,19 +25,30 @@
       </div>
 
       <div class="profile-info-wrapper">
-        <div class="profile-subscription">
+        <div
+          :class="[
+            'profile-subscription',
+            { 'profile-subscription--is-empty': !subscribeInfo.exist },
+          ]"
+        >
           <div class="profile-subscription__title">
-            Срок подписки истекает:
+            {{ subscribeInfo.title }}
           </div>
-          <div class="profile-subscription__date">
-            <span>19</span>
-            <span>сентября</span>
+
+          <div
+            v-if="subscribeInfo.day && subscribeInfo.month"
+            class="profile-subscription__date"
+          >
+            <span>{{ subscribeInfo.day }}</span>
+
+            <span>{{ subscribeInfo.month }}</span>
           </div>
+
           <button
             class="button button--type-filled"
             @click="onSubscriptionButtonClick"
           >
-            Продлить подписку
+            {{ subscribeInfo.buttonLabel }}
           </button>
         </div>
 
@@ -130,7 +141,7 @@ export default {
 
   computed: {
     ...mapState('user', ['user', 'loading']),
-    ...mapGetters('user', ['isUserInfoExited']),
+    ...mapGetters('user', ['isUserInfoExited', 'userCurrentSubscribe']),
 
     statistic() {
       return this.isUserInfoExited
@@ -163,6 +174,16 @@ export default {
       return this.isUserInfoExited
         ? dayjs().to(dayjs.utc(this.user.password_updated))
         : '';
+    },
+
+    subscribeInfo() {
+      return {
+        exist: !!this.userCurrentSubscribe,
+        title: this.userCurrentSubscribe ? 'Срок подписки истекает:' : 'Подписка не оформлена',
+        day: this.userCurrentSubscribe.dayUntil || '',
+        month: this.userCurrentSubscribe.monthUntil || '',
+        buttonLabel: this.userCurrentSubscribe ? 'Продлить подписку' : 'Оформить подписку',
+      };
     },
   },
 
@@ -267,6 +288,12 @@ export default {
 
   .button {
     width: 100%;
+  }
+
+  &--is-empty {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
   }
 }
 
