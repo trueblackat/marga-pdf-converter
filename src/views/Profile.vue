@@ -105,15 +105,6 @@
     >
       <password-change-form @success="$refs.popupChangePassword.close()" />
     </popup>
-
-    <popup
-      ref="popupRemindPassword"
-      title="Забыли пароль"
-    >
-      <password-remind-form
-        caption="Введите Вашу почту чтобы, мы смогли вам отправить проверочный код"
-      />
-    </popup>
   </section>
 </template>
 
@@ -121,7 +112,6 @@
 import EmailChangeForm from '@/components/popup/forms/EmailChangeForm.vue';
 import EmailConfirmForm from '@/components/popup/forms/EmailConfirmForm.vue';
 import PasswordChangeForm from '@/components/popup/forms/PasswordChangeForm.vue';
-import PasswordRemindForm from '@/components/popup/forms/PasswordRemindForm.vue';
 import Popup from '@/components/popup/Popup.vue';
 import UserAvatar from '@/components/UserAvatar.vue';
 import dayjs from 'dayjs';
@@ -131,7 +121,6 @@ export default {
   name: 'Profile',
 
   components: {
-    PasswordRemindForm,
     PasswordChangeForm,
     EmailChangeForm,
     EmailConfirmForm,

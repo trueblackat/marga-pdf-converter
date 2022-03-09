@@ -1,60 +1,74 @@
 <template>
-  <form
-    class="login-form"
-    @submit.prevent="onFormSubmit"
-  >
-    <h1 class="login-form__title title">
-      Войти
-    </h1>
-
-    <input
-      v-model.trim="$v.login.$model"
-      class="login-form__element input"
-      type="text"
-      placeholder="Логин"
+  <div class="login-form-wrapper">
+    <form
+      class="login-form"
+      @submit.prevent="onFormSubmit"
     >
+      <h1 class="login-form__title title">
+        Войти
+      </h1>
 
-    <input
-      v-model.trim="$v.password.$model"
-      class="login-form__element input"
-      type="password"
-      placeholder="Пароль"
-    >
-
-    <input
-      class="login-form__element button button--size-xl button--type-filled"
-      type="submit"
-      value="Вход"
-      :disabled="$v.$anyError"
-    >
-
-    <router-link
-      class="login-form__element text-button text-button--inverted"
-      to="/password-recovery"
-    >
-      Забыли пароль?
-    </router-link>
-
-    <div class="login-form__divider login-form__element" />
-
-    <span>
-      Нет подписки?
-      <router-link
-        class="login-form__element text-button text-button--inverted"
-        to="/subscriptions"
+      <input
+        v-model.trim="$v.login.$model"
+        class="login-form__element input"
+        type="text"
+        placeholder="Логин"
       >
-        Получите бесплатно
-      </router-link>
-    </span>
-  </form>
+
+      <input
+        v-model.trim="$v.password.$model"
+        class="login-form__element input"
+        type="password"
+        placeholder="Пароль"
+      >
+
+      <input
+        class="login-form__element button button--size-xl button--type-filled"
+        type="submit"
+        value="Вход"
+        :disabled="$v.$anyError"
+      >
+
+      <button
+        type="button"
+        class="login-form__element text-button text-button--inverted"
+        @click="showPopupRemindPassword"
+      >
+        Забыли пароль?
+      </button>
+
+      <div class="login-form__divider login-form__element" />
+
+      <span>
+        Нет подписки?
+        <router-link
+          class="login-form__element text-button text-button--inverted"
+          to="/subscriptions"
+        >
+          Получите бесплатно
+        </router-link>
+      </span>
+    </form>
+
+    <popup
+      ref="popupRemindPassword"
+      title="Забыли пароль"
+    >
+      <password-remind-form @success="$refs.popupRemindPassword.close()" />
+    </popup>
+  </div>
 </template>
 
 <script>
+import PasswordRemindForm from '@/components/popup/forms/PasswordRemindForm.vue';
+import Popup from '@/components/popup/Popup.vue';
 import { minLength, required } from 'vuelidate/lib/validators';
 import { mapActions } from 'vuex';
 
 export default {
   name: 'LoginForm',
+
+  components: { Popup, PasswordRemindForm },
 
   data() {
     return {
@@ -77,6 +91,10 @@ export default {
 
   methods: {
     ...mapActions('auth', ['loginByLogin']),
+
+    showPopupRemindPassword() {
+      this.$refs.popupRemindPassword.show();
+    },
 
     async onFormSubmit() {
       this.$v.$touch();

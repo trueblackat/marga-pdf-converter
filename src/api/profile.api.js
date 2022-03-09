@@ -28,7 +28,15 @@ const changePassword = (oldPassword, newPassword) => httpClient.post(
   { old_password: oldPassword, new_password: newPassword },
 );
 
+/**
+ * Отправка ссылки на напоминание пароля
+ * @param email {string} - почта, на которую отправить ссылку
+ * @return {Promise<any>}
+ */
+const remindPassword = (email) => httpClient.post('/users/send-password', { email });
+
 export default {
   confirmEmail,
   changePassword,
+  remindPassword,
 };

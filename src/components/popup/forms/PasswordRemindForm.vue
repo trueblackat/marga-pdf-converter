@@ -1,24 +1,88 @@
 <template>
-  <div class="popup-form">
+  <form
+    v-loading="loading"
+    class="popup-form"
+    @submit.prevent="onSubmit"
+  >
     <p class="popup-form__caption">
-      Введите Вашу почту чтобы, мы смогли вам отправить проверочный код
+      {{ caption }}
     </p>
 
     <input
+      ref="input"
+      v-model="email"
       type="email"
-      class="input"
+      :class="['input', {'input--is-error': isError}]"
       placeholder="Введите email"
-      disabled
     >
 
-    <button class="button button--type-filled button--size-l">
-      Отправить
-    </button>
-  </div>
+    <input
+      class="button button--type-filled button--size-l"
+      type="submit"
+      value="Отправить"
+      :disabled="$v.$anyError"
+    >
+  </form>
 </template>
 
 <script>
+import api from '@/api';
+import { email, required } from 'vuelidate/lib/validators';
+
 export default {
   name: 'PasswordRemindForm',
+
+  data() {
+    return {
+      isErrorOnRequest: false,
+      loading: false,
+      email: '',
+    };
+  },
+
+  computed: {
+    isError() {
+      return this.$v.$anyError || this.isErrorOnRequest;
+    },
+
+    caption() {
+      return this.isError
+        ? 'Проверьте правильность введенных данных'
+        : 'Введите Вашу почту чтобы, мы смогли вам отправить проверочный код';
+    },
+  },
+
+  validations: {
+    email: {
+      required,
+      email,
+    },
+  },
+
+  mounted() {
+    this.$refs.input.focus();
+  },
+
+  methods: {
+    async onSubmit() {
+      this.$v.$touch();
+
+      if (!this.$v.$invalid) {
+        try {
+          this.loading = true;
+          await api.profile.remindPassword(this.email);
+
+          this.$emit('success');
+          this.isErrorOnRequest = false;
+        } catch (e) {
+          this.isErrorOnRequest = true;
+
+          console.error(e);
+        } finally {
+          this.loading = false;
+        }
+      }
+    },
+  },
 };
 </script>
