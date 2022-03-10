@@ -19,7 +19,7 @@
       </picture>
 
       <button
-        v-if="link"
+        v-if="link && id"
         class="document__download-button"
         title="Скачать"
         @click.stop.prevent="downloadFile"
@@ -53,9 +53,11 @@
 </template>
 
 <script>
+import api from '@/api';
 import { documentFormats } from '@/constants/base.constants';
 import { FILE_PROCESSING_MODES_TYPES } from '@/constants/system.constants';
 import declOfNum from '@/utils/declOfNum';
+import { getAbsoluteFileApiLink } from '@/utils/misc.utils';
 import { saveAs } from 'file-saver';
 import { mapState } from 'vuex';
 
@@ -63,6 +65,11 @@ export default {
   name: 'Document',
 
   props: {
+    id: {
+      type: String,
+      default: '',
+    },
+
     name: {
       type: String,
       required: true,
@@ -148,8 +155,15 @@ export default {
       });
     },
 
-    downloadFile() {
-      saveAs(this.link);
+    async downloadFile() {
+      try {
+        const { link } = await api.documents.downloadItem(this.id);
+
+        saveAs(getAbsoluteFileApiLink(link.substring(1)));
+      } catch (e) {
+        // TODO: сделать нотификации для таких случаев
+        console.error(e);
+      }
     },
   },
 };

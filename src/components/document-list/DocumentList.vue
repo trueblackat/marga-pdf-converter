@@ -15,6 +15,7 @@
 
     <document
       v-for="file in sortedFiles"
+      :id="file.id"
       :key="`file-${file.id}`"
       :name="file.name"
       :link="file.link"

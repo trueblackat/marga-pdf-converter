@@ -59,6 +59,13 @@ const getItem = (id) => httpClient.get(`/documents/${id}`);
 const uploadItem = (name, body) => httpClient.post('/documents/', { name, body });
 
 /**
+ * Скачивание документа
+ * @param fileId {string} - id документа
+ * @return {Promise<object>} - документ
+ */
+const downloadItem = (fileId) => httpClient.get(`/documents/${fileId}/download`);
+
+/**
  * Удаление документа по id
  * @param id {string} - id документа
  * @return {Promise<any>}
@@ -115,4 +122,5 @@ export default {
   splitItem,
   convertItem,
   mergeItems,
+  downloadItem,
 };
