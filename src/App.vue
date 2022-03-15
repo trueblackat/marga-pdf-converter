@@ -14,12 +14,14 @@
 import Paywall from '@/components/Paywall.vue';
 import TheFooter from '@/components/the/TheFooter.vue';
 import TheHeader from '@/components/the/TheHeader.vue';
-import { mapActions, mapGetters } from 'vuex';
+import { intervalUntil } from '@/utils/api.utils';
+import { mapActions, mapGetters, mapState } from 'vuex';
 
 export default {
   name: 'App',
   components: { Paywall, TheFooter, TheHeader },
   computed: {
+    ...mapState('auth', ['tokenExpires']),
     ...mapGetters('auth', ['isAuthenticated']),
     ...mapGetters('user', ['isUserInfoExited']),
   },
@@ -38,9 +40,17 @@ export default {
         }
       },
     },
+
+    tokenExpires: {
+      immediate: true,
+      handler(value) {
+        intervalUntil(value, this.refreshToken);
+      },
+    },
   },
 
   methods: {
+    ...mapActions('auth', ['refreshToken']),
     ...mapActions('user', ['getCurrentUserInfo']),
     ...mapActions('files', ['getFiles']),
   },

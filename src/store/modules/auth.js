@@ -1,11 +1,13 @@
 import api from '@/api';
 import localStorageDb from '@/utils/localStorageDB.utils';
+import dayjs from 'dayjs';
 
 export default {
   namespaced: true,
 
   state: () => ({
     token: localStorageDb.get('token') || null,
+    tokenExpires: localStorageDb.get('tokenExpires') || null,
     loading: false,
   }),
 
@@ -14,10 +16,15 @@ export default {
       state.token = token;
       localStorageDb.put('token', token);
     },
+    SET_TOKEN_EXPIRES(state, date) {
+      state.tokenExpires = date;
+      localStorageDb.put('tokenExpires', date);
+    },
 
-    CLEAR_TOKEN(state) {
+    CLEAR_TOKEN_DATA(state) {
       state.token = null;
       localStorageDb.delete('token');
+      localStorageDb.delete('tokenExpires');
     },
 
     SET_LOADING(state, data) {
@@ -26,42 +33,83 @@ export default {
   },
 
   actions: {
-    async loginByLogin({ commit }, { login, password }) {
+    async loginByLogin({ commit, dispatch }, { login, password }) {
       try {
         commit('SET_LOADING', true);
-        const tokenData = await api.auth.loginByLogin({ login, password });
 
-        commit('SET_TOKEN', tokenData.access_token);
-        commit('SET_LOADING', false);
+        await dispatch(
+          'tokenWork',
+          {
+            requestMethod: api.auth.loginByLogin,
+            params: { login, password },
+          },
+        );
 
         await window.vm.$router.push({ name: 'Home' });
       } catch (error) {
-        commit('SET_LOADING', false);
         console.error(error);
+      } finally {
+        commit('SET_LOADING', false);
       }
     },
 
-    async registerByLogin({ commit }, { login, email, password }) {
+    async refreshToken({ commit, dispatch }) {
       try {
         commit('SET_LOADING', true);
-        const tokenData = await api.auth.registerByLoginEmailPass({ login, email, password });
 
-        commit('SET_TOKEN', tokenData.access_token);
+        await dispatch(
+          'tokenWork',
+          {
+            requestMethod: api.auth.refreshToken,
+          },
+        );
+      } catch (error) {
+        console.error(error);
+      } finally {
         commit('SET_LOADING', false);
+      }
+    },
+
+    async registerByLogin({ commit, dispatch }, { login, email, password }) {
+      try {
+        commit('SET_LOADING', true);
+
+        await dispatch(
+          'tokenWork',
+          {
+            requestMethod: api.auth.registerByLoginEmailPass,
+            params: { login, email, password },
+          },
+        );
 
         await window.vm.$router.push({ name: 'Home' });
       } catch (error) {
-        commit('SET_LOADING', false);
         console.error(error);
+      } finally {
+        commit('SET_LOADING', false);
       }
     },
 
     async logout({ commit, dispatch }) {
-      commit('CLEAR_TOKEN');
+      commit('CLEAR_TOKEN_DATA');
       dispatch('user/clearUser', null, { root: true });
 
-      await api.auth.revokeToken();
-      await window.vm.$router.push({ name: 'Login' });
+      if (window.vm.$route.name !== 'Login') {
+        await window.vm.$router.push({ name: 'Login' });
+      }
+    },
+
+    async tokenWork({ commit }, { requestMethod, params }) {
+      try {
+        const { access_token: token, expires: tokenExpires } = await requestMethod(params);
+
+        commit('SET_TOKEN', token);
+        commit('SET_TOKEN_EXPIRES', dayjs(tokenExpires).valueOf());
+
+        return Promise.resolve();
+      } catch (e) {
+        return Promise.reject();
+      }
     },
   },
 
