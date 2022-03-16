@@ -5,9 +5,9 @@
   >
     <document
       class="document-list__add-file"
-      size="Макс. 50 Mb"
-      name="Добавить файл"
-      date="Сегодня"
+      :size="$t('documents.maxSize')"
+      :name="$t('actions.addFile')"
+      :date="$t('today')"
       :is-clickable="false"
     >
       <file-uploader-block />

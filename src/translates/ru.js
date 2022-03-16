@@ -5,12 +5,17 @@ export default {
   myFiles: 'Мои файлы',
   login: 'Логин',
   entrance: 'Вход',
+  today: 'Сегодня',
   auth: {
     forgotPasswordQuestion: 'Забыли пароль?',
     subscriptionNotExistsQuestion: 'Нет подписки?',
     takeFree: 'Получите бесплатно',
   },
+  documents: {
+    maxSize: 'Макс. 50 Mb',
+  },
   actions: {
+    addFile: 'Добавить файл',
     restorePassword: 'Восстановить пароль',
     setNewPassword: 'Задать новый пароль',
     enter: 'Войти',
@@ -23,6 +28,11 @@ export default {
     convert: 'Конвертировать',
     splitFile: 'Разделить файл',
     split: 'Разделить',
+    dontConvert: 'Не конвертировать',
+    select: 'Выбрать',
+    scaleDown: 'Уменьшить масштаб',
+    scaleUp: 'Увеличить масштаб',
+    scaleSet: 'Настроить масштаб',
   },
   profile: {
     title: 'Профиль',

@@ -12,7 +12,7 @@
     <div
       v-if="isSelectable"
       class="document-page__selector"
-      title="Выбрать"
+      :title="$t('actions.select')"
       @click.stop="toggleSelected"
     >
       <svg-icon name="check-small" />

@@ -10,7 +10,7 @@
 
     <button
       class="document-big__close-button"
-      title="Не конвертировать"
+      :title="$t('actions.dontConvert')"
       @click="$emit('delete')"
     >
       <svg-icon name="close" />

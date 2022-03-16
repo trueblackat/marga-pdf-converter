@@ -4,7 +4,7 @@
   >
     <button
       class="scale-slider__button"
-      title="Уменьшить масштаб"
+      :title="$t('actions.scaleDown')"
       @click="minus"
     >
       <svg-icon name="minus-bold" />
@@ -14,7 +14,7 @@
       v-model.number="value"
       type="range"
       class="scale-slider__element"
-      title="Настроить масштаб"
+      :title="$t('actions.scaleSet')"
       :min="min"
       :step="step"
       :max="max"
@@ -22,7 +22,7 @@
 
     <button
       class="scale-slider__button"
-      title="Увеличить масштаб"
+      :title="$t('actions.scaleUp')"
       @click="plus"
     >
       <svg-icon
