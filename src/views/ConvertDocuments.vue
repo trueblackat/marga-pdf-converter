@@ -41,6 +41,7 @@
 
       <file-uploader-block
         is-title-showed
+        :title="$t('actions.addFile')"
         @uploaded="onUpload"
       />
     </div>

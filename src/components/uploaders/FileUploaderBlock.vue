@@ -9,7 +9,7 @@
     <svg-icon name="plus-light" />
 
     <div
-      v-if="isTitleShowed"
+      v-if="isTitleShowed && title"
       class="file-uploader-block__title"
     >
       {{ title }}
@@ -33,7 +33,7 @@ export default {
   props: {
     title: {
       type: String,
-      default: 'Добавить файл',
+      default: '',
     },
 
     isTitleShowed: {

@@ -15,7 +15,7 @@
       >
         <svg-icon name="plus" />
 
-        <span>Добавить файл</span>
+        <span>{{ $t('actions.addFile') }}</span>
       </button>
 
       <file-uploader-input-element ref="input" />
