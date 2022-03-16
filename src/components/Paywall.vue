@@ -6,7 +6,7 @@
     >
       <div
         class="paywall__backdrop"
-        title="Закрыть"
+        :title="$t('actions.close')"
         @click="close"
       />
 
@@ -16,14 +16,14 @@
       >
         <button
           class="paywall__close-button"
-          title="Закрыть"
+          :title="$t('actions.close')"
           @click="close"
         >
           <svg-icon name="close" />
         </button>
 
         <h1 class="paywall__title">
-          Оформление подписки
+          {{ $t('subscribe.oder') }}
         </h1>
 
         <subscription-features :features="selectedSubscription.features" />
@@ -64,7 +64,7 @@
           class="button button--size-xl button--type-filled"
           @click="submitSubscription"
         >
-          Оформить подписку
+          {{ $t('subscribe.order') }}
         </button>
 
         <stripe-checkout

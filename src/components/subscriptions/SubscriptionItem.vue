@@ -33,7 +33,7 @@
       class="button button--size-l button--type-filled"
       @click="$emit('select')"
     >
-      Выбрать
+      {{ $t('actions.select') }}
     </button>
   </div>
 </template>

@@ -8,6 +8,7 @@ export default {
   today: 'Сегодня',
   popup: 'Попап',
   code: 'Код',
+
   auth: {
     forgotPasswordQuestion: 'Забыли пароль?',
     subscriptionNotExistsQuestion: 'Нет подписки?',
