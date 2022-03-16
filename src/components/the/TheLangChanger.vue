@@ -1,16 +1,17 @@
 <template>
   <button
     class="the-lang-changer text-button"
-    @click="changeLang(showedLang.code)"
+    @click="toggleLocale"
   >
     <svg-icon name="globe" />
 
-    <span>{{ showedLang.label }}</span>
+    <span>{{ locale.label }}</span>
   </button>
 </template>
 
 <script>
 import { languages } from '@/translates';
+import { mapActions, mapState } from 'vuex';
 
 export default {
   name: 'TheLangChanger',
@@ -18,15 +19,11 @@ export default {
   languages,
 
   computed: {
-    showedLang() {
-      return languages.find((item) => item.code !== this.$i18n.locale);
-    },
+    ...mapState('system', ['locale']),
   },
 
   methods: {
-    changeLang(code) {
-      this.$i18n.locale = code;
-    },
+    ...mapActions('system', ['toggleLocale']),
   },
 };
 </script>

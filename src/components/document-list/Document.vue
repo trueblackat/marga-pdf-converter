@@ -114,6 +114,7 @@ export default {
     },
 
     pagesCountCaption() {
+      // TODO: сделать переводы
       return declOfNum(this.pagesCount, ['страница', 'страницы', 'страниц']);
     },
 

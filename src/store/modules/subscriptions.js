@@ -1,10 +1,10 @@
-import { subscriptionsMock } from '@/constants/system.constants';
+import { SUBSCRIPTIONS_MOCK } from '@/constants/system.constants';
 
 export default {
   namespaced: true,
 
   state: () => ({
-    subscriptions: Object.freeze(subscriptionsMock),
+    subscriptions: Object.freeze(SUBSCRIPTIONS_MOCK),
     selectedSubscriptionId: 3,
     loading: false,
   }),

@@ -32,11 +32,11 @@ export const FILE_PROCESSING_MODES = {
 
 export const SERVER_GET_FILES_INTERVAL = 1000;
 
-export const subscriptionsMock = [
+export const SUBSCRIPTIONS_MOCK = [
   {
     id: 1,
     stripeId: 'price_1Kdd32EXuMQd7RgJKWKi7Yo3',
-    title: i18n.t('subscriptionsData.one.title'), // 1 month premium subscription
+    title: i18n.t('subscriptionsData.one.title'),
     features: i18n.t('subscriptionsData.one.features', { returnObjects: true }),
     price: i18n.t('subscriptionsData.one.price'),
     priceCaption: i18n.t('subscriptionsData.one.priceCaption'),
@@ -46,7 +46,7 @@ export const subscriptionsMock = [
   {
     id: 2,
     stripeId: 'price_1KddtXEXuMQd7RgJnR3s3cCB',
-    title: i18n.t('subscriptionsData.three.title'), // 1 month premium subscription
+    title: i18n.t('subscriptionsData.three.title'),
     features: i18n.t('subscriptionsData.three.features', { returnObjects: true }),
     price: i18n.t('subscriptionsData.three.price'),
     priceCaption: i18n.t('subscriptionsData.three.priceCaption'),
@@ -56,7 +56,7 @@ export const subscriptionsMock = [
   {
     id: 3,
     stripeId: 'price_1KddwhEXuMQd7RgJyhz9fwjy',
-    title: i18n.t('subscriptionsData.year.title'), // 1 month premium subscription
+    title: i18n.t('subscriptionsData.year.title'),
     features: i18n.t('subscriptionsData.year.features', { returnObjects: true }),
     price: i18n.t('subscriptionsData.year.price'),
     priceCaption: i18n.t('subscriptionsData.year.priceCaption'),

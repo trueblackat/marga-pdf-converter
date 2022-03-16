@@ -68,7 +68,7 @@
               v-if="isEmailConfirmed"
               class="text-button text-button--inverted"
             >
-              {{ $t('action.change') }}
+              {{ $t('actions.change') }}
             </button>
 
             <button

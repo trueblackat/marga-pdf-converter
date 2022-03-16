@@ -1,11 +1,12 @@
 import SvgIcon from '@/components/SvgIcon.vue';
 import loading from '@/directives/loading.directive';
 import '@/plugins/svg-icons';
-import i18n from '@/translates';
 import dayjs from 'dayjs';
+import 'dayjs/locale/en';
 import 'dayjs/locale/ru';
 import relativeTime from 'dayjs/plugin/relativeTime';
 import utc from 'dayjs/plugin/utc';
+import i18n from '@/translates';
 import Vue from 'vue';
 import ClickOutside from 'vue-click-outside';
 import Vuelidate from 'vuelidate';
@@ -14,7 +15,6 @@ import './assets/scss/main.scss';
 import router from './router';
 import store from './store';
 
-dayjs.locale('ru');
 dayjs.extend(relativeTime);
 dayjs.extend(utc);
 
