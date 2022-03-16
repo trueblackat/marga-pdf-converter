@@ -19,7 +19,10 @@
           <svg-icon name="close" />
         </button>
 
-        <h1 class="popup__title">
+        <h1
+          v-if="title"
+          class="popup__title"
+        >
           {{ title }}
         </h1>
 
@@ -36,7 +39,7 @@ export default {
   props: {
     title: {
       type: String,
-      default: this.$t('popup'),
+      default: '',
     },
   },
 
