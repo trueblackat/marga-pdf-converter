@@ -7,7 +7,7 @@
       <ScaleSlider />
 
       <h1 class="title">
-        Разделить файл
+        {{ $t('actions.splitFile') }}
       </h1>
 
       <button
@@ -15,7 +15,7 @@
         :disabled="!selectedPagesIndexes.length"
         @click="onSplitDocumentsButtonClick"
       >
-        Разделить
+        {{ $t('actions.split') }}
       </button>
     </div>
 

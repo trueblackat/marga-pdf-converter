@@ -1,7 +1,7 @@
 <template>
   <div class="subscriptions-page container">
     <h1 class="title page-title">
-      Подписки
+      {{ $t('subscriptions') }}
     </h1>
 
     <div class="subscriptions-page__inner">

@@ -5,7 +5,7 @@
   >
     <template v-if="isUserInfoExited">
       <h1 class="page-profile__title title">
-        Профиль
+        {{ $t('profile.title') }}
       </h1>
 
       <div class="profile-statistic-wrapper">
@@ -60,7 +60,7 @@
           </div>
 
           <div class="profile-info__data">
-            <span>Электронная почта</span>
+            <span>{{ $t('email') }}</span>
 
             <span>{{ user.email }}</span>
 
@@ -68,7 +68,7 @@
               v-if="isEmailConfirmed"
               class="text-button text-button--inverted"
             >
-              изменить
+              {{ $t('action.change') }}
             </button>
 
             <button
@@ -76,10 +76,10 @@
               class="text-button text-button--inverted"
               @click="showPopupConfirmEmail"
             >
-              подтвердить
+              {{ $t('actions.approve') }}
             </button>
 
-            <span>Пароль</span>
+            <span>{{ $t('password') }}</span>
 
             <span>
               {{ passwordUpdatedTime }}
@@ -89,7 +89,7 @@
               class="text-button text-button--inverted"
               @click="showPopupChangePassword"
             >
-              изменить
+              {{ $t('actions.change') }}
             </button>
           </div>
         </div>
@@ -98,21 +98,21 @@
 
     <popup
       ref="popupConfirmEmail"
-      title="Подтвердить почту"
+      :title="$t('actions.approveEmail')"
     >
       <email-confirm-form @success="$refs.popupConfirmEmail.close()" />
     </popup>
 
     <popup
       ref="popupChangeEmail"
-      title="Изменить почту"
+      :title="$t('actions.changeEmail')"
     >
       <email-change-form />
     </popup>
 
     <popup
       ref="popupChangePassword"
-      title="Сменить пароль"
+      :title="$t('actions.changePassword')"
     >
       <password-change-form @success="$refs.popupChangePassword.close()" />
     </popup>
@@ -147,19 +147,19 @@ export default {
       return this.isUserInfoExited
         ? {
           load: {
-            label: 'Залито файлов',
+            label: this.$t('profile.statistic.load'),
             count: this.user.load_count,
           },
           convert: {
-            label: 'Сконвертированно файлов',
+            label: this.$t('profile.statistic.convert'),
             count: this.user.convert_count,
           },
           merge: {
-            label: 'Объединено файлов',
+            label: this.$t('profile.statistic.merge'),
             count: this.user.merge_count,
           },
           split: {
-            label: 'Разделено файлов',
+            label: this.$t('profile.statistic.split'),
             count: this.user.split_count,
           },
         }
@@ -179,10 +179,14 @@ export default {
     subscribeInfo() {
       return {
         exist: !!this.userCurrentSubscribe,
-        title: this.userCurrentSubscribe ? 'Срок подписки истекает:' : 'Подписка не оформлена',
+        title: this.userCurrentSubscribe
+          ? this.$t('profile.subscribe.ends')
+          : this.$t('profile.subscribe.notExists'),
         day: this.userCurrentSubscribe.dayUntil || '',
         month: this.userCurrentSubscribe.monthUntil || '',
-        buttonLabel: this.userCurrentSubscribe ? 'Продлить подписку' : 'Оформить подписку',
+        buttonLabel: this.userCurrentSubscribe
+          ? this.$t('profile.subscribe.resume')
+          : this.$t('profile.subscribe.order'),
       };
     },
   },

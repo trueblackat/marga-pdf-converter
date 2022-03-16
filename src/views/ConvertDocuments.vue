@@ -10,7 +10,7 @@
       />
 
       <h1 class="title">
-        Конвертировать в PDF
+        {{ $t('actions.convertToPdf') }}
       </h1>
 
       <div class="convert-document-page__buttons">
@@ -24,7 +24,7 @@
           class="button button--type-filled"
           @click="convertFiles"
         >
-          Конвертировать
+          {{ $t('actions.convert') }}
         </button>
       </div>
     </div>

@@ -1,6 +1,7 @@
 import SvgIcon from '@/components/SvgIcon.vue';
 import loading from '@/directives/loading.directive';
 import '@/plugins/svg-icons';
+import i18n from '@/translates';
 import dayjs from 'dayjs';
 import 'dayjs/locale/ru';
 import relativeTime from 'dayjs/plugin/relativeTime';
@@ -28,6 +29,7 @@ Vue.component('SvgIcon', SvgIcon);
 Vue.directive('ClickOutside', ClickOutside);
 
 window.vm = new Vue({
+  i18n,
   router,
   store,
   render: (h) => h(App),

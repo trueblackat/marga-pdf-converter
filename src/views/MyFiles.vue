@@ -1,7 +1,7 @@
 <template>
   <section class="page-my-files container">
     <h1 class="page-my-files__title title">
-      Мои файлы
+      {{ $t('myFiles') }}
     </h1>
 
     <file-processing-mode-selector
