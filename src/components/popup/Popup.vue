@@ -6,14 +6,14 @@
     >
       <div
         class="popup__backdrop"
-        title="Закрыть"
+        :title="$t('actions.close')"
         @click="close"
       />
 
       <div class="popup__inner">
         <button
           class="popup__close-button"
-          title="Закрыть"
+          :title="$t('actions.close')"
           @click="close"
         >
           <svg-icon name="close" />
@@ -36,7 +36,7 @@ export default {
   props: {
     title: {
       type: String,
-      default: 'Попап',
+      default: this.$t('popup'),
     },
   },
 

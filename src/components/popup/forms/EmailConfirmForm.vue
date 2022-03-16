@@ -12,7 +12,7 @@
       v-model="code"
       type="text"
       :class="['input', {'input--is-error': isError}]"
-      placeholder="Введите код"
+      :placeholder="$t('code')"
     >
 
     <!--    <p class="popup-form__question">-->
@@ -28,7 +28,7 @@
       :disabled="code.length < 4"
       @click="confirm"
     >
-      Подтвердить
+      {{ $t('actions.approve') }}
     </button>
   </div>
 </template>
@@ -53,8 +53,8 @@ export default {
 
     formCaption() {
       return this.isError
-        ? 'Код не верен, проверьте правильность введенных данных'
-        : 'Введите код подтверждения, который пришел Вам на почту';
+        ? this.$t('auth.incorrectCodeMessage')
+        : this.$t('auth.typeCodeMessage');
     },
   },
 

@@ -8,34 +8,34 @@
       v-if="isError"
       class="popup-form__caption"
     >
-      Проверьте правильность введенных данных
+      {{ $t('auth.checkEnterDataMessage') }}
     </p>
 
     <input
       v-model="oldPassword"
       type="password"
       :class="['input', {'input--is-error': isError}]"
-      placeholder="Старый пароль"
+      :placeholder="$t('auth.oldPassword')"
     >
 
     <input
       v-model="newPassword"
       type="password"
       :class="['input', {'input--is-error': isError}]"
-      placeholder="Новый пароль"
+      :placeholder="$t('auth.newPassword')"
     >
 
     <input
       v-model="retypePassword"
       type="password"
       :class="['input', {'input--is-error': isError}]"
-      placeholder="Подтвердите пароль"
+      :placeholder="$t('auth.approvePasswordMessage')"
     >
 
     <input
       class="button button--type-filled button--size-l"
       type="submit"
-      value="Изменить"
+      :value="$t('actions.change')"
       :disabled="$v.$anyError"
     >
   </form>

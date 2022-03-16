@@ -3,11 +3,11 @@
     <input
       type="email"
       class="input"
-      placeholder="Введите почту"
+      :placeholder="$t('email')"
     >
 
     <button class="button button--type-filled button--size-l">
-      Изменить
+      {{ $t('actions.change') }}
     </button>
   </div>
 </template>

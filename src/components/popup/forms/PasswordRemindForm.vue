@@ -13,13 +13,13 @@
       v-model="email"
       type="email"
       :class="['input', {'input--is-error': isError}]"
-      placeholder="Введите email"
+      :placeholder="$t('email')"
     >
 
     <input
       class="button button--type-filled button--size-l"
       type="submit"
-      value="Отправить"
+      :value="$t('actions.send')"
       :disabled="$v.$anyError"
     >
   </form>
@@ -47,8 +47,8 @@ export default {
 
     caption() {
       return this.isError
-        ? 'Проверьте правильность введенных данных'
-        : 'Введите Вашу почту чтобы, мы смогли вам отправить проверочный код';
+        ? this.$t('auth.checkEnterDataMessage')
+        : this.$t('auth.setEmailForSentMessage');
     },
   },
 
