@@ -1,42 +1,45 @@
 const subscriptionsMock = [
   {
     id: 1,
-    title: 'на 1 месяц',
+    title: 'на 1 месяц', // 1 month premium subscription
     features: [
       'Единый аккаунт для всех ваших устройств',
       'Хранилище файлов',
-      'Редактирование неограниченное количества файлов в день',
+      'Выгрузка неограниченного количества файлов в день',
     ],
     price: '4,99$/month',
     priceCaption: '',
     priceDiscount: '',
     isHot: false,
+    stripeId: 'price_1Kdd32EXuMQd7RgJKWKi7Yo3',
   },
   {
     id: 2,
-    title: 'на 3 месяца',
+    title: 'на 3 месяца', // 3 months premium subscription
     features: [
       'Единый аккаунт для всех ваших устройств',
       'Хранилище файлов',
-      'Редактирование неограниченное количества файлов в день',
+      'Выгрузка неограниченного количества файлов в день',
     ],
     price: '4,99$/month',
     priceCaption: '13,65$ за 3 месяца',
     priceDiscount: '',
     isHot: false,
+    stripeId: 'price_1KddtXEXuMQd7RgJnR3s3cCB',
   },
   {
     id: 3,
-    title: 'на год',
+    title: 'на год', // 1 year premium subscription
     features: [
       'Единый аккаунт для всех ваших устройств',
       'Хранилище файлов',
-      'Редактирование неограниченное количества файлов в день',
+      'Выгрузка неограниченного количества файлов в день',
     ],
     price: '3,99$/month',
     priceCaption: '48$ за 1 год ',
     priceDiscount: '-25%',
     isHot: true,
+    stripeId: 'price_1KddwhEXuMQd7RgJyhz9fwjy',
   },
 ];
 

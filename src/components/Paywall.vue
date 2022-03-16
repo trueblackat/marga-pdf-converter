@@ -10,7 +10,10 @@
         @click="close"
       />
 
-      <div class="paywall__inner">
+      <div
+        v-loading="stripeLoading"
+        class="paywall__inner"
+      >
         <button
           class="paywall__close-button"
           title="Закрыть"
@@ -57,9 +60,22 @@
 
         <div class="paywall__divider" />
 
-        <button class="button button--size-xl button--type-filled">
+        <button
+          class="button button--size-xl button--type-filled"
+          @click="submitSubscription"
+        >
           Оформить подписку
         </button>
+
+        <stripe-checkout
+          ref="checkout"
+          mode="subscription"
+          :pk="stripeData.stripePk"
+          :line-items="stripeData.items"
+          :client-reference-id="stripeData.clientReferenceId"
+          :customer-email="stripeData.customerEmail"
+          @loading="v => stripeLoading = v"
+        />
       </div>
     </section>
   </transition>
@@ -67,25 +83,39 @@
 
 <script>
 import SubscriptionFeatures from '@/components/subscriptions/SubscriptionFeatures.vue';
+import { stripePk } from '@/constants/payment.constants';
+import { StripeCheckout } from '@vue-stripe/vue-stripe';
 import { mapActions, mapGetters, mapState } from 'vuex';
 
 export default {
   name: 'Paywall',
 
-  components: { SubscriptionFeatures },
+  components: { SubscriptionFeatures, StripeCheckout },
 
   data() {
     return {
       isShowed: false,
+      stripeLoading: false,
     };
   },
 
   computed: {
+    ...mapState('user', ['user']),
     ...mapState('subscriptions', ['subscriptions', 'selectedSubscriptionId']),
-    ...mapGetters('subscriptions', ['getSelectedSubscription']),
+    ...mapGetters('subscriptions', {
+      selectedSubscription: 'getSelectedSubscription',
+    }),
 
-    selectedSubscription() {
-      return this.getSelectedSubscription;
+    stripeData() {
+      return {
+        stripePk,
+        clientReferenceId: this.user.id,
+        customerEmail: this.user.email,
+        items: [{
+          price: this.selectedSubscription.stripeId,
+          quantity: 1,
+        }],
+      };
     },
   },
 
@@ -110,6 +140,10 @@ export default {
 
     onSubscriptionSelect(id) {
       this.setSelectedSubscriptionId(id);
+    },
+
+    submitSubscription() {
+      this.$refs.checkout.redirectToCheckout();
     },
   },
 };

@@ -19,7 +19,9 @@ import { mapActions, mapGetters, mapState } from 'vuex';
 
 export default {
   name: 'App',
+
   components: { Paywall, TheFooter, TheHeader },
+
   computed: {
     ...mapState('auth', ['tokenExpires']),
     ...mapGetters('auth', ['isAuthenticated']),

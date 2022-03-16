@@ -1,5 +1,6 @@
 .is-loading {
   position: relative;
+  position: inherit;
 
   &::before,
   &::after {
