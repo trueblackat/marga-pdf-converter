@@ -23,7 +23,7 @@
         </button>
 
         <h1 class="paywall__title">
-          {{ $t('subscribe.oder') }}
+          {{ $t('profile.subscribe.order') }}
         </h1>
 
         <subscription-features :features="selectedSubscription.features" />
@@ -64,7 +64,7 @@
           class="button button--size-xl button--type-filled"
           @click="submitSubscription"
         >
-          {{ $t('subscribe.order') }}
+          {{ $t('profile.subscribe.order') }}
         </button>
 
         <stripe-checkout

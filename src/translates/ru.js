@@ -69,4 +69,56 @@ export default {
     socialLinks: 'Социальные сети',
     mobileApps: 'Мобильные приложения',
   },
+  modes: {
+    convert: {
+      title: 'Конвертировать файл',
+      subTitle: 'из .DOC, .DOCX, .JPG или .EXEL в .PDF',
+      caption: 'Выберите файл для конвертирования',
+    },
+    merge: {
+      title: 'Объединить файлы',
+      subTitle: 'из нескольких .PDF в один',
+      caption: 'Выберите файл для объединения',
+    },
+    split: {
+      title: 'Разделить файл',
+      subTitle: 'из одного .PDF в два или больше',
+      caption: 'Выберите файл для разделения',
+    },
+  },
+  subscriptionsData: {
+    one: {
+      title: 'на 1 месяц',
+      features: [
+        'Единый аккаунт для всех ваших устройств',
+        'Хранилище файлов',
+        'Выгрузка неограниченного количества файлов в день',
+      ],
+      price: '4,99$/month',
+      priceCaption: '',
+      priceDiscount: '',
+    },
+    three: {
+      title: 'на 3 месяца', // 3 months premium subscription
+      features: [
+        'Единый аккаунт для всех ваших устройств',
+        'Хранилище файлов',
+        'Выгрузка неограниченного количества файлов в день',
+      ],
+      price: '4,99$/month',
+      priceCaption: '13,65$ за 3 месяца',
+      priceDiscount: '',
+    },
+    year: {
+      title: 'на год', // 1 year premium subscription
+      features: [
+        'Единый аккаунт для всех ваших устройств',
+        'Хранилище файлов',
+        'Выгрузка неограниченного количества файлов в день',
+      ],
+      price: '3,99$/month',
+      priceCaption: '48$ за 1 год ',
+      priceDiscount: '-25%',
+    },
+  },
 };
