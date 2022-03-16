@@ -25,28 +25,28 @@
           class="text-button"
           to="/"
         >
-          Добавить файл
+          {{ $t('actions.addFile') }}
         </router-link>
 
         <router-link
           class="text-button"
           to="/my-files"
         >
-          Мои файлы
+          {{ $t('myFiles') }}
         </router-link>
 
         <router-link
           class="text-button"
           to="/profile"
         >
-          Профиль
+          {{ $t('profile.title') }}
         </router-link>
 
         <button
           class="text-button"
           @click="logout"
         >
-          Выйти
+          {{ $t('actions.out') }}
         </button>
       </div>
     </transition>

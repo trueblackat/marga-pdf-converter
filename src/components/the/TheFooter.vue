@@ -10,13 +10,13 @@
         </router-link>
 
         <p class="footer__rights">
-          pdf editor {{ currentYear }}  ©  all right received
+          {{ $t('footer.rights', { year: currentYear }) }}
         </p>
       </div>
 
       <div class="footer__block">
         <h4 class="footer__title">
-          Social
+          {{ $t('footer.socialLinks') }}
         </h4>
 
         <div class="footer__inlines">
@@ -56,7 +56,7 @@
 
       <div class="footer__block">
         <h4 class="footer__title">
-          Mobile
+          {{ $t('footer.mobileApps') }}
         </h4>
 
         <div class="footer__inlines">

@@ -14,7 +14,7 @@
         class="header__link text-button"
         to="/terms-and-conditions"
       >
-        Информация
+        {{ $t('info') }}
       </router-link>
 
       <router-link
@@ -22,7 +22,7 @@
         class="header__link text-button"
         to="/login"
       >
-        Войти
+        {{ $t('actions.enter') }}
       </router-link>
 
       <router-link
@@ -30,7 +30,7 @@
         class="button"
         to="/subscriptions"
       >
-        Подписка
+        {{ $t('subscription') }}
       </router-link>
 
       <user-nav

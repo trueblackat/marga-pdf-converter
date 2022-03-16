@@ -1,6 +1,7 @@
 export default {
   email: 'Электронная почта',
   password: 'Пароль',
+  subscription: 'Подписки',
   subscriptions: 'Подписки',
   myFiles: 'Мои файлы',
   login: 'Логин',
@@ -8,6 +9,7 @@ export default {
   today: 'Сегодня',
   popup: 'Попап',
   code: 'Код',
+  info: 'Информация',
 
   auth: {
     forgotPasswordQuestion: 'Забыли пароль?',
@@ -31,6 +33,7 @@ export default {
     restorePassword: 'Восстановить пароль',
     setNewPassword: 'Задать новый пароль',
     enter: 'Войти',
+    out: 'Выйти',
     change: 'Изменить',
     approve: 'Подтвердить',
     approveEmail: 'Подтвердить почту',
@@ -60,5 +63,10 @@ export default {
       ends: 'Срок подписки истекает:',
       notExists: 'Подписка не оформлена',
     },
+  },
+  footer: {
+    rights: 'Pdf Editor {year} © Все права защищены',
+    socialLinks: 'Социальные сети',
+    mobileApps: 'Мобильные приложения',
   },
 };
