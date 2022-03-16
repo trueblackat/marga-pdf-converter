@@ -5,7 +5,7 @@
       @submit.prevent="onFormSubmit"
     >
       <h1 class="login-form__title title">
-        Войти
+        {{ $t('actions.enter') }}
       </h1>
 
       <input
@@ -13,20 +13,20 @@
         v-model.trim="$v.login.$model"
         class="login-form__element input"
         type="text"
-        placeholder="Логин"
+        :placeholder="$t('login')"
       >
 
       <input
         v-model.trim="$v.password.$model"
         class="login-form__element input"
         type="password"
-        placeholder="Пароль"
+        :placeholder="$t('password')"
       >
 
       <input
         class="login-form__element button button--size-xl button--type-filled"
         type="submit"
-        value="Вход"
+        :value="$t('entrance')"
         :disabled="$v.$anyError"
       >
 
@@ -35,32 +35,32 @@
         class="login-form__element text-button text-button--inverted"
         @click="showPopupRemindPassword"
       >
-        Забыли пароль?
+        {{ $t('auth.forgotPasswordQuestion') }}
       </button>
 
       <div class="login-form__divider login-form__element" />
 
       <span>
-        Нет подписки?
+        {{ $t('auth.subscriptionNotExistsQuestion') }}
         <router-link
           class="login-form__element text-button text-button--inverted"
           to="/subscriptions"
         >
-          Получите бесплатно
+          {{ $t('auth.takeFree') }}
         </router-link>
       </span>
     </form>
 
     <popup
       ref="popupRemindPassword"
-      title="Забыли пароль"
+      :title="$t('actions.restorePassword')"
     >
       <password-remind-form @success="$refs.popupRemindPassword.close()" />
     </popup>
 
     <popup
       ref="popupRestorePassword"
-      title="Задать новый пароль"
+      :title="$t('actions.setNewPassword')"
     >
       <password-restore-form @success="onRestorePasswordSuccess" />
     </popup>

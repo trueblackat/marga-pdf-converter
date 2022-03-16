@@ -3,7 +3,17 @@ export default {
   password: 'Пароль',
   subscriptions: 'Подписки',
   myFiles: 'Мои файлы',
+  login: 'Логин',
+  entrance: 'Вход',
+  auth: {
+    forgotPasswordQuestion: 'Забыли пароль?',
+    subscriptionNotExistsQuestion: 'Нет подписки?',
+    takeFree: 'Получите бесплатно',
+  },
   actions: {
+    restorePassword: 'Восстановить пароль',
+    setNewPassword: 'Задать новый пароль',
+    enter: 'Войти',
     change: 'Изменить',
     approve: 'Подтвердить',
     approveEmail: 'Подтвердить почту',
