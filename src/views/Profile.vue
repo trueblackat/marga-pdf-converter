@@ -67,6 +67,7 @@
             <button
               v-if="isEmailConfirmed"
               class="text-button text-button--inverted"
+              @click="showPopupChangeEmail"
             >
               {{ $t('actions.change') }}
             </button>
@@ -107,7 +108,7 @@
       ref="popupChangeEmail"
       :title="$t('actions.changeEmail')"
     >
-      <email-change-form />
+      <email-change-form @success="$refs.popupChangeEmail.close()" />
     </popup>
 
     <popup
@@ -126,7 +127,7 @@ import PasswordChangeForm from '@/components/popup/forms/PasswordChangeForm.vue'
 import Popup from '@/components/popup/Popup.vue';
 import UserAvatar from '@/components/UserAvatar.vue';
 import dayjs from 'dayjs';
-import { mapGetters, mapState } from 'vuex';
+import { mapActions, mapGetters, mapState } from 'vuex';
 
 export default {
   name: 'Profile',
@@ -204,6 +205,8 @@ export default {
   },
 
   methods: {
+    ...mapActions('user', ['getCurrentUserInfo']),
+
     onSubscriptionButtonClick() {
       this.$eventBus.$emit('show-paywall');
     },
@@ -214,6 +217,10 @@ export default {
 
     showPopupChangePassword() {
       this.$refs.popupChangePassword.show();
+    },
+
+    showPopupChangeEmail() {
+      this.$refs.popupChangeEmail.show();
     },
   },
 };

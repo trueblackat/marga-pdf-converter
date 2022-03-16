@@ -63,7 +63,7 @@ export default {
   },
 
   methods: {
-    ...mapActions('user', ['setUser']),
+    ...mapActions('user', ['getCurrentUserInfo']),
 
     async confirm() {
       try {
@@ -74,6 +74,8 @@ export default {
           this.user.email,
           this.user.id,
         );
+
+        await this.getCurrentUserInfo();
 
         this.$emit('success');
       } catch (e) {

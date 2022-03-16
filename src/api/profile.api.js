@@ -29,6 +29,16 @@ const changePassword = (oldPassword, newPassword) => httpClient.post(
 );
 
 /**
+ * Изменение почты.
+ * @param newEmail {string} - новая почта
+ * @return {Promise<object>} - обновленный объект токена пользователя
+ */
+const changeEmail = (newEmail) => httpClient.post(
+  '/users/change_email',
+  { new_email: newEmail },
+);
+
+/**
  * Восстановление пароля (из ссылки на почту)
  * @param userId {string} - id пользователя
  * @param code {string} - код из письма
@@ -52,4 +62,5 @@ export default {
   changePassword,
   remindPassword,
   restorePassword,
+  changeEmail,
 };

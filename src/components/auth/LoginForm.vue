@@ -10,10 +10,10 @@
 
       <input
         ref="loginInput"
-        v-model.trim="$v.login.$model"
+        v-model.trim="$v.email.$model"
         class="login-form__element input"
-        type="text"
-        :placeholder="$t('login')"
+        type="email"
+        :placeholder="$t('email')"
       >
 
       <input
@@ -71,7 +71,7 @@
 import PasswordRemindForm from '@/components/popup/forms/PasswordRemindForm.vue';
 import PasswordRestoreForm from '@/components/popup/forms/PasswordRestoreForm.vue';
 import Popup from '@/components/popup/Popup.vue';
-import { minLength, required } from 'vuelidate/lib/validators';
+import { email, minLength, required } from 'vuelidate/lib/validators';
 import { mapActions } from 'vuex';
 
 export default {
@@ -81,15 +81,15 @@ export default {
 
   data() {
     return {
-      login: '',
+      email: '',
       password: '',
     };
   },
 
   validations: {
-    login: {
+    email: {
       required,
-      minLength: minLength(4),
+      email,
     },
 
     password: {
@@ -126,7 +126,7 @@ export default {
         console.error('ERROR IN FORM');
       } else {
         const params = {
-          login: this.login,
+          login: this.email,
           password: this.password,
         };
 

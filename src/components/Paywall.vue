@@ -176,6 +176,10 @@ export default {
     height: 100%;
     background: $c-white;
     padding: 100px 5.5vw;
+
+    &.is-loading {
+      position: absolute;
+    }
   }
 
   &__close-button {

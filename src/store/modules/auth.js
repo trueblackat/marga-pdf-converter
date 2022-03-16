@@ -70,7 +70,7 @@ export default {
       }
     },
 
-    async registerByLogin({ commit, dispatch }, { login, email, password }) {
+    async registerByLogin({ commit, dispatch }, { email, password }) {
       try {
         commit('SET_LOADING', true);
 
@@ -78,7 +78,7 @@ export default {
           'tokenWork',
           {
             requestMethod: api.auth.registerByLoginEmailPass,
-            params: { login, email, password },
+            params: { email, password },
           },
         );
 
