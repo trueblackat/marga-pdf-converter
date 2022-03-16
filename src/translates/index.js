@@ -5,6 +5,17 @@ import ru from './ru';
 
 Vue.use(VueI18n);
 
+export const languages = [
+  {
+    code: 'en',
+    label: 'English',
+  },
+  {
+    code: 'ru',
+    label: 'Русский',
+  },
+];
+
 export default new VueI18n({
   locale: 'ru',
   messages: { en, ru },

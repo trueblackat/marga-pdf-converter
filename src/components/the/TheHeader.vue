@@ -10,6 +10,8 @@
 
       <div class="header__gutter" />
 
+      <the-lang-changer class="header__link" />
+
       <router-link
         class="header__link text-button"
         to="/terms-and-conditions"
@@ -42,12 +44,15 @@
 </template>
 
 <script>
+import TheLangChanger from '@/components/the/TheLangChanger.vue';
 import UserNav from '@/components/UserNav.vue';
 import { mapGetters, mapState } from 'vuex';
 
 export default {
   name: 'TheHeader',
-  components: { UserNav },
+
+  components: { TheLangChanger, UserNav },
+
   computed: {
     ...mapState('user', ['user']),
     ...mapGetters('user', ['isUserInfoExited']),

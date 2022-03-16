@@ -10,7 +10,6 @@ export default {
   popup: 'Попап',
   code: 'Код',
   info: 'Информация',
-
   auth: {
     forgotPasswordQuestion: 'Забыли пароль?',
     subscriptionNotExistsQuestion: 'Нет подписки?',
