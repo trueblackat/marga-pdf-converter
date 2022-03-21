@@ -74,10 +74,15 @@ const deleteItem = (id) => httpClient.delete(`/documents/${id}`);
 
 /**
  * Получение превью всех страниц документа
- * @param id
+ * @param id {string} - id документа
+ * @param limit {number} - кол-во элементов на страницу (по умолчанию 40)
+ * @param offset {number} - с какого элемента загружать (по умолчанию 0)
  * @return {Promise<array>}
  */
-const getItemPreviews = (id) => httpClient.get(`/documents/${id}/previews`);
+const getItemPreviews = (id, limit = 40, offset = 0) => httpClient.get(
+  `/documents/${id}/previews`,
+  { params: { limit, offset } },
+);
 
 /**
  * Сплит документа

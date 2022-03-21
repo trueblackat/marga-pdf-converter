@@ -63,3 +63,5 @@ export const documentStatuses = {
     return this[findingType]?.code;
   },
 };
+
+export const DOCUMENT_PREVIEWS_PER_PAGE = 20;
