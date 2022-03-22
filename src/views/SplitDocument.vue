@@ -109,10 +109,10 @@ export default {
         const { previews, count: total } = await api.documents
           .getItemPreviews(this.fileId, DOCUMENT_PREVIEWS_PER_PAGE, offset);
 
-        this.previews.push(...previews.map((item) => (item.status === 1
-          ? getAbsoluteFileApiLink(item.link.substring(1))
-          : false
-        )));
+        this.previews
+          .push(...previews
+            .filter((item) => item.status === 1)
+            .map((item) => getAbsoluteFileApiLink(item.link.substring(1))));
         this.total = total;
       } catch (e) {
         console.error(e);

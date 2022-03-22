@@ -22,7 +22,9 @@
 
       <file-uploader-input-element
         ref="input"
+        :single-mode="singleMode"
         @uploading="$emit('uploading', $event)"
+        @uploaded="$emit('uploaded', $event)"
       />
     </div>
   </section>
@@ -36,6 +38,13 @@ export default {
   name: 'FileUploader',
 
   components: { FileUploaderInputElement },
+
+  props: {
+    singleMode: {
+      type: Boolean,
+      default: false,
+    },
+  },
 
   computed: {
     ...mapGetters('system', ['selectedFileProcessingModeData']),

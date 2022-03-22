@@ -3,7 +3,7 @@
     ref="element"
     type="file"
     :accept="accept"
-    multiple
+    :multiple="!singleMode"
     style="display: none"
     @change="onInputChange"
   >
@@ -17,6 +17,13 @@ import { mapActions, mapGetters } from 'vuex';
 
 export default {
   name: 'FileUploaderInputElement',
+
+  props: {
+    singleMode: {
+      type: Boolean,
+      default: false,
+    },
+  },
 
   computed: {
     ...mapGetters('user', ['isUserInfoExited']),

@@ -54,6 +54,10 @@ export default {
         this.$router.push({ name: 'ConvertDocuments' });
       }
 
+      if (this.fileProcessingMode === FILE_PROCESSING_MODES_TYPES.merge) {
+        // TODO: сделать режим merge
+      }
+
       if (canSplit && this.fileProcessingMode === FILE_PROCESSING_MODES_TYPES.split) {
         this.$router.push({ name: 'SplitDocument', params: { fileId } });
       }
