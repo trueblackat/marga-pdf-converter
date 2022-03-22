@@ -71,7 +71,7 @@ export default {
   modes: {
     convert: {
       title: 'Convert the file',
-      subTitle: 'form .DOC, .DOCX, .JPG or .EXEL to .PDF',
+      subTitle: 'form .DOC, .DOCX, .JPG or .EXCEL to .PDF',
       caption: 'Select the file for converting',
     },
     merge: {

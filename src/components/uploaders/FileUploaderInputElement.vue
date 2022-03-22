@@ -2,7 +2,7 @@
   <input
     ref="element"
     type="file"
-    accept="image/*, application/pdf, application/docx"
+    :accept="accept"
     multiple
     style="display: none"
     @change="onInputChange"
@@ -20,6 +20,14 @@ export default {
 
   computed: {
     ...mapGetters('user', ['isUserInfoExited']),
+    ...mapGetters('system', ['selectedFileProcessingModeData']),
+
+    accept() {
+      // http://htmlbook.ru/html/value/mime
+      return this.selectedFileProcessingModeData.pdfOnly
+        ? 'application/pdf'
+        : 'image/jpeg, image/png, application/msword, application/excel';
+    },
   },
 
   methods: {

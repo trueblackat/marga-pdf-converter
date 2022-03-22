@@ -38,6 +38,7 @@ export default {
 
       commit('SET_LOCALE', newLocale);
 
+      // reload page
       window.vm.$router.go();
     },
   },

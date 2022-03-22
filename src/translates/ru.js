@@ -71,7 +71,7 @@ export default {
   modes: {
     convert: {
       title: 'Конвертировать файл',
-      subTitle: 'из .DOC, .DOCX, .JPG или .EXEL в .PDF',
+      subTitle: 'из .DOC, .DOCX, .JPG или .EXCEL в .PDF',
       caption: 'Выберите файл для конвертирования',
     },
     merge: {

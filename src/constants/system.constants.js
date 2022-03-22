@@ -13,6 +13,7 @@ export const FILE_PROCESSING_MODES = {
     subTitle: i18n.t('modes.convert.subTitle'),
     caption: i18n.t('modes.convert.caption'),
     icon: 'convert-pdf',
+    pdfOnly: false,
   },
   [FILE_PROCESSING_MODES_TYPES.merge]: {
     code: FILE_PROCESSING_MODES_TYPES.merge,
@@ -20,6 +21,7 @@ export const FILE_PROCESSING_MODES = {
     subTitle: i18n.t('modes.merge.subTitle'),
     caption: i18n.t('modes.merge.caption'),
     icon: 'merge-pdf',
+    pdfOnly: true,
   },
   [FILE_PROCESSING_MODES_TYPES.split]: {
     code: FILE_PROCESSING_MODES_TYPES.split,
@@ -27,6 +29,7 @@ export const FILE_PROCESSING_MODES = {
     subTitle: i18n.t('modes.split.subTitle'),
     caption: i18n.t('modes.split.caption'),
     icon: 'split-pdf',
+    pdfOnly: true,
   },
 };
 
