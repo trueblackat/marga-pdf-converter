@@ -37,7 +37,7 @@
 
       <user-nav
         v-if="isAuthenticated && isUserInfoExited"
-        :username="user.login"
+        :username="computedLogin"
       />
     </nav>
   </header>
@@ -46,12 +46,15 @@
 <script>
 import TheLangChanger from '@/components/the/TheLangChanger.vue';
 import UserNav from '@/components/UserNav.vue';
+import userMixin from '@/mixins/user.mixin';
 import { mapGetters, mapState } from 'vuex';
 
 export default {
   name: 'TheHeader',
 
   components: { TheLangChanger, UserNav },
+
+  mixins: [userMixin],
 
   computed: {
     ...mapState('user', ['user']),

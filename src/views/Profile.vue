@@ -54,31 +54,33 @@
 
         <div class="profile-info">
           <div class="profile-info__name">
-            <user-avatar :username="user.login" />
+            <user-avatar :username="computedLogin" />
 
-            <span>{{ user.login }}</span>
+            <span>{{ computedLogin }}</span>
           </div>
 
           <div class="profile-info__data">
-            <span>{{ $t('email') }}</span>
+            <template v-if="user.email">
+              <span>{{ $t('email') }}</span>
 
-            <span>{{ user.email }}</span>
+              <span>{{ user.email }}</span>
 
-            <button
-              v-if="isEmailConfirmed"
-              class="text-button text-button--inverted"
-              @click="showPopupChangeEmail"
-            >
-              {{ $t('actions.change') }}
-            </button>
+              <button
+                v-if="isEmailConfirmed"
+                class="text-button text-button--inverted"
+                @click="showPopupChangeEmail"
+              >
+                {{ $t('actions.change') }}
+              </button>
 
-            <button
-              v-if="!isEmailConfirmed"
-              class="text-button text-button--inverted"
-              @click="showPopupConfirmEmail"
-            >
-              {{ $t('actions.approve') }}
-            </button>
+              <button
+                v-if="!isEmailConfirmed"
+                class="text-button text-button--inverted"
+                @click="showPopupConfirmEmail"
+              >
+                {{ $t('actions.approve') }}
+              </button>
+            </template>
 
             <span>{{ $t('password') }}</span>
 
@@ -126,6 +128,7 @@ import EmailConfirmForm from '@/components/popup/forms/EmailConfirmForm.vue';
 import PasswordChangeForm from '@/components/popup/forms/PasswordChangeForm.vue';
 import Popup from '@/components/popup/Popup.vue';
 import UserAvatar from '@/components/UserAvatar.vue';
+import userMixin from '@/mixins/user.mixin';
 import dayjs from 'dayjs';
 import { mapActions, mapGetters, mapState } from 'vuex';
 
@@ -139,6 +142,8 @@ export default {
     Popup,
     UserAvatar,
   },
+
+  mixins: [userMixin],
 
   computed: {
     ...mapState('user', ['user', 'loading']),

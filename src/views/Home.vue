@@ -1,8 +1,14 @@
 <template>
-  <div class="home-page container">
+  <div
+    v-loading="loading"
+    class="home-page container"
+  >
     <file-uploader class="home-page__uploader" />
 
-    <file-processing-mode-selector class="home-page__features" />
+    <file-processing-mode-selector
+      class="home-page__features"
+      @uploading="loading = $event"
+    />
   </div>
 </template>
 
@@ -14,6 +20,12 @@ export default {
   name: 'HomePage',
 
   components: { FileProcessingModeSelector, FileUploader },
+
+  data() {
+    return {
+      loading: false,
+    };
+  },
 };
 </script>
 

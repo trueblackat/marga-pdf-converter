@@ -99,16 +99,16 @@ export default {
       }
     },
 
-    async tokenWork({ commit }, { requestMethod, params }) {
+    async tokenWork({ commit }, { requestMethod, params = {} }) {
       try {
         const { access_token: token, expires: tokenExpires } = await requestMethod(params);
 
         commit('SET_TOKEN', token);
         commit('SET_TOKEN_EXPIRES', dayjs(tokenExpires).valueOf());
 
-        return Promise.resolve();
+        return Promise.resolve(token);
       } catch (e) {
-        return Promise.reject();
+        return Promise.reject(e);
       }
     },
   },

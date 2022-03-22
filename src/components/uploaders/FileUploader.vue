@@ -1,5 +1,7 @@
 <template>
-  <section class="file-uploader">
+  <section
+    class="file-uploader"
+  >
     <div class="file-uploader__inner">
       <h1 class="file-uploader__title">
         {{ selectedFileProcessingModeData.title }}
@@ -18,7 +20,10 @@
         <span>{{ $t('actions.addFile') }}</span>
       </button>
 
-      <file-uploader-input-element ref="input" />
+      <file-uploader-input-element
+        ref="input"
+        @uploading="$emit('uploading', $event)"
+      />
     </div>
   </section>
 </template>
@@ -29,7 +34,9 @@ import { mapGetters } from 'vuex';
 
 export default {
   name: 'FileUploader',
+
   components: { FileUploaderInputElement },
+
   computed: {
     ...mapGetters('system', ['selectedFileProcessingModeData']),
   },
