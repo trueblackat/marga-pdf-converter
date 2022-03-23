@@ -33,10 +33,16 @@ export default {
         if (user) {
           commit('SET_USER', user);
           commit('SET_LOADING', false);
+
+          return Promise.resolve();
         }
+
+        return Promise.reject();
       } catch (error) {
         commit('SET_LOADING', false);
         console.error(error);
+
+        return Promise.reject();
       }
     },
 
@@ -51,6 +57,8 @@ export default {
 
   getters: {
     isUserInfoExited: (state) => !!Object.keys(state.user).length,
+
+    isUserRegistered: (state, getters) => getters.isUserInfoExited && !!state.user.login,
 
     userCurrentSubscribe: (state) => {
       if (!!state.user.tariff && dayjs(state.user.tariff_finished).isValid()) {

@@ -1,11 +1,13 @@
 export default {
   email: 'E-mail',
   password: 'Password',
+  passwordRetype: 'Retype password',
   subscription: 'Subscription',
   subscriptions: 'Subscriptions',
   myFiles: 'Files',
   login: 'Login',
   entrance: 'Login',
+  register: 'Register',
   today: 'Today',
   popup: 'Pop-up',
   code: 'Code',
@@ -26,6 +28,7 @@ export default {
     maxSize: 'Max size is 50 Mb',
   },
   actions: {
+    goBack: 'Go back',
     send: 'Send',
     close: 'Close',
     addFile: 'Add file',
@@ -59,8 +62,17 @@ export default {
     subscribe: {
       resume: 'Renew subscription',
       order: 'Subscribe',
+      continueOrder: 'Continue order',
       ends: 'Your subscription expires soon:',
       notExists: 'You haven\'t subscribed yet',
+      successPayment: {
+        title: 'Success payment',
+        message: 'Thank you!',
+      },
+      errorPayment: {
+        title: 'Error during payment!',
+        message: 'Please, go to admin - admin@pdf-maker.com',
+      },
     },
   },
   footer: {
@@ -86,6 +98,11 @@ export default {
     },
   },
   subscriptionsData: {
+    step: 'Step',
+    steps: {
+      first: 'Subscribe select',
+      second: 'Register account',
+    },
     one: {
       title: 'one month',
       features: [

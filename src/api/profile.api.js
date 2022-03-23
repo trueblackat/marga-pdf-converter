@@ -57,10 +57,22 @@ const restorePassword = (userId, code, newPassword) => httpClient.post(
  */
 const remindPassword = (email) => httpClient.post('/users/send-password', { email });
 
+/**
+ * Подтверждение оплаты подписки
+ * @param userId {string} - id пользователя
+ * @param subscribeId {string} - id подписки
+ * @return {Promise<object>} - обновленный объект токена пользователя
+ */
+const onSuccessPayment = (userId, subscribeId) => httpClient.post(
+  '/users/success-payment',
+  { user_id: userId, subscribe_id: subscribeId },
+);
+
 export default {
   confirmEmail,
   changePassword,
   remindPassword,
   restorePassword,
   changeEmail,
+  onSuccessPayment,
 };

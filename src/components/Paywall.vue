@@ -26,46 +26,70 @@
           {{ $t('profile.subscribe.order') }}
         </h1>
 
-        <subscription-features :features="selectedSubscription.features" />
+        <stepper
+          v-if="currentStep && !isUserRegistered"
+          v-model="currentStep"
+          :steps="steps"
+        />
 
-        <div class="subscription-small-wrapper">
-          <div
-            v-for="subscription in subscriptions"
-            :key="`subscription-small-${subscription.id}`"
-            :class="[
-              'subscription-small-item',
-              { 'subscription-small-item--selected': subscription.id === selectedSubscriptionId },
-            ]"
-            @click="onSubscriptionSelect(subscription.id)"
-          >
-            <div class="subscription-small-item__title">
-              {{ subscription.title }}
-            </div>
+        <template v-if="currentStep === steps[0].id">
+          <subscription-features :features="selectedSubscription.features" />
 
-            <div class="subscription-small-item__price">
-              {{ subscription.price }}
-            </div>
+          <div class="subscription-small-wrapper">
+            <div
+              v-for="subscription in subscriptions"
+              :key="`subscription-small-${subscription.id}`"
+              :class="[
+                'subscription-small-item',
+                { 'subscription-small-item--selected': subscription.id === selectedSubscriptionId },
+              ]"
+              @click="onSubscriptionSelect(subscription.id)"
+            >
+              <div class="subscription-small-item__title">
+                {{ subscription.title }}
+              </div>
 
-            <div class="subscription-small-item__price-captions">
-              <span v-if="subscription.priceCaption">
-                {{ subscription.priceCaption }}
-              </span>
+              <div class="subscription-small-item__price">
+                {{ subscription.price }}
+              </div>
 
-              <span v-if="subscription.priceDiscount">
-                {{ subscription.priceDiscount }}
-              </span>
+              <div class="subscription-small-item__price-captions">
+                <span v-if="subscription.priceCaption">
+                  {{ subscription.priceCaption }}
+                </span>
+
+                <span v-if="subscription.priceDiscount">
+                  {{ subscription.priceDiscount }}
+                </span>
+              </div>
             </div>
           </div>
-        </div>
 
-        <div class="paywall__divider" />
+          <div class="paywall__divider" />
 
-        <button
-          class="button button--size-xl button--type-filled"
-          @click="submitSubscription"
-        >
-          {{ $t('profile.subscribe.order') }}
-        </button>
+          <button
+            v-if="isUserRegistered"
+            class="button button--size-xl button--type-filled"
+            @click="submitSubscription"
+          >
+            {{ $t('profile.subscribe.order') }}
+          </button>
+
+          <button
+            v-else
+            class="button button--size-xl button--type-filled"
+            @click="continueOrder"
+          >
+            {{ $t('profile.subscribe.continueOrder') }}
+          </button>
+        </template>
+
+        <template v-if="currentStep === steps[1].id">
+          <register-by-login-form
+            :submit-button-label="$t('profile.subscribe.order')"
+            @success="submitSubscription"
+          />
+        </template>
 
         <stripe-checkout
           ref="checkout"
@@ -74,6 +98,8 @@
           :line-items="stripeData.items"
           :client-reference-id="stripeData.clientReferenceId"
           :customer-email="stripeData.customerEmail"
+          :success-url="stripeData.successURL"
+          :cancel-url="stripeData.cancelURL"
           @loading="v => stripeLoading = v"
         />
       </div>
@@ -82,6 +108,8 @@
 </template>
 
 <script>
+import RegisterByLoginForm from '@/components/auth/RegisterByLoginForm.vue';
+import Stepper from '@/components/Stepper.vue';
 import SubscriptionFeatures from '@/components/subscriptions/SubscriptionFeatures.vue';
 import { stripePk } from '@/constants/payment.constants';
 import { StripeCheckout } from '@vue-stripe/vue-stripe';
@@ -90,12 +118,27 @@ import { mapActions, mapGetters, mapState } from 'vuex';
 export default {
   name: 'Paywall',
 
-  components: { SubscriptionFeatures, StripeCheckout },
+  components: {
+    RegisterByLoginForm, Stepper, SubscriptionFeatures, StripeCheckout,
+  },
 
   data() {
     return {
       isShowed: false,
       stripeLoading: false,
+      steps: [
+        {
+          id: 'step-1',
+          label: this.$t('subscriptionsData.steps.first'),
+          disabled: false,
+        },
+        {
+          id: 'step-2',
+          label: this.$t('subscriptionsData.steps.second'),
+          disabled: true,
+        },
+      ],
+      currentStep: null,
     };
   },
 
@@ -105,6 +148,7 @@ export default {
     ...mapGetters('subscriptions', {
       selectedSubscription: 'getSelectedSubscription',
     }),
+    ...mapGetters('user', ['isUserRegistered']),
 
     stripeData() {
       return {
@@ -115,12 +159,17 @@ export default {
           price: this.selectedSubscription.stripeId,
           quantity: 1,
         }],
+        // successURL: `${window.location.origin}/profile?action=payment-success&userId=${this.
+        // user.id}&userEmail=${this.user.email}&subscription=${this.selectedSubscriptionId}`,
+        successURL: `${window.location.origin}/profile?action=payment-success&subscriptionId=${this.selectedSubscriptionId}`,
+        cancelURL: window.location.origin,
       };
     },
   },
 
   created() {
     this.$eventBus.$on('show-paywall', this.show);
+    this.currentStep = this.steps[0].id;
   },
 
   destroyed() {
@@ -140,6 +189,11 @@ export default {
 
     onSubscriptionSelect(id) {
       this.setSelectedSubscriptionId(id);
+    },
+
+    continueOrder() {
+      this.steps[1].disabled = false;
+      this.currentStep = this.steps[1].id;
     },
 
     submitSubscription() {

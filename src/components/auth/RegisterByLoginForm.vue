@@ -1,43 +1,36 @@
 <template>
   <form
+    v-loading="loading"
     class="auth-form"
     @submit.prevent="onFormSubmit"
   >
-    <h1>Регистрация по логину</h1>
-
     <input
       v-model.trim.lazy="$v.email.$model"
+      :class="['auth-form__element input', {'input--is-error': $v.email.$anyError}]"
       type="email"
-      placeholder="email"
-    >
-
-    <input
-      v-model.trim.lazy="$v.login.$model"
-      type="text"
-      placeholder="login"
+      :placeholder="$t('email')"
     >
 
     <input
       v-model.trim.lazy="$v.password.$model"
+      :class="['auth-form__element input', {'input--is-error': $v.email.$anyError}]"
       type="password"
-      placeholder="password"
+      :placeholder="$t('password')"
     >
 
     <input
-      v-model.trim.lazy="$v.passwordRetype.$model"
+      v-model.trim="$v.passwordRetype.$model"
+      :class="['auth-form__element input', {'input--is-error': $v.email.$anyError}]"
       type="password"
-      placeholder="password retype"
+      :placeholder="$t('passwordRetype')"
     >
 
     <input
+      class="auth-form__element button button--size-xl button--type-filled"
       type="submit"
-      value="Зарегистрироваться"
+      :value="submitButtonLabel || this.$t('register')"
       :disabled="$v.$anyError"
     >
-
-    <router-link to="/login">
-      Есть профиль? Войти
-    </router-link>
   </form>
 </template>
 
@@ -53,10 +46,17 @@ import { mapActions } from 'vuex';
 export default {
   name: 'RegisterByLoginForm',
 
+  props: {
+    submitButtonLabel: {
+      type: String,
+      default: '',
+    },
+  },
+
   data() {
     return {
+      loading: false,
       email: '',
-      login: '',
       password: '',
       passwordRetype: '',
     };
@@ -66,11 +66,6 @@ export default {
     email: {
       required,
       email,
-    },
-
-    login: {
-      required,
-      minLength: minLength(4),
     },
 
     password: {
@@ -85,20 +80,30 @@ export default {
 
   methods: {
     ...mapActions('auth', ['registerByLogin']),
+    ...mapActions('user', ['getCurrentUserInfo']),
 
     async onFormSubmit() {
       this.$v.$touch();
 
-      if (this.$v.$invalid) {
-        console.error('ERROR IN FORM');
-      } else {
+      if (this.$v.$invalid) return;
+
+      this.loading = true;
+
+      try {
         const params = {
-          login: this.login,
           email: this.email,
           password: this.password,
         };
 
         await this.registerByLogin(params);
+        await this.getCurrentUserInfo();
+
+        this.$emit('success');
+      } catch (e) {
+        console.error(e);
+        this.$emit('error', e);
+      } finally {
+        this.loading = false;
       }
     },
   },

@@ -1,11 +1,13 @@
 export default {
   email: 'Электронная почта',
   password: 'Пароль',
+  passwordRetype: 'Повторите пароль',
   subscription: 'Подписки',
   subscriptions: 'Подписки',
   myFiles: 'Мои файлы',
   login: 'Логин',
   entrance: 'Вход',
+  register: 'Регистрация',
   today: 'Сегодня',
   popup: 'Попап',
   code: 'Код',
@@ -26,6 +28,7 @@ export default {
     maxSize: 'Макс. 50 Mb',
   },
   actions: {
+    goBack: 'Вернуться назад',
     send: 'Отправить',
     close: 'Закрыть',
     addFile: 'Добавить файл',
@@ -52,15 +55,24 @@ export default {
     title: 'Профиль',
     statistic: {
       load: 'Залито файлов',
-      convert: 'Сконвертированно файлов',
+      convert: 'Сконвертировано файлов',
       merge: 'Объединено файлов',
       split: 'Разделено файлов',
     },
     subscribe: {
       resume: 'Продлить подписку',
       order: 'Оформить подписку',
+      continueOrder: 'Продолжить оформление',
       ends: 'Срок подписки истекает:',
       notExists: 'Подписка не оформлена',
+      successPayment: {
+        title: 'Успешная оплата!',
+        message: 'Спасибо за оплату!',
+      },
+      errorPayment: {
+        title: 'Ошибка при оплате подписки!',
+        message: 'Обратитесь к администратору - admin@pdf-maker.com',
+      },
     },
   },
   footer: {
@@ -86,6 +98,11 @@ export default {
     },
   },
   subscriptionsData: {
+    step: 'Шаг',
+    steps: {
+      first: 'Выбор подписки',
+      second: 'Регистрация аккаунта',
+    },
     one: {
       title: 'на 1 месяц',
       features: [

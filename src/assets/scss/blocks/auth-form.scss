@@ -1,0 +1,17 @@
+.auth-form {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+
+  &__title {
+    margin-bottom: 50px;
+  }
+
+  &__element {
+    margin-bottom: $base-gap;
+  }
+
+  &__divider {
+    border-bottom: 1px solid $color-border;
+  }
+}

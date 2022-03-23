@@ -82,9 +82,11 @@ export default {
           },
         );
 
-        await window.vm.$router.push({ name: 'Home' });
+        return Promise.resolve();
       } catch (error) {
         console.error(error);
+
+        return Promise.reject();
       } finally {
         commit('SET_LOADING', false);
       }

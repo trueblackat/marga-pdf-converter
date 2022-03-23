@@ -4,7 +4,6 @@ import Home from '@/views/Home.vue';
 import Login from '@/views/Login.vue';
 import MyFiles from '@/views/MyFiles.vue';
 import Profile from '@/views/Profile.vue';
-import Register from '@/views/Register.vue';
 import SplitDocument from '@/views/SplitDocument.vue';
 import Subscriptions from '@/views/Subscriptions.vue';
 import TermsAndConditions from '@/views/TermsAndConditions.vue';
@@ -19,12 +18,6 @@ export default [
     path: '/login',
     name: 'Login',
     component: Login,
-    beforeEnter: ifNotAuthenticated,
-  },
-  {
-    path: '/register',
-    name: 'Register',
-    component: Register,
     beforeEnter: ifNotAuthenticated,
   },
   {

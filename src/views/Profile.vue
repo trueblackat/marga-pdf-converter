@@ -131,6 +131,7 @@ import UserAvatar from '@/components/UserAvatar.vue';
 import userMixin from '@/mixins/user.mixin';
 import dayjs from 'dayjs';
 import { mapActions, mapGetters, mapState } from 'vuex';
+import api from '@/api';
 
 export default {
   name: 'Profile',
@@ -209,8 +210,40 @@ export default {
     },
   },
 
+  mounted() {
+    this.init();
+  },
+
   methods: {
     ...mapActions('user', ['getCurrentUserInfo']),
+
+    async init() {
+      // проверка actions
+      const { subscriptionId, action } = this.$route.query;
+
+      if (action === 'payment-success' && subscriptionId) {
+        await this.$router.replace({ query: {} });
+
+        try {
+          const userId = this.user.id;
+
+          await api.profile.onSuccessPayment(userId, subscriptionId);
+          await this.getCurrentUserInfo();
+
+          this.$notify.success({
+            title: this.$t('profile.subscribe.successPayment.title'),
+            message: this.$t('profile.subscribe.successPayment.message'),
+          });
+        } catch (e) {
+          console.error(e);
+
+          this.$notify.error({
+            title: this.$t('profile.subscribe.errorPayment.title'),
+            message: this.$t('profile.subscribe.errorPayment.message'),
+          });
+        }
+      }
+    },
 
     onSubscriptionButtonClick() {
       this.$eventBus.$emit('show-paywall');

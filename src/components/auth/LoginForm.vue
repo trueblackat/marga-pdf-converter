@@ -1,30 +1,30 @@
 <template>
   <div class="login-form-wrapper">
     <form
-      class="login-form"
+      class="auth-form"
       @submit.prevent="onFormSubmit"
     >
-      <h1 class="login-form__title title">
+      <h1 class="auth-form__title title">
         {{ $t('actions.enter') }}
       </h1>
 
       <input
         ref="loginInput"
         v-model.trim="$v.email.$model"
-        class="login-form__element input"
+        class="auth-form__element input"
         type="email"
         :placeholder="$t('email')"
       >
 
       <input
         v-model.trim="$v.password.$model"
-        class="login-form__element input"
+        class="auth-form__element input"
         type="password"
         :placeholder="$t('password')"
       >
 
       <input
-        class="login-form__element button button--size-xl button--type-filled"
+        class="auth-form__element button button--size-xl button--type-filled"
         type="submit"
         :value="$t('entrance')"
         :disabled="$v.$anyError"
@@ -32,18 +32,18 @@
 
       <button
         type="button"
-        class="login-form__element text-button text-button--inverted"
+        class="auth-form__element text-button text-button--inverted"
         @click="showPopupRemindPassword"
       >
         {{ $t('auth.forgotPasswordQuestion') }}
       </button>
 
-      <div class="login-form__divider login-form__element" />
+      <div class="auth-form__divider auth-form__element" />
 
       <span>
         {{ $t('auth.subscriptionNotExistsQuestion') }}
         <router-link
-          class="login-form__element text-button text-button--inverted"
+          class="auth-form__element text-button text-button--inverted"
           to="/subscriptions"
         >
           {{ $t('auth.takeFree') }}
@@ -136,23 +136,3 @@ export default {
   },
 };
 </script>
-
-<style lang="scss">
-.login-form {
-  display: flex;
-  flex-direction: column;
-  text-align: center;
-
-  &__title {
-    margin-bottom: 50px;
-  }
-
-  &__element {
-    margin-bottom: $base-gap;
-  }
-
-  &__divider {
-    border-bottom: 1px solid $color-border;
-  }
-}
-</style>

@@ -10,10 +10,13 @@ import i18n from '@/translates';
 import Vue from 'vue';
 import ClickOutside from 'vue-click-outside';
 import Vuelidate from 'vuelidate';
+import Notification from 'element-ui/lib/notification';
 import App from './App.vue';
 import './assets/scss/main.scss';
 import router from './router';
 import store from './store';
+import 'element-ui/packages/theme-chalk/lib/notification.css';
+import 'element-ui/packages/theme-chalk/lib/icon.css';
 
 dayjs.extend(relativeTime);
 dayjs.extend(utc);
@@ -21,11 +24,11 @@ dayjs.extend(utc);
 Vue.config.productionTip = false;
 
 Vue.prototype.$eventBus = new Vue();
-
-Vue.directive('loading', loading);
+Vue.prototype.$notify = Notification;
 
 Vue.use(Vuelidate);
 Vue.component('SvgIcon', SvgIcon);
+Vue.directive('loading', loading);
 Vue.directive('ClickOutside', ClickOutside);
 
 window.vm = new Vue({
