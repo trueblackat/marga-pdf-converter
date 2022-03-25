@@ -11,8 +11,6 @@
 
 <script>
 import api from '@/api';
-
-// TODO: описать accept возможные типы загрузки файлов
 import { mapActions, mapGetters } from 'vuex';
 
 export default {

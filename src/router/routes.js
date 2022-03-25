@@ -2,6 +2,7 @@ import { ifAuthenticated, ifNotAuthenticated } from '@/router/interceptors';
 import ConvertDocuments from '@/views/ConvertDocuments.vue';
 import Home from '@/views/Home.vue';
 import Login from '@/views/Login.vue';
+import MergeDocuments from '@/views/MergeDocuments.vue';
 import MyFiles from '@/views/MyFiles.vue';
 import Profile from '@/views/Profile.vue';
 import SplitDocument from '@/views/SplitDocument.vue';
@@ -51,5 +52,10 @@ export default [
     path: '/convert-documents',
     name: 'ConvertDocuments',
     component: ConvertDocuments,
+  },
+  {
+    path: '/merge-documents',
+    name: 'MergeDocuments',
+    component: MergeDocuments,
   },
 ];

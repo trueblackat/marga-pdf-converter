@@ -118,6 +118,16 @@ const mergeItems = (ids) => {
   return httpClient.post('/documents/merge', props);
 };
 
+/**
+ * Создание нового документа из страниц других документов
+ * @param sources {array} - массив со страницами
+ * @return {Promise<object>} - новый документ
+ */
+const modify = (sources) => httpClient.post(
+  '/documents/modify',
+  { sources },
+);
+
 export default {
   getList,
   uploadItem,
@@ -128,4 +138,5 @@ export default {
   convertItem,
   mergeItems,
   downloadItem,
+  modify,
 };

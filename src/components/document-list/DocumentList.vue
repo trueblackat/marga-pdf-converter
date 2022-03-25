@@ -46,16 +46,17 @@ export default {
   },
 
   methods: {
-    ...mapActions('files', ['deleteFile', 'addToConvertQueue']),
+    ...mapActions('files', ['deleteFile', 'addToConvertQueue', 'addToMergeQueue']),
 
-    onDocumentClick(fileId, { canSplit, canConvert }) {
+    onDocumentClick(fileId, { canSplit, canConvert, canMerge }) {
       if (canConvert && this.fileProcessingMode === FILE_PROCESSING_MODES_TYPES.convert) {
         this.addToConvertQueue(fileId);
         this.$router.push({ name: 'ConvertDocuments' });
       }
 
-      if (this.fileProcessingMode === FILE_PROCESSING_MODES_TYPES.merge) {
-        // TODO: сделать режим merge
+      if (canMerge && this.fileProcessingMode === FILE_PROCESSING_MODES_TYPES.merge) {
+        this.addToMergeQueue(fileId);
+        this.$router.push({ name: 'MergeDocuments' });
       }
 
       if (canSplit && this.fileProcessingMode === FILE_PROCESSING_MODES_TYPES.split) {

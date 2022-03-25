@@ -26,6 +26,7 @@ export default {
   },
   documents: {
     maxSize: 'Max size is 50 Mb',
+    pages: 'No pages | {n} page | {n} pages',
   },
   actions: {
     goBack: 'Go back',
@@ -45,6 +46,8 @@ export default {
     convert: 'Convert',
     splitFile: 'Split the file',
     split: 'Split',
+    mergePages: 'Merge pages',
+    merge: 'Merge',
     dontConvert: 'Не конвертировать',
     select: 'Select',
     scaleDown: 'Scale down',

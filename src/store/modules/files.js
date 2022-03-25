@@ -8,14 +8,20 @@ export default {
     files: [],
     loading: false,
     convertQueue: [],
+    mergeQueue: [],
   }),
 
   mutations: {
     SET_FILES(state, files) {
       state.files = files;
     },
+
     SET_CONVERT_QUEUE(state, files) {
       state.convertQueue = files;
+    },
+
+    SET_MERGE_QUEUE(state, files) {
+      state.mergeQueue = files;
     },
 
     SET_LOADING(state, data) {
@@ -111,6 +117,30 @@ export default {
       }
     },
 
+    async mergeDocuments({ commit, state }, pages) {
+      try {
+        commit('SET_LOADING', true);
+
+        const newDocument = await api.documents.modify(pages);
+
+        // Периодически спрашивать сервер "а не загрузились ли файлы?"
+        const readyToShowFiles = await waitFileReady([newDocument.id]);
+        const mappedFiles = getMappedFiles(readyToShowFiles);
+
+        // TODO: обновить статистику юзера
+
+        commit('SET_FILES', [...state.files, ...mappedFiles]);
+
+        return Promise.resolve();
+      } catch (e) {
+        console.error(e);
+
+        return Promise.reject(e);
+      } finally {
+        commit('SET_LOADING', false);
+      }
+    },
+
     addToConvertQueue({ commit, state }, fileId) {
       const fileToAdd = state.files.find((item) => item.id === fileId);
       const newQueue = [...state.convertQueue, fileToAdd];
@@ -126,6 +156,17 @@ export default {
 
     clearConvertQueue({ commit }) {
       commit('SET_CONVERT_QUEUE', []);
+    },
+
+    addToMergeQueue({ commit, state }, fileId) {
+      const fileToAdd = state.files.find((item) => item.id === fileId);
+      const newQueue = [...state.mergeQueue, fileToAdd];
+
+      commit('SET_MERGE_QUEUE', newQueue);
+    },
+
+    clearMergeQueue({ commit }) {
+      commit('SET_MERGE_QUEUE', []);
     },
 
     async convertAllInQueue({ state, commit }, isMergeMode = false) {

@@ -56,7 +56,6 @@
 import api from '@/api';
 import { documentFormats } from '@/constants/base.constants';
 import { FILE_PROCESSING_MODES_TYPES } from '@/constants/system.constants';
-import declOfNum from '@/utils/declOfNum';
 import { getAbsoluteFileApiLink } from '@/utils/misc.utils';
 import { saveAs } from 'file-saver';
 import { mapState } from 'vuex';
@@ -114,8 +113,7 @@ export default {
     },
 
     pagesCountCaption() {
-      // TODO: сделать переводы
-      return declOfNum(this.pagesCount, ['страница', 'страницы', 'страниц']);
+      return this.$tc('documents.pages', this.pagesCount);
     },
 
     isPdf() {
@@ -152,6 +150,7 @@ export default {
 
       this.$emit('document-click', {
         canSplit: this.canSplit,
+        canMerge: this.canMerge,
         canConvert: this.canConvert,
       });
     },
