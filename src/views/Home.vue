@@ -39,12 +39,10 @@ export default {
   },
 
   methods: {
-    ...mapActions('files', ['addToConvertQueue']),
+    ...mapActions('files', ['addToConvertQueue', 'addToMergeQueue']),
 
     onUpload(files = []) {
-      const fileId = this.selectedFileProcessingModeData.multipleOnly
-        ? files.map((item) => item.id)
-        : files[0].id;
+      const fileId = files[0].id;
 
       if (this.selectedFileProcessingModeData.code === FILE_PROCESSING_MODES_TYPES.convert) {
         this.addToConvertQueue(fileId);
@@ -52,7 +50,8 @@ export default {
       }
 
       if (this.selectedFileProcessingModeData.code === FILE_PROCESSING_MODES_TYPES.merge) {
-        // TODO: сделать режим merge
+        this.addToMergeQueue(fileId);
+        this.$router.push({ name: 'MergeDocuments' });
       }
 
       if (this.selectedFileProcessingModeData.code === FILE_PROCESSING_MODES_TYPES.split) {
