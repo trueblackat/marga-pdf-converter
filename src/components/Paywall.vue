@@ -161,7 +161,7 @@ export default {
         }],
         // successURL: `${window.location.origin}/profile?action=payment-success&userId=${this.
         // user.id}&userEmail=${this.user.email}&subscription=${this.selectedSubscriptionId}`,
-        successURL: `${window.location.origin}/profile?action=payment-success&subscriptionId=${this.selectedSubscriptionId}`,
+        successURL: `${window.location.origin}/profile?action=payment-success&subscriptionId=${this.selectedSubscriptionId}&userId=${this.user.id}`,
         cancelURL: window.location.origin,
       };
     },

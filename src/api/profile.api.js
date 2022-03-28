@@ -60,12 +60,12 @@ const remindPassword = (email) => httpClient.post('/users/send-password', { emai
 /**
  * Подтверждение оплаты подписки
  * @param userId {string} - id пользователя
- * @param subscribeId {string} - id подписки
+ * @param subscribeId {number} - id подписки
  * @return {Promise<object>} - обновленный объект токена пользователя
  */
-const onSuccessPayment = (userId, subscribeId) => httpClient.post(
-  '/users/success-payment',
-  { user_id: userId, subscribe_id: subscribeId },
+const onSuccessPayment = (userId, subscribeId) => httpClient.put(
+  '/users/update-tariff',
+  { user_id: userId, tariff: subscribeId, token: process.env.VUE_APP_UPDATE_TARIFF_TOKEN },
 );
 
 export default {

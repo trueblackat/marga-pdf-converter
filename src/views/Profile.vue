@@ -219,15 +219,13 @@ export default {
 
     async init() {
       // проверка actions
-      const { subscriptionId, action } = this.$route.query;
+      const { subscriptionId, action, userId } = this.$route.query;
 
       if (action === 'payment-success' && subscriptionId) {
         await this.$router.replace({ query: {} });
 
         try {
-          const userId = this.user.id;
-
-          await api.profile.onSuccessPayment(userId, subscriptionId);
+          await api.profile.onSuccessPayment(userId, +subscriptionId);
           await this.getCurrentUserInfo();
 
           this.$notify.success({
