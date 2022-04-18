@@ -103,7 +103,7 @@ export default {
   subscriptionsData: {
     step: 'Step',
     steps: {
-      first: 'Subscribe select',
+      first: 'Subscription duration',
       second: 'Register account',
     },
     one: {

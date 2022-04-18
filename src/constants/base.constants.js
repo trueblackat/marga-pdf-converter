@@ -65,3 +65,26 @@ export const documentStatuses = {
 };
 
 export const DOCUMENT_PREVIEWS_PER_PAGE = 20;
+
+export const SOCIALS = [
+  // {
+  //   code: 'instagram',
+  //   label: 'Instagram',
+  //   url: '#',
+  // },
+  {
+    code: 'telegram',
+    label: 'Telegram',
+    url: '#',
+  },
+  // {
+  //   code: 'facebook',
+  //   label: 'Facebook',
+  //   url: '#',
+  // },
+  {
+    code: 'github',
+    label: 'Github',
+    url: '#',
+  },
+];

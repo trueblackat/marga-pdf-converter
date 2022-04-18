@@ -21,35 +21,13 @@
 
         <div class="footer__inlines">
           <a
+            v-for="social in socials"
+            :key="`social-${social.code}`"
             class="text-button"
-            href="#"
+            :href="social.url"
             target="_blank"
           >
-            Instagram
-          </a>
-
-          <a
-            class="text-button"
-            href="#"
-            target="_blank"
-          >
-            Telegram
-          </a>
-
-          <a
-            class="text-button"
-            href="#"
-            target="_blank"
-          >
-            Facebook
-          </a>
-
-          <a
-            class="text-button"
-            href="#"
-            target="_blank"
-          >
-            Github
+            {{ social.label }}
           </a>
         </div>
       </div>
@@ -88,8 +66,16 @@
 </template>
 
 <script>
+import { SOCIALS } from '@/constants/base.constants';
+
 export default {
   name: 'TheFooter',
+
+  data() {
+    return {
+      socials: Object.freeze(SOCIALS),
+    };
+  },
 
   computed: {
     currentYear() {

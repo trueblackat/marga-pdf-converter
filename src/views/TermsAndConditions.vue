@@ -134,7 +134,7 @@
         If you have any questions regarding privacy while using PDF EDITOR app, or have
         questions about our practices, please contact us via email at info@adleadpro.com.
         <br>
-        [Dated: March 28, 2022]
+        [Created: March 28, 2022]
         <br>
         [Updated: March 28, 2022]
       </p>
@@ -473,7 +473,7 @@
         ORAL OR WRITTEN, AND ANY OTHER COMMUNICATIONS BETWEEN US RELATING TO THE SUBJECT
         MATTER OF THIS AGREEMENT.
       </p><p>
-        [Dated: March 28, 2021]<br>[Dated: March 28, 2022]<br>
+        [Created: March 28, 2022]<br>[Updated: March 28, 2022]<br>
       </p>
     </div>
   </div>
