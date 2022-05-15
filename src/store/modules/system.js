@@ -21,6 +21,8 @@ export default {
     SET_LOCALE(state, locale) {
       state.locale = locale;
       localStorageDb.put('locale', locale);
+      // reload page
+      window.vm.$router.go();
     },
 
     SET_LOADING(state, data) {
@@ -33,13 +35,12 @@ export default {
       commit('SET_FILE_PROCESSING_MODE', mode);
     },
 
-    toggleLocale({ commit, state }) {
-      const newLocale = languages.find((item) => item.code !== state.locale.code);
+    setLocale({ commit, state }, langCode) {
+      if (state.locale.code === langCode) return;
+
+      const newLocale = languages.find((item) => item.code === langCode);
 
       commit('SET_LOCALE', newLocale);
-
-      // reload page
-      window.vm.$router.go();
     },
   },
 

@@ -17,9 +17,9 @@
     </div>
 
     <transition name="fade">
-      <div
-        v-if="isDropdownShowed"
-        class="user-nav__dropdown"
+      <dropdown
+        v-model="isDropdownShowed"
+        bounding="right"
       >
         <router-link
           class="text-button"
@@ -48,7 +48,7 @@
         >
           {{ $t('actions.out') }}
         </button>
-      </div>
+      </dropdown>
     </transition>
   </div>
 </template>
@@ -56,11 +56,12 @@
 <script>
 import UserAvatar from '@/components/UserAvatar.vue';
 import { mapActions } from 'vuex';
+import Dropdown from '@/components/Dropdown.vue';
 
 export default {
   name: 'UserNav',
 
-  components: { UserAvatar },
+  components: { UserAvatar, Dropdown },
 
   props: {
     username: {
@@ -116,26 +117,6 @@ export default {
   &__name {
     margin-left: 10px;
     margin-right: 6px;
-  }
-
-  &__dropdown {
-    position: absolute;
-    top: calc(100% + 10px);
-    right: 0;
-    border-radius: $base-border-radius;
-    box-shadow: $base-shadow;
-    padding: 15px 20px;
-    background: $c-white;
-    white-space: nowrap;
-
-    .text-button {
-      display: block;
-      padding: 0;
-
-      &:not(:last-child) {
-        margin-bottom: 10px;
-      }
-    }
   }
 }
 </style>
