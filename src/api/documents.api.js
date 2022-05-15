@@ -54,9 +54,10 @@ const getItem = (id) => httpClient.get(`/documents/${id}`);
  * Загрузка документа
  * @param name {string} - имя файла
  * @param body {string} - тело файла в base64
+ * @param forceCreatePreviews {boolean} - создавать ли серверу превью сразу после загрузки файла?
  * @return {Promise<object>} - созданный документ
  */
-const uploadItem = (name, body) => httpClient.post('/documents/', { name, body });
+const uploadItem = (name, body, forceCreatePreviews = false) => httpClient.post('/documents/', { name, body, all_previews: booleanToNumber(forceCreatePreviews) });
 
 /**
  * Скачивание документа

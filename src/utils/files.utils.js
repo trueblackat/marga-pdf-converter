@@ -64,7 +64,7 @@ export const waitFileReady = async (ids) => {
   const uploadedFilesInfo = await Promise.all(promises);
 
   const isReady = uploadedFilesInfo
-    .every((item) => item.link_status === 1 && item.preview_status === 1);
+    .every((item) => item.link_status === 1 && item.all_previews_stage);
 
   if (!isReady) {
     await waitFileReady(ids);

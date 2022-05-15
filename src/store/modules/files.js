@@ -40,7 +40,7 @@ export default {
     async uploadFiles({ commit, state }, files) {
       const encodedFiles = await getEncodedFiles(files);
       const uploadPromises = encodedFiles
-        .map((item) => api.documents.uploadItem(item.name, item.body));
+        .map((item) => api.documents.uploadItem(item.name, item.body, true));
 
       try {
         commit('SET_LOADING', true);
