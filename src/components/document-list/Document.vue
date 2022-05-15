@@ -53,15 +53,15 @@
 </template>
 
 <script>
-import api from '@/api';
 import { documentFormats } from '@/constants/base.constants';
 import { FILE_PROCESSING_MODES_TYPES } from '@/constants/system.constants';
-import { getAbsoluteFileApiLink } from '@/utils/misc.utils';
-import { saveAs } from 'file-saver';
 import { mapState } from 'vuex';
+import documentMixin from './document.mixin';
 
 export default {
   name: 'Document',
+
+  mixins: [documentMixin],
 
   props: {
     id: {
@@ -154,22 +154,6 @@ export default {
         canConvert: this.canConvert,
       });
     },
-
-    async downloadFile() {
-      try {
-        const { link } = await api.documents.downloadItem(this.id);
-
-        saveAs(getAbsoluteFileApiLink(link.substring(1)));
-      } catch (e) {
-        // TODO: сделать нотификации для таких случаев
-        console.error(e);
-
-        this.$notify.error({
-          title: this.$t('messages.somethingWrongTitle'),
-          message: this.$t('messages.somethingWrongText'),
-        });
-      }
-    },
   },
 };
 </script>
@@ -191,19 +175,6 @@ export default {
       position: absolute;
       bottom: 10px;
       right: 10px;
-      border-radius: 50%;
-      padding: 7px;
-      width: 30px;
-      height: 30px;
-      background: $color-theme;
-      color: $c-white;
-      border: none;
-      cursor: pointer;
-
-      svg {
-        width: 100%;
-        height: 100%;
-      }
     }
 
     picture {

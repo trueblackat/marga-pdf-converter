@@ -32,6 +32,7 @@
     <div class="convert-document-page__body">
       <document-big
         v-for="file in convertQueue"
+        :id="file.id"
         :key="`file-to-convert-${file.id}`"
         :file-name="file.name"
         :preview-image="file.previewLink"

@@ -16,6 +16,15 @@
       <svg-icon name="close" />
     </button>
 
+    <button
+      v-if="id"
+      class="document__download-button document-big__download-button"
+      title="Скачать"
+      @click.stop.prevent="downloadFile"
+    >
+      <svg-icon name="download" />
+    </button>
+
     <div class="document-big__footer">
       <span :title="fileName">{{ fileName }}</span>
 
@@ -25,10 +34,19 @@
 </template>
 
 <script>
+import documentMixin from '@/components/document-list/document.mixin';
+
 export default {
   name: 'DocumentBig',
 
+  mixins: [documentMixin],
+
   props: {
+    id: {
+      type: String,
+      default: '',
+    },
+
     fileName: {
       type: String,
       required: true,
@@ -75,6 +93,12 @@ export default {
       width: 100%;
       height: 100%;
     }
+  }
+
+  &__download-button {
+    position: absolute;
+    top: 15px;
+    left: 15px;
   }
 
   &__preview {
