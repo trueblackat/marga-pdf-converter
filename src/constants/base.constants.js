@@ -1,3 +1,5 @@
+export const APP_NAME = 'PDFEditor';
+
 export const documentFormats = {
   pdf: {
     label: 'pdf',

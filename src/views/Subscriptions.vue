@@ -25,7 +25,13 @@ import SubscriptionItem from '@/components/subscriptions/SubscriptionItem.vue';
 import { mapActions, mapState } from 'vuex';
 
 export default {
-  name: 'SubscriptionsPage',
+  name: 'Subscriptions',
+
+  metaInfo() {
+    return {
+      titleTemplate: `%s - ${this.$t('pageNames.subscriptions')}`,
+    };
+  },
 
   components: {
     SubscriptionItem,

@@ -16,6 +16,13 @@ import LoginForm from '@/components/auth/LoginForm.vue';
 
 export default {
   name: 'LoginPage',
+
+  metaInfo() {
+    return {
+      titleTemplate: `%s - ${this.$t('pageNames.login')}`,
+    };
+  },
+
   components: { LoginForm },
 };
 </script>

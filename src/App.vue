@@ -14,11 +14,16 @@
 import Paywall from '@/components/Paywall.vue';
 import TheFooter from '@/components/the/TheFooter.vue';
 import TheHeader from '@/components/the/TheHeader.vue';
+import { APP_NAME } from '@/constants/base.constants';
 import { intervalUntil } from '@/utils/api.utils';
 import { mapActions, mapGetters, mapState } from 'vuex';
 
 export default {
   name: 'App',
+
+  metaInfo: {
+    title: APP_NAME,
+  },
 
   components: { Paywall, TheFooter, TheHeader },
 

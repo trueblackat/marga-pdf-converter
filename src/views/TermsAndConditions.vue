@@ -479,6 +479,18 @@
   </div>
 </template>
 
+<script>
+export default {
+  name: 'TermsAndConditions',
+
+  metaInfo() {
+    return {
+      titleTemplate: `%s - ${this.$t('pageNames.termsAndConditions')}`,
+    };
+  },
+};
+</script>
+
 <style lang="scss">
 .terms-and-conditions-page {
   line-height: 1.6;

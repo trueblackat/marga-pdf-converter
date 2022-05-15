@@ -47,6 +47,12 @@ import { DOCUMENT_PREVIEWS_PER_PAGE } from '@/constants/base.constants';
 export default {
   name: 'SplitDocument',
 
+  metaInfo() {
+    return {
+      titleTemplate: `%s - ${this.$t('pageNames.splitDocument')}`,
+    };
+  },
+
   components: { ScaleSlider, DocumentPagesList },
 
   props: {

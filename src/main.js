@@ -1,3 +1,4 @@
+import VueMeta from 'vue-meta';
 import SvgIcon from '@/components/SvgIcon.vue';
 import loading from '@/directives/loading.directive';
 import '@/plugins/svg-icons';
@@ -26,6 +27,7 @@ Vue.config.productionTip = false;
 Vue.prototype.$eventBus = new Vue();
 Vue.prototype.$notify = Notification;
 
+Vue.use(VueMeta);
 Vue.use(Vuelidate);
 Vue.component('SvgIcon', SvgIcon);
 Vue.directive('loading', loading);

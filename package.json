@@ -25,6 +25,7 @@
     "vue": "^2.6.11",
     "vue-click-outside": "^1.1.0",
     "vue-i18n": "8",
+    "vue-meta": "^2.4.0",
     "vue-router": "^3.2.0",
     "vuedraggable": "^2.24.3",
     "vuelidate": "^0.7.7",

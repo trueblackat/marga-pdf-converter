@@ -136,6 +136,12 @@ import api from '@/api';
 export default {
   name: 'Profile',
 
+  metaInfo() {
+    return {
+      titleTemplate: `%s - ${this.$t('pageNames.profile')}`,
+    };
+  },
+
   components: {
     PasswordChangeForm,
     EmailChangeForm,

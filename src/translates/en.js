@@ -12,6 +12,17 @@ export default {
   popup: 'Pop-up',
   code: 'Code',
   info: 'Information',
+  pageNames: {
+    main: 'Main',
+    login: 'Login',
+    convertDocument: 'Convert document',
+    mergeDocuments: 'Merge documents',
+    splitDocument: 'Split document',
+    myFiles: 'My files',
+    profile: 'Profile',
+    subscriptions: 'Subscriptions',
+    termsAndConditions: 'Terms and conditions',
+  },
   auth: {
     forgotPasswordQuestion: 'Forgot your password?',
     subscriptionNotExistsQuestion: 'Didn\'t subscribed yet?',

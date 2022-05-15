@@ -121,6 +121,12 @@ const mapDocument = (document) => ({
 export default {
   name: 'MergeDocuments',
 
+  metaInfo() {
+    return {
+      titleTemplate: `%s - ${this.$t('pageNames.mergeDocuments')}`,
+    };
+  },
+
   components: {
     DocumentDraggablePagesList, FileUploaderBlock, ScaleSlider, DocumentPagesList,
   },

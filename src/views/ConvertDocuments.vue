@@ -58,6 +58,12 @@ import { mapActions, mapState } from 'vuex';
 export default {
   name: 'ConvertDocument',
 
+  metaInfo() {
+    return {
+      titleTemplate: `%s - ${this.$t('pageNames.convertDocument')}`,
+    };
+  },
+
   components: {
     BaseCheckbox, FileUploaderBlock, DocumentBig, ScaleSlider,
   },

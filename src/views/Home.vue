@@ -25,6 +25,12 @@ import { mapActions, mapGetters, mapState } from 'vuex';
 export default {
   name: 'HomePage',
 
+  metaInfo() {
+    return {
+      titleTemplate: `%s - ${this.$t('pageNames.main')}`,
+    };
+  },
+
   components: { FileProcessingModeSelector, FileUploader },
 
   data() {

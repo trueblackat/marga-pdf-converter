@@ -12,6 +12,17 @@ export default {
   popup: 'Попап',
   code: 'Код',
   info: 'Информация',
+  pageNames: {
+    main: 'Главная',
+    login: 'Авторизация',
+    convertDocument: 'Конвертировать файл',
+    mergeDocuments: 'Объединить файлы',
+    splitDocument: 'Разделить документ',
+    myFiles: 'Мои файлы',
+    profile: 'Профиль',
+    subscriptions: 'Подписки',
+    termsAndConditions: 'Информация',
+  },
   auth: {
     forgotPasswordQuestion: 'Забыли пароль?',
     subscriptionNotExistsQuestion: 'Нет подписки?',

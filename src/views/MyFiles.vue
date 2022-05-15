@@ -18,7 +18,13 @@ import DocumentList from '@/components/document-list/DocumentList.vue';
 import FileProcessingModeSelector from '@/components/FileProcessingModeSelector.vue';
 
 export default {
-  name: 'Profile',
+  name: 'MyFiles',
+
+  metaInfo() {
+    return {
+      titleTemplate: `%s - ${this.$t('pageNames.myFiles')}`,
+    };
+  },
 
   components: { FileProcessingModeSelector, DocumentList },
 };
