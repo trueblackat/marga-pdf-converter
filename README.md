@@ -2,6 +2,7 @@
 
 - ТЗ: https://astroeast.atlassian.net/wiki/spaces/P/pages/484900865/PDF-
 - API: https://pdf.marga.app/api/swagger/
+- настройки Smart App Banner https://github.com/kudago/smart-app-banner
 
 ## Project setup
 ```
