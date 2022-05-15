@@ -31,25 +31,25 @@ const errorInterceptor = async (error) => {
   switch (error.response.status) {
     case 400:
       console.error(error.response.status, error.message);
-      console.error({
-        title: 'Ошибка: 400',
-        message: 'Сетевая ошибка, обратитесь к администратору системы',
+      window.vm.$notify.error({
+        title: `Error: ${error.response.status}`,
+        message: window.vm.$t('messages.somethingWrongText'),
       });
       break;
 
     case 401:
-      console.error({
-        title: 'Пожалуйста, авторизуйтесь заново',
-        message: 'Время жизни сессии окончено',
+      window.vm.$notify.error({
+        title: window.vm.$t('messages.unauthorizedTitle'),
+        message: window.vm.$t('messages.unauthorizedText'),
       });
       await window.vm.$store.dispatch('auth/logout');
       break;
 
     default:
       console.error(error.response.status, error.message);
-      console.error({
-        title: `Ошибка: ${error.response.status}`,
-        message: 'Сетевая ошибка, обратитесь к администратору системы',
+      window.vm.$notify.error({
+        title: `Error: ${error.response.status}`,
+        message: window.vm.$t('messages.somethingWrongText'),
       });
   }
 

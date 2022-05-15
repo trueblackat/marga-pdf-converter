@@ -24,6 +24,12 @@ export default {
     approvePasswordMessage: 'Confirm password',
     setEmailForSentMessage: 'Please add e-mail address to send you verification code',
   },
+  messages: {
+    somethingWrongTitle: 'Something goes wrong.',
+    somethingWrongText: 'Contact the administrator.',
+    unauthorizedTitle: 'Session lifetime is over',
+    unauthorizedText: 'Please login again',
+  },
   documents: {
     maxSize: 'Max size is 50 Mb',
     pages: 'No pages | {n} page | {n} pages',

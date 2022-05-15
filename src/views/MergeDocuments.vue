@@ -103,6 +103,11 @@ const mapDocument = (document) => ({
           .map((previewsItem) => getAbsoluteFileApiLink(previewsItem.link.substring(1))));
     } catch (e) {
       console.error(e);
+
+      this.$notify.error({
+        title: this.$t('messages.somethingWrongTitle'),
+        message: this.$t('messages.somethingWrongText'),
+      });
     } finally {
       this.loading = false;
     }

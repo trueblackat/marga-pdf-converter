@@ -117,6 +117,11 @@ export default {
         this.total = total;
       } catch (e) {
         console.error(e);
+
+        this.$notify.error({
+          title: this.$t('messages.somethingWrongTitle'),
+          message: this.$t('messages.somethingWrongText'),
+        });
       } finally {
         this.isPreviewLoading = false;
       }

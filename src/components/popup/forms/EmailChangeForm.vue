@@ -75,6 +75,11 @@ export default {
           this.isErrorOnRequest = true;
 
           console.error(e);
+
+          this.$notify.error({
+            title: this.$t('messages.somethingWrongTitle'),
+            message: this.$t('messages.somethingWrongText'),
+          });
         } finally {
           this.loading = false;
         }

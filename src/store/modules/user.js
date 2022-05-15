@@ -42,6 +42,11 @@ export default {
         commit('SET_LOADING', false);
         console.error(error);
 
+        this.$notify.error({
+          title: this.$t('messages.somethingWrongTitle'),
+          message: this.$t('messages.somethingWrongText'),
+        });
+
         return Promise.reject();
       }
     },

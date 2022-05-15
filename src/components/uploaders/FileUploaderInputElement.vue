@@ -31,7 +31,8 @@ export default {
       // http://htmlbook.ru/html/value/mime
       return this.selectedFileProcessingModeData.pdfOnly
         ? 'application/pdf'
-        : 'image/jpeg, image/png, application/msword, application/excel';
+        : 'image/jpeg, image/png, application/vnd.openxmlformats-officedocument.wordprocessingml.document, application/excel'
+        + 'application/msword, application/vnd.ms-excel, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet';
     },
   },
 
@@ -59,6 +60,11 @@ export default {
         this.$emit('uploaded', uploadedFiles);
       } catch (e) {
         console.error(e);
+
+        this.$notify.error({
+          title: this.$t('messages.somethingWrongTitle'),
+          message: this.$t('messages.somethingWrongText'),
+        });
       } finally {
         this.$emit('uploading', false);
       }

@@ -24,6 +24,12 @@ export default {
     approvePasswordMessage: 'Подтвердите пароль',
     setEmailForSentMessage: 'Введите вашу почту чтобы, мы смогли вам отправить проверочный код',
   },
+  messages: {
+    somethingWrongTitle: 'Что-то пошло не так.',
+    somethingWrongText: 'Обратитесь к администратору.',
+    unauthorizedTitle: 'Время жизни сессии окончено',
+    unauthorizedText: 'Пожалуйста, авторизуйтесь заново',
+  },
   documents: {
     maxSize: 'Макс. 50 Mb',
     pages: 'Нет страниц | {n} страница | {n} страницы | {n} страниц',

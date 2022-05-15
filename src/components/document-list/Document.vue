@@ -163,6 +163,11 @@ export default {
       } catch (e) {
         // TODO: сделать нотификации для таких случаев
         console.error(e);
+
+        this.$notify.error({
+          title: this.$t('messages.somethingWrongTitle'),
+          message: this.$t('messages.somethingWrongText'),
+        });
       }
     },
   },

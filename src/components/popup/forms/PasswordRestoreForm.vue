@@ -88,6 +88,11 @@ export default {
         } catch (e) {
           this.isErrorOnRequest = true;
 
+          this.$notify.error({
+            title: this.$t('messages.somethingWrongTitle'),
+            message: this.$t('messages.somethingWrongText'),
+          });
+
           console.error(e);
         } finally {
           this.loading = false;
