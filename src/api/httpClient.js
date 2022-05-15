@@ -31,10 +31,10 @@ const errorInterceptor = async (error) => {
   switch (error.response.status) {
     case 400:
       console.error(error.response.status, error.message);
-      window.vm.$notify.error({
-        title: `Error: ${error.response.status}`,
-        message: window.vm.$t('messages.somethingWrongText'),
-      });
+      // window.vm.$notify.error({
+      //   title: `Error: ${error.response.status}`,
+      //   message: window.vm.$t('messages.somethingWrongText'),
+      // });
       break;
 
     case 401:

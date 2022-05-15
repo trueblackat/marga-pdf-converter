@@ -19,8 +19,10 @@ export default {
 
         this.$notify.error({
           title: this.$t('messages.somethingWrongTitle'),
-          message: this.$t('messages.somethingWrongText'),
+          message: this.$t('messages.downloadLimitOff'),
         });
+
+        window.vm.$eventBus.$emit('show-paywall');
       }
     },
   },

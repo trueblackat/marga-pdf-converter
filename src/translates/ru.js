@@ -40,6 +40,7 @@ export default {
     somethingWrongText: 'Обратитесь к администратору.',
     unauthorizedTitle: 'Время жизни сессии окончено',
     unauthorizedText: 'Пожалуйста, авторизуйтесь заново',
+    downloadLimitOff: 'Превышен лимит скачиваний',
   },
   documents: {
     maxSize: 'Макс. 50 Mb',

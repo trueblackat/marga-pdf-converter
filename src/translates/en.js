@@ -40,6 +40,7 @@ export default {
     somethingWrongText: 'Contact the administrator.',
     unauthorizedTitle: 'Session lifetime is over',
     unauthorizedText: 'Please login again',
+    downloadLimitOff: 'Download limit exceeded',
   },
   documents: {
     maxSize: 'Max size is 50 Mb',
