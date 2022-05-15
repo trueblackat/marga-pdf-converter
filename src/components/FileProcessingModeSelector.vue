@@ -62,13 +62,15 @@ export default {
   &__item {
     display: flex;
     align-items: center;
-    border: 1px solid $color-theme;
+    background-color: $c-white !important;
+    border: 1px solid $c-white;
     border-radius: $base-border-radius;
     padding: 25px;
     cursor: pointer;
-    transition-property: background-color, border-color, box-shadow;
+    transition-property: border-color, box-shadow;
     transition-duration: $base-animation-time;
     transition-timing-function: $base-animation-function;
+    user-select: none;
 
     .svg-icon {
       width: 86px;
@@ -97,9 +99,8 @@ export default {
     }
 
     &--selected {
-      background-color: $c-white !important;
+      border-color: $color-theme;
       box-shadow: $base-shadow;
-      border-color: $c-white;
     }
 
     &:hover {
